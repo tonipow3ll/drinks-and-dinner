@@ -9,6 +9,19 @@ $(document).ready(function () {
     const lookUpURL = "lookup.php?i=";
     const searchURL = "search.php?s=";
 
+    Promise.resolve(drinkIngredients).then(function(response) {
+
+        response.drinks.sort(function (a, b) {
+            return a.strIngredient1.localeCompare(b.strIngredient1);
+        });
+
+        for(let i =0; i < response.drinks.length; i++) {
+            console.log(response.drinks[i].strIngredient1)
+            let rowTemp = '<option value="' + response.drinks[i].strIngredient1 + '">' + response.drinks[i].strIngredient1 + '</option>';
+            $("#drinks").append(rowTemp)
+        }
+     })
+
 
     // get Ingredient Promises function
     function getIngredPromises(array, type, arrGen, counts, finalList, functionURL) {
