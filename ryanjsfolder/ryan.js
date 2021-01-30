@@ -33,21 +33,19 @@ $(document).ready(function () {
                 counts[x] = (counts[x] || 0) + 1;
             })
 
-            console.log(finalList);
             // Converts the resulting counts object into a more easily usable JSON object.
             Object.entries(counts).forEach(e => finalList["items"].push({ "id": e[0], "count": e[1] }))
-            console.log(finalList);
 
             // Sorts the JSON object by count descending.
             finalList.items.sort(function (a, b) { return b.count - a.count });
 
-            // Top 10.
-            let top10 = [];
-            for (let i = 0; i < 10 || i < finalList.length; i++) { top10[i] = $.get(functionURL + lookUpURL + finalList.items[i].id, ((response) => { return response })) };
-            Promise.all(top10).then((response) => { console.log(response) });
+            // // Top 10.
+            // let top10 = [];
+            // for (let i = 0; i < 10 || i < finalList.length; i++) { top10[i] = $.get(functionURL + lookUpURL + finalList.items[i].id, ((response) => { return response })) };
+            // Promise.all(top10).then((response) => { console.log(response) });
 
-            console.log(top10)
-            
+            // console.log(top10)
+            console.log(finalList);
             let drinkID = finalList.items[Math.floor(Math.random() * finalList.items.length)].id;
             if ( type === "drink") {
             $.get(functionURL + lookUpURL + drinkID, function(response) { 
@@ -69,31 +67,19 @@ $(document).ready(function () {
         let arrGenDrink = [];
         let countsDrink = {};
         let drinkSelection = $('#drinks').val();
-        let drinkIngredients = [drinkSelection];
+        let drinkIngredients = drinkSelection;
+        console.log(drinkSelection);
+        console.log(drinkIngredients);
         getIngredPromises(drinkIngredients, "drink", arrGenDrink, countsDrink, drinkFinalList, drinkURL);
 
-        let mealFinalList = { "items": [] };
-        let arrGenMeal = [];
-        let countsMeal = {};
-        let mealSelection = $('#meals').val();
-        let mealIngredients = [mealSelection];
-        getIngredPromises(mealIngredients, "meal", arrGenMeal, countsMeal, mealFinalList, mealURL);
+        // let mealFinalList = { "items": [] };
+        // let arrGenMeal = [];
+        // let countsMeal = {};
+        // let mealSelection = $('#meals').val();
+        // let mealIngredients = [mealSelection];
+        // getIngredPromises(mealIngredients, "meal", arrGenMeal, countsMeal, mealFinalList, mealURL);
 
     });
 
-    // getIDList("chicken");
-
-    // function getIDList(ingredient) {
-    //     $.get("https://www.themealdb.com/api/json/v1/1/filter.php?i=" + ingredient, function(response) { 
-    //         const arrayGen = response.meals.map(function(v) {return v.idMeal})
-    //         console.log(arrayGen);
-    //         let workingID = arrayGen[Math.floor(Math.random() * arrayGen.length)]
-    //         $.get("https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + workingID, function(response) {
-    //             console.log(response);
-    //      }) 
-
-    //     });
-
-    // }
 
 })
