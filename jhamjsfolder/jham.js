@@ -71,6 +71,19 @@ $(document).ready(function () {
         // NOTE: full details includes items such as Meal Name, Image, Ingredients, Measures, Instructions...
         $.get(queryURL, function (fullDeets) {
             console.log(fullDeets);
+            console.log(fullDeets.meals[0].strMeal);
+            console.log(fullDeets.meals[0].strTags);
+            // function dinnerHere() {
+                $("#strMeal").text(fullDeets.meals[0].strMeal);
+                $("#strMealThumb").attr('src', fullDeets.meals[0].strMealThumb);
+                $("#strTags").text(fullDeets.meals[0].strTags);
+                $("#strYoutube").attr('href', fullDeets.meals[0].strYoutube);
+                console.log('done');
+            // }
+            // dinnerHere();
         });
     }
+
+
+
 });
