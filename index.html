@@ -55,9 +55,9 @@
               <option value="vegan" class="value">Vegan</option>
               <option value="vegetarian" class="value">Vegetarian</option>
             </select>
-            <div class="icon is-small is-left">
-              <i class="fas fa-pizza-slice fa-1x"></i>
-            </div>
+          <!-- wasn't sure if we needed this div tag - commented out for now  -->
+            <!-- <div class="icon is-small is-left">
+            </div> -->
           </div>
         </div>
       </div>
@@ -137,9 +137,9 @@
               <option class="" value="Whisk(e)y">Whisk(e)y</option>
             </select>
           </div>
-          <div class="icon is-small is-left">
-            <i class="fas fa-glass-martini-alt fa-1x"></i>
-          </div>
+          <!-- wasn't sure if we needed this div tag - commented out for now  -->
+          <!-- <div class="icon is-small is-left">
+          </div> -->
         </div>
       </div>
     </div>
@@ -201,9 +201,13 @@
                 <a href="#">Show me the deets!</a>
               </span>
             </p>
+            <!-- ADDED ICONS FOR SOCIAL MEDIA  -->
             <p class="card-footer-item">
               <span>
-                Share on <a href="#">Facebook</a>
+               <a href="#"> <i class="fab fa-2x fa-facebook"></i> </a>
+               <a href="#"> <i class="fab fa-2x fa-twitter"></i></i> </a>
+               <a href="#"> <i class="fab fa-2x fa-instagram"></i></i> </a>
+               <a href="#"> <i class="fab fa-2x fa-pinterest"></i></i> </a>
               </span>
             </p>
           </footer>
@@ -217,35 +221,42 @@
         <ul>
           <li class="is-active" data-tab="1">
             <a>
-              <span>Recipe</span>
+              <span><i class="fas fa-pizza-slice"></i> Meal Ingredients</span>
             </a>
           </li>
           <li data-tab="2">
             <a>
-              <span>Ingredients</span>
+              <span><i class="fas fa-book-open"></i> Meal Recipe</span>
             </a>
           </li>
           <li data-tab="3">
             <a>
-              <span>Drink Mixes</span>
+              <span><i class="fas fa-glass-martini"></i> Drink Ingredients</span>
             </a>
           </li>
           <li data-tab="4">
             <a>
-              <span>Steps</span>
+              <span><i class="fas fa-glass-cheers"></i> Drink Recipe</span>
             </a>
           </li>
         </ul>
       </div>
-      <div id="tab-content" class="has-text-centered">
+      <!-- ADDED DIV FOR COLUMNS, AND COLUMN WRAPPERS TO ALL CONTENT BELOW  -->
+      <div class="columns is-centered has-text-centered">
+        <div id="tab-content" class="has-text-centered">
+
+       
         <p class="is-active" data-content="1">
-          Recipes appear here
         </p>
-        <p data-content="2">
+      
+        <div class="column is-centered has-text-centered">
+        <p data-content="2" class="mx-4 px-4">
           <!-- Ingredients appear here -->
           <!-- Please test this unordered list and inspect in HTML -->
           <!-- Try adding CSS that makes all line items align left to be flush? -->
         </p>
+      </div>
+
         <p data-content="3">
           Drink ingredients appear here
         </p>
@@ -253,9 +264,19 @@
           Drink steps appear here
         </p>
       </div>
+    </div>
   </main>
   <!-- Footer with a 'signature' for all of us? -->
   ​
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        <strong></strong> Created by <a href="#">Bjorn Yourney, Cathy Marcheses, Jonathan Hammond, Ryan Royalty & Toni Powell</a>. The source code is licensed
+        <a href="http://opensource.org/licenses/mit-license.php">MIT</a>
+      </p>
+    </div>
+  </footer>
+
   <!-- JS BELOW  -->
   <script src="tabs.js"></script>
   <script src="./ryanjsfolder/ryan.js"></script>
