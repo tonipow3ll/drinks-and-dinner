@@ -44,7 +44,7 @@ $(document).ready(function () {
         // NOTE: <select> is comprised of <option values=""> -- the selected option === <select> value!!!
         let selection = $('#meals').val();
         // Console logs 'beef' to help explain what information is being acquired here
-        console.log('Selected meal category: ' + selection);
+        // console.log('Selected meal category: ' + selection);
         // Calls below function that randomizes array item from user-selected meal key
         getMealID(mealCategories[selection]);
     });
@@ -74,24 +74,26 @@ $(document).ready(function () {
                 $("#strMealThumb").attr('src', fullDeets.meals[0].strMealThumb);
                 $("#strTags").text(fullDeets.meals[0].strTags);
                 $("#strYoutube").attr('href', fullDeets.meals[0].strYoutube);
-                console.log('done');
+                // console.log('done');
                 // let strIngMeas = 20;
                 // for (let i = 0; i < strIngMeas.length; i++) {
                 //     if (strIngredient`${i}`)
                 // }
             // }
-            console.log("The first ingredient is: " + fullDeets.meals[0].strIngredient1);
-            console.log("The first ing. measurement is: " + fullDeets.meals[0].strMeasure1);
-            console.log(fullDeets.meals[0].strMeasure1 + '' + fullDeets.meals[0].strIngredient1);
-            $("[data-content=2]").text(fullDeets.meals[0].strMeasure1 + ' ' + fullDeets.meals[0].strIngredient1);
+            // console.log("The first ingredient is: " + fullDeets.meals[0].strIngredient1);
+            // console.log("The first ing. measurement is: " + fullDeets.meals[0].strMeasure1);
+            // console.log(fullDeets.meals[0].strMeasure1 + '' + fullDeets.meals[0].strIngredient1);
+            // $("[data-content=2]").text(fullDeets.meals[0].strMeasure1 + ' ' + fullDeets.meals[0].strIngredient1);
             let ingredientsUL = $(`<ul></ul>`).attr('id', 'ingredientsUL')
             $("[data-content=2]").append(ingredientsUL);
+            $("[data-content=1]").text(fullDeets.meals[0].strInstructions);
+            console.log(fullDeets.meals[0].strInstructions)
             let mealKeys = Object.keys(fullDeets.meals[0]);
             let mealEntries = Object.entries(fullDeets.meals[0]);
             // console.log(Object.keys(fullDeets.meals[0]));
-            console.log(mealKeys.length);
-            console.log(mealKeys);
-            console.log(mealEntries);
+            // console.log(mealKeys.length);
+            // console.log(mealKeys);
+            // console.log(mealEntries);
             // stringify object
             // search for value in string
             const regexIng = /\bstrIngredient/g;
@@ -109,7 +111,7 @@ $(document).ready(function () {
                     `${fullDeets.meals[0][property]}` !== 'null' && 
                     `${fullDeets.meals[0][property]}` !== ' ') {
                     // console.log('The Ingredient is: ' + `${property}`);
-                    console.log(`Ingredient ${i} is: ` + `${fullDeets.meals[0][property]}`);
+                    // console.log(`Ingredient ${i} is: ` + `${fullDeets.meals[0][property]}`);
                     // console.log(i);
                     ingredients[i] = `${fullDeets.meals[0][property]}`
                     i++
@@ -125,17 +127,17 @@ $(document).ready(function () {
                     `${fullDeets.meals[0][property]}` !== 'null' && 
                     `${fullDeets.meals[0][property]}` !== ' ') {
 
-                    console.log(`Measurement ${i} is: ` + `${fullDeets.meals[0][property]}`);
+                    // console.log(`Measurement ${i} is: ` + `${fullDeets.meals[0][property]}`);
                     measurements[i] = `${fullDeets.meals[0][property]}`
                     i++
                 }
             }
-            console.log('===')
+            // console.log('===')
             for (let j = 0; j < ingredients.length; j++) {
                 // let ingredientsUL = $(`<ul></ul>`).attr('id', 'ingredientsUL')
-                $('#ingredientsUL').append($(`<li></li>`)).text(
-                    `${j}:` + ' ' + measurements[j] + ' ' + ingredients[j]
-                );
+                $('#ingredientsUL').append($(`<li></li>`).text(
+                    measurements[j] + ' ' + ingredients[j]
+                ));
                 // console.log(`${j}:` + ' ' + measurements[j] + ' ' + ingredients[j])
             }
 
