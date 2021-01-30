@@ -37,7 +37,8 @@
       <div class="column is-one-quarter">
         <div class="control has-icons-left">
           <div class="select is-medium">
-            <select name="meals" id="meals" style="display: block;">
+            <select name="meals" id="meals">
+              <option value="" class="value">I have some...</option>
               <option value="beef" class="value">Beef</option>
               <option value="breakfast" class="value">Breakfast</option>
               <option value="chicken" class="value">Chicken</option>
@@ -63,9 +64,8 @@
       <!-- Drink Dropdown  -->
       <div class="column is-one-quarter">
         <div class="control has-icons-left">
-          <div class="select is-medium">
-            <select id="drinks">
-              <option class="" value="">I've have some...</option>
+          <div class="select is-medium is-multiple">
+            <select id="drinks" multiple size="4">
               <option class="" value="Absinthe">Absinthe</option>
               <option class="" value="Amaretto">Amaretto</option>
               <option class="" value="Aperol">Aperol</option>
@@ -134,9 +134,9 @@
               <option class="" value="Whisk(e)y">Whisk(e)y</option>
             </select>
           </div>
-          <div class="icon is-small is-left">
+          <!-- <div class="icon is-small is-left">
             <i class="fas fa-glass-martini-alt fa-1x"></i>
-          </div>
+          </div> -->
         </div>
       </div>
       ​
