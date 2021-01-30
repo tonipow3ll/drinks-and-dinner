@@ -142,7 +142,7 @@
       ​
       <!-- Test button for API calls -->
       <div class="column is-one-quarter">
-        <button class="button" type="submit">JHam's Test Button</button>
+        <button id="jonsButton" class="button" type="submit">JHam's Test Button</button>
       </div>
 
       <!-- Test button for API calls -->
@@ -153,21 +153,18 @@
     ​
     <!-- Card for previews - 1 -->
     <div class="columns is-centered">
-      <div class="column is-one-quarter is-centered">
+      <div class="column is-one-quarter">
         <div class="card py-5 my-5 ml-2 mr-2">
-          <!-- added ID for 'strMealThumb - thumbnail with image should populate here' -->
-          <div class="card-content py-5" id="strMealThumb">
-            <p class="title">
-              Dinner will appear here
+          <div class="card-content py-5">
+            <p id = "mealTitle" class="title">
             </p>
-            <p class="subtitle">
-              Text Here
-            </p>
+            <img id="mealImg" src="" alt="">
+            </img>
           </div>
           <footer class="card-footer">
             <p class="card-footer-item">
               <span>
-                <a href="#">Show me the deets!</a>
+                Share on <a href="#">Facebook</a>
               </span>
             </p>
           </footer>
@@ -183,11 +180,6 @@
             </img>
           </div>
           <footer class="card-footer">
-            <p class="card-footer-item">
-              <span>
-                <a href="#">Show me the deets!</a>
-              </span>
-            </p>
             <p class="card-footer-item">
               <span>
                 Share on <a href="#">Facebook</a>
