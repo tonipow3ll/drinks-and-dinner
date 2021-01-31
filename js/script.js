@@ -220,26 +220,25 @@ $(document).ready(function () {
         $('#modalMI').addClass('is-active');
     });
     
-
     $('#buttonDI').on('click', function (event) {
         event.preventDefault;
         $('#modalDI').addClass('is-active');
     });
 
     $('.saveButton').on('click', function (event) {
+        event.preventDefault;
         $('.modal').removeClass("is-active");
+        $('.searchBar').val("");
+        $('.drinkSelector').show();
+        $('.mealSelector').show();
     })
 
     $('#drinkSearch').on('input', function (event) {
-        let _this = this;
-        console.log($(this).val())
         $('.drinkSelector').hide();
         $('.drinkSelector:contains("' + $(this).val() + '")').show()
     })
 
     $('#mealSearch').on('input', function (event) {
-        let _this = this;
-        console.log($(this).val())
         $('.mealSelector').hide();
         $('.mealSelector:contains("' + $(this).val() + '")').show()
     })
