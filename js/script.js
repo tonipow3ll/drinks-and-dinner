@@ -9,19 +9,35 @@ $(document).ready(function () {
     const lookUpURL = "lookup.php?i=";
     const searchURL = "search.php?s=";
 
-    Promise.resolve(drinkIngredients).then(function(response) {
+    init();
 
-        response.drinks.sort(function (a, b) {
-            return a.strIngredient1.localeCompare(b.strIngredient1);
-        });
+    function init() {
 
-        for(let i =0; i < response.drinks.length; i++) {
-            console.log(response.drinks[i].strIngredient1)
-            let rowTemp = '<option value="' + response.drinks[i].strIngredient1 + '">' + response.drinks[i].strIngredient1 + '</option>';
-            $("#drinks").append(rowTemp)
-        }
-     })
+        Promise.resolve(mealIngredients).then(function(response) {
+            response.meals.sort(function (a, b) {
+                return a.strIngredient.localeCompare(b.strIngredient);
+            });
 
+            for(let i =0; i < response.meals.length; i++) {
+                let store = 0;
+                let classAdd = "";
+
+                if(JSON.parse(localStorage.getItem(response.meals[i].strIngredient)) !== null) { store = localStorage.getItem(response.meals[i].strIngredient) };
+
+                switch(parseInt(store)) {
+                    case 1:
+                        classAdd = " is-success"
+                    break;
+                    case -1:
+                        classAdd = " is-danger"
+                    break;
+                }
+
+                let rowTemp = '<button class="button mealSelector' + classAdd + '" data-state=' + store + '>' + response.meals[i].strIngredient + '</button>';
+                $("#contentMI").append(rowTemp);
+            };
+        })
+    };
 
     // get Ingredient Promises function
     function getIngredPromises(array, type, arrGen, counts, finalList, functionURL) {
@@ -34,7 +50,6 @@ $(document).ready(function () {
         // Waits for all promises, then generates a list of IDs for the drinks that use the ingredients. Sorts the list by most ingredients found to least.
         Promise.all(array).then((response) => {
 
-            console.log(response)
             // Loop to concat the arrays of IDs together.
             for (let i = 0; i < response.length; i++) {
                 if (type === "drink") { arrGen = arrGen.concat(response[i].drinks.map(function (v) { return v.idDrink })) }
@@ -58,6 +73,7 @@ $(document).ready(function () {
             // Promise.all(top10).then((response) => { console.log(response) });
 
             // console.log(top10)
+
             console.log(finalList);
             let drinkID = finalList.items[Math.floor(Math.random() * finalList.items.length)].id;
             if ( type === "drink") {
@@ -76,23 +92,55 @@ $(document).ready(function () {
     $('#ryansButton').on('click', function (event) {
         event.preventDefault;
 
-        let drinkFinalList = { "items": [] };
-        let arrGenDrink = [];
-        let countsDrink = {};
-        let drinkSelection = $('#drinks').val();
-        let drinkIngredients = drinkSelection;
-        console.log(drinkSelection);
-        console.log(drinkIngredients);
-        getIngredPromises(drinkIngredients, "drink", arrGenDrink, countsDrink, drinkFinalList, drinkURL);
+        // let drinkFinalList = { "items": [] };
+        // let arrGenDrink = [];
+        // let countsDrink = {};
+        // let drinkSelection = $('#drinks').val();
+        // let drinkIngredients = [drinkSelection];
 
-        // let mealFinalList = { "items": [] };
-        // let arrGenMeal = [];
-        // let countsMeal = {};
-        // let mealSelection = $('#meals').val();
-        // let mealIngredients = [mealSelection];
-        // getIngredPromises(mealIngredients, "meal", arrGenMeal, countsMeal, mealFinalList, mealURL);
+        // getIngredPromises(drinkIngredients, "drink", arrGenDrink, countsDrink, drinkFinalList, drinkURL);
+
+        let mealFinalList = { "items": [] };
+        let mIng2Pass = [];
+        let arrGenMeal = [];
+        let countsMeal = {};
+        let mealGreenButtons = $(".mealSelector.is-success");
+        for(i = 0; i < mealGreenButtons.length; i++) {
+            mIng2Pass[i] = $(mealGreenButtons[i]).text()
+        }
+        console.log(mIng2Pass);
+        
+        getIngredPromises(mIng2Pass, "meal", arrGenMeal, countsMeal, mealFinalList, mealURL);
 
     });
+
+    $('#buttonMI').on('click', function (event) {
+        event.preventDefault;
+        $('#modalMI').addClass('is-active');
+
+            $('.mealSelector').on('click', function (event) {
+                event.preventDefault;
+                let _this = this;
+
+                switch(parseInt($(_this).attr("data-state"))) {
+                    case 1:
+                        $(_this).attr("data-state", -1);
+                        $(_this).removeClass("is-success");
+                        $(_this).addClass("is-danger");
+                    break;
+                    case 0:
+                        $(_this).attr("data-state", 1);
+                        $(_this).addClass("is-success");
+                    break;
+                    case -1:
+                        $(_this).attr("data-state", 0);
+                        $(_this).removeClass("is-danger");
+                    break;
+                }
+
+                localStorage.setItem($(_this).text(), $(_this).attr("data-state"));
+            });
+        });
 
 
 })

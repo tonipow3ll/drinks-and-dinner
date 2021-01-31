@@ -2,7 +2,16 @@
     display: none;
   }
   
-  #tab-content p.is-active {
-    display: block;
-  }
-  
+#tab-content p.is-active {
+  display: block;
+}
+
+.fixedHeader {
+  position: fixed;
+  width: 100%;
+  top: 0;
+}
+
+.centerButtons {
+  width: 100%
+}
