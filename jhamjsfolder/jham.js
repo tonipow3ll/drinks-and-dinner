@@ -85,8 +85,9 @@ $(document).ready(function () {
             // console.log(fullDeets.meals[0].strMeasure1 + '' + fullDeets.meals[0].strIngredient1);
             // $("[data-content=2]").text(fullDeets.meals[0].strMeasure1 + ' ' + fullDeets.meals[0].strIngredient1);
             let ingredientsUL = $(`<ul></ul>`).attr('id', 'ingredientsUL')
-            $("[data-content=2]").append(ingredientsUL);
-            $("[data-content=1]").text(fullDeets.meals[0].strInstructions);
+            // NOTES FROM TONI ======== swappeded data-content1, and 2, so ingredients / directions populate in the correct places 
+            $("[data-content=1]").append(ingredientsUL);
+            $("[data-content=2]").text(fullDeets.meals[0].strInstructions);
             console.log(fullDeets.meals[0].strInstructions)
             let mealKeys = Object.keys(fullDeets.meals[0]);
             let mealEntries = Object.entries(fullDeets.meals[0]);
