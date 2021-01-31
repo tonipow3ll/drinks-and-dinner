@@ -58,7 +58,7 @@ $(document).ready(function () {
         event.preventDefault();
         // Empty the ingredients paragraph every time to remove the UL and corresponding list items.
         // Each time user clicks, the AJAX returns, and below code makes a new UL and adds list items.
-        $("[data-content=2]").empty();
+        $("[data-content=1]").empty();
         // Get the value of the dropdown at time of submission
         // NOTE: <select> is comprised of <option values=""> -- the selected option === <select> value!!!
         let selection = $('#meals').val();
@@ -99,7 +99,7 @@ $(document).ready(function () {
             // $("[data-content=1]").text(details.strInstructions);
             // Add an empty unordered list to the ingredients paragraph, where items will be listed.
             let ingredientsUL = $(`<ul></ul>`).attr('id', 'ingredientsUL')
-            $("[data-content=2]").append(ingredientsUL);
+            $("[data-content=1]").append(ingredientsUL);
 
             // Regular expressions start with an open / signifying the start
             // \b indicates the word we are looking for, in this case strIngredient then strMeasure
