@@ -89,9 +89,6 @@ $(document).ready(function () {
                 else if (type === "meal" && response[i].meals !== null) { arrGen = arrGen.concat(response[i].meals.map(function (v) { return v.idMeal })) }
             }
 
-            // Sorts the JSON object by count descending.
-            goodList.items.sort(function (a, b) { return b.goodCounts - a.goodCounts });
-
             Promise.all(badArray).then((response) => {
             // Loop to concat the arrays of IDs together.
                 for (let i = 0; i < response.length; i++) {
@@ -99,7 +96,6 @@ $(document).ready(function () {
                     else if (type === "meal" && response[i].meals !== null) { badGen = badGen.concat(response[i].meals.map(function (v) { return v.idMeal })) }
                 }
 
-                
                 // forEach counts the number of times each ID appears in the list.
                 arrGen.forEach(function (x) {
                     goodCounts[x] = (goodCounts[x] || 0) + 1;
@@ -118,22 +114,50 @@ $(document).ready(function () {
                 })
 
                 Object.entries(goodCounts).forEach(e => goodList["items"].push({ "id": e[0], "count": e[1] }))
-                console.log(goodList)
+
+                goodList.items.sort(function (a, b) { return b.count - a.count });
+
                 // Top 30.
                 let top30 = [];
+
                 for (let i = 0; i < 30 || i < goodList.length; i++) { top30[i] = $.get(functionURL + lookUpURL + goodList.items[i].id, ((response) => { return response })) };
-                Promise.all(top30).then((response) => { 
-                    let itemID = top30.items[Math.floor(Math.random() * top30.items.length)].id;
-                    console.log(itemID)
+                Promise.all(top30).then((response) => {
+                    console.log(response)
+                    let itemID = Math.floor(Math.random() * top30.length);
                     if ( type === "drink") {
-                    $.get(functionURL + lookUpURL + itemID, function(response) { 
-                        $("#drinkTitle").text(response.drinks[0].strDrink);
-                        $("#drinkImg").attr("src", response.drinks[0].strDrinkThumb); 
-                    }); } else if ( type === "meal") {
-                        $.get(functionURL + lookUpURL + itemID, function(response) {
-                            $("#mealTitle").text(response.meals[0].strMeal);
-                            $("#mealImg").attr("src", response.meals[0].strMealThumb); 
-                    })}
+                            $("#drinkTitle").text(response[itemID].drinks[0].strDrink);
+                            $("#drinkImg").attr("src", response[itemID].drinks[0].strDrinkThumb);
+                            $("#drinkIngredients").empty();
+                            let liTemp = ""
+
+                            for(let i = 1; i <+ 20; i++){
+                                if (!response[itemID].drinks[0]["strIngredient" + i] === false) {
+                                    if (JSON.parse(localStorage.getItem(response[itemID].drinks[0]["strIngredient" + i]) == 1)) {
+                                        liTemp = '<li class="haveIng">' + response[itemID].drinks[0]["strMeasure" + i] + ' - ' + response[itemID].drinks[0]["strIngredient" + i] + '</li>';
+                                    } else { 
+                                        liTemp = '<li>' + response[itemID].drinks[0]["strMeasure" + i] + ' - ' + response[itemID].drinks[0]["strIngredient" + i] + '</li>'
+                                    };
+                                    $("#drinkIngredients").append(liTemp);
+                                }
+                            }
+
+                        } else if ( type === "meal") {
+                            $("#mealTitle").text(response[itemID].meals[0].strMeal);
+                            $("#mealImg").attr("src", response[itemID].meals[0].strMealThumb);
+                            $("#mealIngredients").empty();
+
+                            for(let i = 1; i <+ 20; i++){
+                                if (!response[itemID].meals[0]["strIngredient" + i] === false) {
+                                    if (JSON.parse(localStorage.getItem(response[itemID].meals[0]["strIngredient" + i]) == 1)) {
+                                        liTemp = '<li class="haveIng">' + response[itemID].meals[0]["strMeasure" + i] + ' - ' + response[itemID].meals[0]["strIngredient" + i] + '</li>';
+                                    } else { 
+                                        liTemp = '<li>' + response[itemID].meals[0]["strMeasure" + i] + ' - ' + response[itemID].meals[0]["strIngredient" + i] + '</li>'
+                                    };
+                                    $("#mealIngredients").append(liTemp);
+                                }
+                            } 
+                            }
+
                 });
             })
         })
