@@ -17,17 +17,69 @@
 </head>
 
 <body>
-  <header class="has-text-centered">
-    <h1 class="is-size-2">Dinner and a Drink?</h1>
-  </header>
+  <section class="hero is-info is-small heroBorder">
+  <div class="hero-body columns">
+    <div class="column is-four-fifths">
+      <p class="title">
+        Dinner and a Drink
+      </p>
+      <p class="subtitle">
+        Randomize recipes with ingredients you have!
+      </p>
+   </div>
+   <div class="column"></div>
+    <div class="column">
+      <button id="genButton" class="button centerButtons is-danger">I'm feelin' lucky</button>
+    </div>
+  </div>
+</section>
 
   <div class="container is-max-desktop">
       <div class="columns">
         <div class="column">
-          <button id="buttonMI" class="button centerButtons">Meal Ingredients</button>
+          <button id="buttonMI" class="button centerButtons is-info">Food I've got lying around</button>
+          <div class="card">
+            <header>
+              <p id="mealTitle" class="card-header-title"></p>
+            </header>
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <img id="mealImg" src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+              </figure>
+            </div>
+            <div class="card-content">
+              <div class="media">
+                <div class="media-content">
+                  <ul id="mealIngredients">
+
+                  </ul>
+                </div>
+              </div>
+          
+            </div>
+          </div>
         </div>
         <div class="column">
-          <button id="ryansButton" class="button centerButtons">Drink Ingredients</button>
+          <button id="buttonDI" class="button centerButtons is-info">Booze I've got lying around</button>
+          <div class="card">
+            <header>
+              <p id="drinkTitle" class="card-header-title"></p>
+            </header>
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <img id="drinkImg" src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+              </figure>
+            </div>
+            <div class="card-content">
+              <div class="media">
+                <div class="media-content">
+                  <ul id="drinkIngredients">
+
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -75,17 +127,17 @@
       </div>
   </main>
 
-  <div class="modal">
+  <div id="modalDI" class="modal">
     <div class="modal-background"></div>
     <div class="modal-card">
       <header class="modal-card-head">
         <p class="modal-card-title">Drink Ingredients</p>
       </header>
-      <section class="modal-card-body">
-        <!-- Content ... -->
+      <section id="contentDI" class="modal-card-body">
+
       </section>
       <footer class="modal-card-foot">
-        <button id="saveButtonDI" class="button is-success">Save changes</button>
+        <button class="button is-info saveButton">Close</button>
       </footer>
     </div>
   </div>
@@ -100,7 +152,7 @@
 
       </section>
       <footer class="modal-card-foot">
-        <button id="saveButtonMI" class="button is-success">Save changes</button>
+        <button class="button is-info saveButton">Close</button>
       </footer>
     </div>
   </div>
