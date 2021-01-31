@@ -37,8 +37,31 @@ $(document).ready(function () {
                 $("#contentMI").append(rowTemp);
             };
 
+            $('.mealSelector').on('click', function (event) {
+                event.preventDefault;
+                let _this = this;
+
+                switch(parseInt($(_this).attr("data-state"))) {
+                    case 1:
+                        $(_this).attr("data-state", -1);
+                        $(_this).removeClass("is-success");
+                        $(_this).addClass("is-danger");
+                    break;
+                    case 0:
+                        $(_this).attr("data-state", 1);
+                        $(_this).addClass("is-success");
+                    break;
+                    case -1:
+                        $(_this).attr("data-state", 0);
+                        $(_this).removeClass("is-danger");
+                    break;
+                };
+
+                localStorage.setItem(titleCase($(_this).text()), $(_this).attr("data-state"));
+            });
+
             generatePair();
-        })
+        });
 
         Promise.resolve(drinkIngredients).then(function(response) {
             response.drinks.sort(function (a, b) {
@@ -64,8 +87,32 @@ $(document).ready(function () {
                 let rowTemp = '<button class="button drinkSelector' + classAdd + '" data-state=' + storeDrink + '>' + titleCase(response.drinks[i].strIngredient1) + '</button>';
                 $("#contentDI").append(rowTemp);
             };
-        }).then(generatePair())
 
+            $('.drinkSelector').on('click', function (event) {
+                event.preventDefault;
+                let _this = this;
+
+                switch(parseInt($(_this).attr("data-state"))) {
+                    case 1:
+                        $(_this).attr("data-state", -1);
+                        $(_this).removeClass("is-success");
+                        $(_this).addClass("is-danger");
+                    break;
+                    case 0:
+                        $(_this).attr("data-state", 1);
+                        $(_this).addClass("is-success");
+                    break;
+                    case -1:
+                        $(_this).attr("data-state", 0);
+                        $(_this).removeClass("is-danger");
+                    break;
+                }
+
+                localStorage.setItem(titleCase($(_this).text()), $(_this).attr("data-state"));
+            });
+
+            generatePair();
+        });
     };
 
     // get Ingredient Promises function
@@ -156,7 +203,7 @@ $(document).ready(function () {
                                     $("#mealIngredients").append(liTemp);
                                 }
                             } 
-                            }
+                        }
 
                 });
             })
@@ -166,70 +213,36 @@ $(document).ready(function () {
     $('#genButton').on('click', function (event) {
         event.preventDefault;
         generatePair();
-
     });
 
     $('#buttonMI').on('click', function (event) {
         event.preventDefault;
         $('#modalMI').addClass('is-active');
-
-            $('.mealSelector').on('click', function (event) {
-                event.preventDefault;
-                let _this = this;
-
-                switch(parseInt($(_this).attr("data-state"))) {
-                    case 1:
-                        $(_this).attr("data-state", -1);
-                        $(_this).removeClass("is-success");
-                        $(_this).addClass("is-danger");
-                    break;
-                    case 0:
-                        $(_this).attr("data-state", 1);
-                        $(_this).addClass("is-success");
-                    break;
-                    case -1:
-                        $(_this).attr("data-state", 0);
-                        $(_this).removeClass("is-danger");
-                    break;
-                }
-
-                localStorage.setItem(titleCase($(_this).text()), $(_this).attr("data-state"));
-            });
-        });
+    });
     
 
     $('#buttonDI').on('click', function (event) {
         event.preventDefault;
         $('#modalDI').addClass('is-active');
+    });
 
-            $('.drinkSelector').on('click', function (event) {
-                event.preventDefault;
-                let _this = this;
+    $('.saveButton').on('click', function (event) {
+        $('.modal').removeClass("is-active");
+    })
 
-                switch(parseInt($(_this).attr("data-state"))) {
-                    case 1:
-                        $(_this).attr("data-state", -1);
-                        $(_this).removeClass("is-success");
-                        $(_this).addClass("is-danger");
-                    break;
-                    case 0:
-                        $(_this).attr("data-state", 1);
-                        $(_this).addClass("is-success");
-                    break;
-                    case -1:
-                        $(_this).attr("data-state", 0);
-                        $(_this).removeClass("is-danger");
-                    break;
-                }
+    $('#drinkSearch').on('input', function (event) {
+        let _this = this;
+        console.log($(this).val())
+        $('.drinkSelector').hide();
+        $('.drinkSelector:contains("' + $(this).val() + '")').show()
+    })
 
-                localStorage.setItem(titleCase($(_this).text()), $(_this).attr("data-state"));
-            });
-        });
-
-        $('.saveButton').on('click', function (event) {
-            $('.modal').removeClass("is-active");
-
-        })
+    $('#mealSearch').on('input', function (event) {
+        let _this = this;
+        console.log($(this).val())
+        $('.mealSelector').hide();
+        $('.mealSelector:contains("' + $(this).val() + '")').show()
+    })
 
     function generatePair() {
         let drinkGoodList = { "items": [] };
