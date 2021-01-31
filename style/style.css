@@ -4,5 +4,12 @@
   
   #tab-content p.is-active {
     display: block;
-  }
+  } 
+
+.owl-carousel .owl-wrapper {
+    display: flex !important;
   
+  }
+.owl-carousel .owl-item {
+    max-height: 500px;
+}
