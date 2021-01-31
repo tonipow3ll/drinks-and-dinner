@@ -36,10 +36,29 @@ $(document).ready(function () {
         vegetarian: ["52807", "52870", "52785", "52955", "52906", "53025", "53012", "52971", "52868", "53027", "52973", "52865", "52864", "52921", "52908", "52811", "52816", "52963", "52784", "52872", "52771", "52797", "52849", "52866", "52817", "52911", "52869", "53026", "52863", "52867", "52871"]
     }
 
+    // When div holding Recipe | Ingredients | Drink Mixes | Steps is clicked
+    // If the paragraph with .pre-p is currently active, show pre tag; else hide the pre tag.
+    $('#tabs').on('click', function() {
+        if ($('.pre-p').hasClass('is-active')) {
+            $('pre').each(function()
+            {
+                this.style.display = 'block';
+            })
+        } else {
+            $('pre').each(function()
+            {
+                this.style.display = 'none';
+            })
+        }
+    })
+
     // When Submit button on front end is clicked:
     $('#getMealBtn').on('click', function (event) {
         // Prevent normal page refresh associated with submit buttons from occurring
         event.preventDefault();
+        // Empty the ingredients paragraph every time to remove the UL and corresponding list items.
+        // Each time user clicks, the AJAX returns, and below code makes a new UL and adds list items.
+        $("[data-content=1]").empty();
         // Get the value of the dropdown at time of submission
         // NOTE: <select> is comprised of <option values=""> -- the selected option === <select> value!!!
         let selection = $('#meals').val();
@@ -67,73 +86,70 @@ $(document).ready(function () {
         // Sends request to server to retrieve randomMeal object that contains full details of a Meal
         // NOTE: full details includes items such as Meal Name, Image, Ingredients, Measures, Instructions...
         $.get(queryURL, function (fullDeets) {
+            // Console log returned object -- this section will change if Ryan's idea is applied here.
             console.log(fullDeets);
-            // console.log(fullDeets.meals[0].strMeal);
-            // console.log(fullDeets.meals[0].strTags);
-                $("#strMeal").text(fullDeets.meals[0].strMeal);
-                $("#strMealThumb").attr('src', fullDeets.meals[0].strMealThumb);
-                $("#strTags").text(fullDeets.meals[0].strTags);
-                $("#strYoutube").attr('href', fullDeets.meals[0].strYoutube);
-                // console.log('done');
-                // let strIngMeas = 20;
-                // for (let i = 0; i < strIngMeas.length; i++) {
-                //     if (strIngredient`${i}`)
-                // }
-            // }
-            // console.log("The first ingredient is: " + fullDeets.meals[0].strIngredient1);
-            // console.log("The first ing. measurement is: " + fullDeets.meals[0].strMeasure1);
-            // console.log(fullDeets.meals[0].strMeasure1 + '' + fullDeets.meals[0].strIngredient1);
-            // $("[data-content=2]").text(fullDeets.meals[0].strMeasure1 + ' ' + fullDeets.meals[0].strIngredient1);
+            let details = fullDeets.meals[0];
+            // Traverse the object and fill in HTML text, save for the image/a which are hrefs.
+            $("#strMeal").text(details.strMeal);
+            $("#strMealThumb").attr('src', details.strMealThumb);
+            $("#strTags").text(details.strTags);
+            $("#strYoutube").attr('href', details.strYoutube);
+            // <pre> represents preformatted text which is to be presented exactly as written.
+            $("pre").text(details.strInstructions);
+            // $("[data-content=1]").text(details.strInstructions);
+            // Add an empty unordered list to the ingredients paragraph, where items will be listed.
             let ingredientsUL = $(`<ul></ul>`).attr('id', 'ingredientsUL')
-            // NOTES FROM TONI ======== swappeded data-content1, and 2, so ingredients / directions populate in the correct places 
             $("[data-content=1]").append(ingredientsUL);
-            $("[data-content=2]").text(fullDeets.meals[0].strInstructions);
-            console.log(fullDeets.meals[0].strInstructions)
-            let mealKeys = Object.keys(fullDeets.meals[0]);
-            let mealEntries = Object.entries(fullDeets.meals[0]);
-            // console.log(Object.keys(fullDeets.meals[0]));
-            // console.log(mealKeys.length);
-            // console.log(mealKeys);
-            // console.log(mealEntries);
-            // stringify object
-            // search for value in string
+
+            // Regular expressions start with an open / signifying the start
+            // \b indicates the word we are looking for, in this case strIngredient then strMeasure
+            // Regular expressions end with a close / signifying both end and start of expression flags
+            // g is a global search -- retain the index of the last match, allowing iterative searches
             const regexIng = /\bstrIngredient/g;
             const regexMeas = /\bstrMeasure/g;
+            // these empty arrays will store they value for each key that matches the regular expression
             let ingredients = [];
             let measurements = [];
+            // i serves as the dynamic beginning of the array, and will be set to 0 for both 
             let i = 0;
-            for (property in fullDeets.meals[0]) {
+            // OBJECT TRAVERSAL: response a.k.a. fullDeets.meals[0]. here could be idMeal, str... etc.
+            // for each property in full details, see if the property has strIngredient in it.
+            // if it does, and equates to true, isn't string 'null' or an empty space...
+            // ... then populate the strIngredient key's value into the ingredients array.
+            for (property in details) {
                 let a = `${property}`.match(regexIng);
-                // console.log(`key= ${property} value= ${fullDeets.meals[0][property]}`)
+                // console.log(`key= ${property} value= ${details[property]}`)
 
                 if (a &&
-                    `${fullDeets.meals[0][property]}` &&
-                    `${fullDeets.meals[0][property]}` !== '' && 
-                    `${fullDeets.meals[0][property]}` !== 'null' && 
-                    `${fullDeets.meals[0][property]}` !== ' ') {
+                    `${details[property]}` &&
+                    `${details[property]}` !== '' && 
+                    `${details[property]}` !== 'null' && 
+                    `${details[property]}` !== ' ') {
                     // console.log('The Ingredient is: ' + `${property}`);
-                    // console.log(`Ingredient ${i} is: ` + `${fullDeets.meals[0][property]}`);
+                    // console.log(`Ingredient ${i} is: ` + `${details[property]}`);
                     // console.log(i);
-                    ingredients[i] = `${fullDeets.meals[0][property]}`
+                    ingredients[i] = `${details[property]}`
                     i++
                 }
             }
+            // reset i to once again serve as the dynamic beginning of the array, this time for measure
             i = 0;
-            for (property in fullDeets.meals[0]) {
+            // same idea as above, except this time ' ' space strings are acceptable for measurements
+            for (property in details) {
                 let b = `${property}`.match(regexMeas);
                 
                 if (b && 
-                    `${fullDeets.meals[0][property]}` &&
-                    `${fullDeets.meals[0][property]}` !== '' && 
-                    `${fullDeets.meals[0][property]}` !== 'null' && 
-                    `${fullDeets.meals[0][property]}` !== ' ') {
+                    `${details[property]}` &&
+                    `${details[property]}` !== '' && 
+                    `${details[property]}` !== 'null') {
 
-                    // console.log(`Measurement ${i} is: ` + `${fullDeets.meals[0][property]}`);
-                    measurements[i] = `${fullDeets.meals[0][property]}`
+                    // console.log(`Measurement ${i} is: ` + `${details[property]}`);
+                    measurements[i] = `${details[property]}`
                     i++
                 }
             }
-            // console.log('===')
+            // NOTE: ingredients and measurements array length are always the same
+            // for each ingredient in the array, append it to a list and add it to the unordered list
             for (let j = 0; j < ingredients.length; j++) {
                 // let ingredientsUL = $(`<ul></ul>`).attr('id', 'ingredientsUL')
                 $('#ingredientsUL').append($(`<li></li>`).text(
@@ -148,3 +164,11 @@ $(document).ready(function () {
     }
 
 });
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match
+// let mealKeys = Object.keys(details);
+// let mealEntries = Object.entries(details);
+// console.log(Object.keys(details));
+// console.log(mealKeys.length);
+// console.log(mealKeys);
+// console.log(mealEntries);
+// stringify object
