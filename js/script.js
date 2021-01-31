@@ -22,7 +22,7 @@ $(document).ready(function () {
                 let storeMeal = 0;
                 let classAdd = "";
 
-                if(JSON.parse(localStorage.getItem(response.meals[i].strIngredient)) !== null) { storeMeal = localStorage.getItem(response.meals[i].strIngredient) };
+                if(JSON.parse(localStorage.getItem(titleCase(response.meals[i].strIngredient))) !== null) { storeMeal = localStorage.getItem(titleCase(response.meals[i].strIngredient)) };
 
                 switch(parseInt(storeMeal)) {
                     case 1:
@@ -33,7 +33,7 @@ $(document).ready(function () {
                     break;
                 }
 
-                let rowTemp = '<button class="button mealSelector' + classAdd + '" data-state=' + storeMeal + '>' + response.meals[i].strIngredient + '</button>';
+                let rowTemp = '<button class="button mealSelector' + classAdd + '" data-state=' + storeMeal + '>' + titleCase(response.meals[i].strIngredient) + '</button>';
                 $("#contentMI").append(rowTemp);
             };
 
@@ -50,7 +50,7 @@ $(document).ready(function () {
                 let storeDrink = 0;
                 let classAdd = "";
 
-                if(JSON.parse(localStorage.getItem(response.drinks[i].strIngredient1)) !== null) { storeDrink = localStorage.getItem(response.drinks[i].strIngredient1) };
+                if(JSON.parse(localStorage.getItem(titleCase(response.drinks[i].strIngredient1))) !== null) { storeDrink = localStorage.getItem(titleCase(response.drinks[i].strIngredient1)) };
 
                 switch(parseInt(storeDrink)) {
                     case 1:
@@ -61,7 +61,7 @@ $(document).ready(function () {
                     break;
                 }
 
-                let rowTemp = '<button class="button drinkSelector' + classAdd + '" data-state=' + storeDrink + '>' + response.drinks[i].strIngredient1 + '</button>';
+                let rowTemp = '<button class="button drinkSelector' + classAdd + '" data-state=' + storeDrink + '>' + titleCase(response.drinks[i].strIngredient1) + '</button>';
                 $("#contentDI").append(rowTemp);
             };
         }).then(generatePair())
@@ -132,10 +132,10 @@ $(document).ready(function () {
 
                             for(let i = 1; i <+ 20; i++){
                                 if (!response[itemID].drinks[0]["strIngredient" + i] === false) {
-                                    if (JSON.parse(localStorage.getItem(response[itemID].drinks[0]["strIngredient" + i]) == 1)) {
-                                        liTemp = '<li class="haveIng">' + response[itemID].drinks[0]["strMeasure" + i] + ' - ' + response[itemID].drinks[0]["strIngredient" + i] + '</li>';
+                                    if (JSON.parse(localStorage.getItem(titleCase(response[itemID].drinks[0]["strIngredient" + i])) == 1)) {
+                                        liTemp = '<li class="haveIng">' + response[itemID].drinks[0]["strMeasure" + i] + ' - ' + titleCase(response[itemID].drinks[0]["strIngredient" + i]) + '</li>';
                                     } else { 
-                                        liTemp = '<li>' + response[itemID].drinks[0]["strMeasure" + i] + ' - ' + response[itemID].drinks[0]["strIngredient" + i] + '</li>'
+                                        liTemp = '<li>' + response[itemID].drinks[0]["strMeasure" + i] + ' - ' + titleCase(response[itemID].drinks[0]["strIngredient" + i]) + '</li>'
                                     };
                                     $("#drinkIngredients").append(liTemp);
                                 }
@@ -148,10 +148,10 @@ $(document).ready(function () {
 
                             for(let i = 1; i <+ 20; i++){
                                 if (!response[itemID].meals[0]["strIngredient" + i] === false) {
-                                    if (JSON.parse(localStorage.getItem(response[itemID].meals[0]["strIngredient" + i]) == 1)) {
-                                        liTemp = '<li class="haveIng">' + response[itemID].meals[0]["strMeasure" + i] + ' - ' + response[itemID].meals[0]["strIngredient" + i] + '</li>';
+                                    if (JSON.parse(localStorage.getItem(titleCase(response[itemID].meals[0]["strIngredient" + i])) == 1)) {
+                                        liTemp = '<li class="haveIng">' + response[itemID].meals[0]["strMeasure" + i] + ' - ' + titleCase(response[itemID].meals[0]["strIngredient" + i]) + '</li>';
                                     } else { 
-                                        liTemp = '<li>' + response[itemID].meals[0]["strMeasure" + i] + ' - ' + response[itemID].meals[0]["strIngredient" + i] + '</li>'
+                                        liTemp = '<li>' + response[itemID].meals[0]["strMeasure" + i] + ' - ' + titleCase(response[itemID].meals[0]["strIngredient" + i]) + '</li>'
                                     };
                                     $("#mealIngredients").append(liTemp);
                                 }
@@ -193,7 +193,7 @@ $(document).ready(function () {
                     break;
                 }
 
-                localStorage.setItem($(_this).text(), $(_this).attr("data-state"));
+                localStorage.setItem(titleCase($(_this).text()), $(_this).attr("data-state"));
             });
         });
     
@@ -222,7 +222,7 @@ $(document).ready(function () {
                     break;
                 }
 
-                localStorage.setItem($(_this).text(), $(_this).attr("data-state"));
+                localStorage.setItem(titleCase($(_this).text()), $(_this).attr("data-state"));
             });
         });
 
@@ -270,7 +270,11 @@ $(document).ready(function () {
 
     }
 
-    function compareJSON () {
-
+    function titleCase(str) {
+        str = str.toLowerCase().split(' ');
+        for (var i = 0; i < str.length; i++) {
+          str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1); 
+        }
+        return str.join(' ');
     }
 })
