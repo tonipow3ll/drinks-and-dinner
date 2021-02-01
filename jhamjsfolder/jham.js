@@ -66,6 +66,17 @@ $(document).ready(function () {
         // console.log('Selected meal category: ' + selection);
         // Calls below function that randomizes array item from user-selected meal key
         getMealID(mealCategories[selection]);
+        if ($('.pre-p').hasClass('is-active')) {
+            $('pre').each(function()
+            {
+                this.style.display = 'block';
+            })
+        } else {
+            $('pre').each(function()
+            {
+                this.style.display = 'none';
+            })
+        }
     });
 
     // Function takes 1 argument = user-selected meal, which equates to one of the above keys in the object
