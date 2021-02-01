@@ -5,4 +5,12 @@
   #tab-content p.is-active {
     display: block;
   }
+
+  body {
+    background-color: #DCE9EB;
+  }
+
+  .button {
+    background-color: #97b48f;
+  }
   
