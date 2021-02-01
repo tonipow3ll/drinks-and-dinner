@@ -69,27 +69,32 @@
         </div>
         <!-- BUTTON FOR MEALS -->
         <button id="buttonMI" class="button centerButtons is-info">Food I've got lying around</button>
-        <!-- MEAL CARD -->
-        <div class="card">
-          <header>
-            <p id="mealTitle" class="card-header-title"></p>
-          </header>
-          <div class="card-image">
-            <figure class="image is-4by3">
-              <img id="mealImg" src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-            </figure>
-          </div>
-          <div class="card-content overflow">
-            <div class="media">
-              <div class="media-content">
-                <ul id="mealIngredients">
-                  ​
-                </ul>
-              </div>
-            </div>
 
+        <!-- CARD FOR MEALS -->
+
+        <div class="column is-centered">
+          <div class="card">
+            <!-- added ID for 'strMealThumb - thumbnail with image should populate here' -->
+            <div class="card-content py-5">
+              <!-- <img src="https://via.placeholder.com/150" alt=""> -->
+              <p class="title" id="strMeal">
+                Dinner will appear here
+              </p>
+              <img id="strMealThumb" src="" alt="">
+              <p class="subtitle" id="strTags">
+                Text Here
+              </p>
+            </div>
+            <footer class="card-footer">
+              <p class="card-footer-item">
+                <span>
+                  <a id="strYoutube" href="#" target="_blank">Show me the deets!</a>
+                </span>
+              </p>
+            </footer>
           </div>
         </div>
+
       </div>
       <!-- MODAL FOR DINKS -->
       <div class="column is-one-third">
@@ -99,11 +104,11 @@
             <header class="modal-card-head">
               <div class="columns">
                 <div class="column">
-              <p class="modal-card-title">Drink Ingredients</p>
+                  <p class="modal-card-title">Drink Ingredients</p>
                 </div>
                 <div class="column">
                   <div class="control has-icons-left">
-                    <input id="drinkSearch" class="input is-normal" type = "text" placeholder="Search">
+                    <input id="drinkSearch" class="input is-normal" type="text" placeholder="Search">
                     <span class="icon is-left">
                       <i class="fas fa-search"></i>
                     </span>
@@ -118,27 +123,35 @@
         </div>
         <!-- BUTTON FOR DRINKS -->
         <button id="buttonDI" class="button centerButtons is-info">Booze I've got lying around</button>
-        <div class="card">
-          <header>
-            <p id="drinkTitle" class="card-header-title"></p>
-          </header>
-          <div class="card-image">
-            <figure class="image is-4by3">
-              <img id="drinkImg" src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-            </figure>
-          </div>
-          <div class="card-content overflow">
-            <div class="media">
-              <div class="media-content">
-                <ul id="drinkIngredients">
-                  ​
-                </ul>
-              </div>
+
+        <!-- CARD FOR DRINKS -->
+
+        <div class="column is-centered ">
+          <div class="card ">
+            <div class="card-content py-5">
+
+              <p id="drinkTitle" class="title">
+                Drinks will appear here
+              </p>
+              <img id="drinkImg" src="" alt="">
+              </img>
+              <p class="subtitle" id="strTags">
+                Text Here
+              </p>
             </div>
+            <footer class="card-footer">
+              <p class="card-footer-item">
+                <span>
+                  <a href="#">Show me the deets!</a>
+                </span>
+              </p>
+
+            </footer>
           </div>
         </div>
       </div>
     </div>
+    <!-- OLD TEST BUTTONS, COMMENTED OUT FOR NOW  -->
     <!-- Test button for API calls -->
     <!-- <div class="columns is-centered">
         <div class="column is-one-quarter">
@@ -151,8 +164,9 @@
         </div>
       </div> -->
 
+    <!-- ============================================================================================ -->
+    <!-- BELOW IS HIDDEN  -->
     <div class="is-centered is-hidden">
-
       <!-- Card for previews - 1 -->
       <div class="is-centered">
         <div class="card py-5 my-5 ml-2 mr-2">
@@ -205,6 +219,21 @@
       </div>
     </div>
 
+    <!-- ABOVE IS HIDDEN  -->
+    <!-- ============================================================================================ -->
+
+    <!-- SOCIAL MEDIA BUTTONS FOR SHARING - THINKING OF MOVING TO ABOVE THE FOOTER?  -->
+<div class="columns  has-text-centered">
+  <div class="column ">
+    <span class="">
+      <a href="#"> <i class="fab fa-2x fa-facebook"></i> </a>
+      <a href="#"> <i class="fab fa-2x fa-twitter"></i></i> </a>
+      <a href="#"> <i class="fab fa-2x fa-instagram"></i></i> </a>
+      <a href="#"> <i class="fab fa-2x fa-pinterest"></i></i> </a>
+    </span>
+    </div>
+  </div>
+
     <!-- tabs for full recipe / ingredient cards -->
     <div class="tabs is-medium is-centered has-text-centered" id="tabs">
       <ul>
@@ -253,7 +282,8 @@
     <div class="content has-text-centered">
       <p>
         <!-- updated A tags so we each will have our own link  -->
-        <strong></strong> Created by <a href="#">Bjorn Yourney</a>, <a href="#">Cathy Marcheses</a>, <a href="#">Jonathan Hammond</a>, <a href="#">Ryan Royalty</a> & <a href="#">Toni
+        <strong></strong> Created by <a href="#">Bjorn Yourney</a>, <a href="#">Cathy Marcheses</a>, <a
+          href="#">Jonathan Hammond</a>, <a href="#">Ryan Royalty</a> & <a href="#">Toni
           Powell</a>. The source code is licensed
         <a href="http://opensource.org/licenses/mit-license.php">MIT</a>
       </p>
@@ -271,4 +301,10 @@
 </body>
 
 </html>
-
+<!-- 
+<span>
+  <a href="#"> <i class="fab fa-2x fa-facebook"></i> </a>
+  <a href="#"> <i class="fab fa-2x fa-twitter"></i></i> </a>
+  <a href="#"> <i class="fab fa-2x fa-instagram"></i></i> </a>
+  <a href="#"> <i class="fab fa-2x fa-pinterest"></i></i> </a>
+ </span> -->
