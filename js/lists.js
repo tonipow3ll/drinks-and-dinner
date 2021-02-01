@@ -1,3 +1,4 @@
+// List of Ingredients - Drinks
 const drinkIngredients = $.get("https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list", function (response) {
     return response;
 })
@@ -6,7 +7,6 @@ const drinkIngredients = $.get("https://www.thecocktaildb.com/api/json/v1/1/list
 const drinkCategories = $.get("https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list", function (response) {
     return response;
 });
-
 
 // list of Glasses - Drinks
 const drinkGlasses = $.get("https://www.thecocktaildb.com/api/json/v1/1/list.php?g=list", function (response) {
@@ -28,13 +28,13 @@ const mealCategories = $.get("https://www.themealdb.com/api/json/v1/1/list.php?c
     return response;
 });
 
-
 // list of Areas - Meals
 const mealAreas = $.get("https://www.themealdb.com/api/json/v1/1/list.php?a=list", function (response) {
     return response;
 });
 
 // Example on how to call the promise.
-Promise.resolve(drinkIngredients).then((response) => { }/* Your function goes here. */)
+
+// Promise.resolve(drinkIngredients).then((response) => { }/* Your function goes here. */)
 
 // Or copy the $.get call into your own code.

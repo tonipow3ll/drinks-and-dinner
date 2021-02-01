@@ -51,27 +51,7 @@ $(document).ready(function () {
             // On Click function for meal ingredient buttons.
             $('.mealSelector').on('click', function (event) {
                 event.preventDefault;
-                let _this = this;
-
-                // Switch Data State and CSS on click.
-                switch(parseInt($(_this).attr("data-state"))) {
-                    case 1:
-                        $(_this).attr("data-state", -1);
-                        $(_this).removeClass("is-success");
-                        $(_this).addClass("is-danger");
-                    break;
-                    case 0:
-                        $(_this).attr("data-state", 1);
-                        $(_this).addClass("is-success");
-                    break;
-                    case -1:
-                        $(_this).attr("data-state", 0);
-                        $(_this).removeClass("is-danger");
-                    break;
-                };
-
-                // Store data state every time an ingredient button is clicked.
-                localStorage.setItem(titleCase($(_this).text()), $(_this).attr("data-state"));
+                ingredButtonFormatting(this);
             });
         });
 
@@ -111,33 +91,13 @@ $(document).ready(function () {
             // On Click function for drink ingredient buttons.
             $('.drinkSelector').on('click', function (event) {
                 event.preventDefault;
-                let _this = this;
+                ingredButtonFormatting(this);
 
-                // Switch Data State and CSS on click.
-                switch(parseInt($(_this).attr("data-state"))) {
-                    case 1:
-                        $(_this).attr("data-state", -1);
-                        $(_this).removeClass("is-success");
-                        $(_this).addClass("is-danger");
-                    break;
-                    case 0:
-                        $(_this).attr("data-state", 1);
-                        $(_this).addClass("is-success");
-                    break;
-                    case -1:
-                        $(_this).attr("data-state", 0);
-                        $(_this).removeClass("is-danger");
-                    break;
-                }
-
-                // Store data state every time an ingredient button is clicked.
-                localStorage.setItem(titleCase($(_this).text()), $(_this).attr("data-state"));
             });
         });
 
         // Generate first meal and drink pair on website open.
         Promise.all([mealIngredients, drinkIngredients]).then((response) => { generatePair() })
-
     };
 
     // get Ingredient Promises function
@@ -312,6 +272,27 @@ $(document).ready(function () {
         
         getIngredPromises(mIng2Pass, mBadIngred, "meal", arrGenMeal, badGenMeal, goodCountsMeal, badCountsMeal, mealGoodList, mealURL);
 
+    }
+
+    function ingredButtonFormatting(_this) {
+        // Switch Data State and CSS on click.
+        switch(parseInt($(_this).attr("data-state"))) {
+            case 1:
+                $(_this).attr("data-state", -1);
+                $(_this).removeClass("is-success");
+                $(_this).addClass("is-danger");
+            break;
+            case 0:
+                $(_this).attr("data-state", 1);
+                $(_this).addClass("is-success");
+            break;
+            case -1:
+                $(_this).attr("data-state", 0);
+                $(_this).removeClass("is-danger");
+            break;
+        }
+
+        localStorage.setItem(titleCase($(_this).text()), $(_this).attr("data-state"));
     }
 
     function titleCase(str) {
