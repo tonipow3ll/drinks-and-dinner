@@ -227,7 +227,7 @@ $(document).ready(function () {
                             let haveDrinkIng = ''
                             if (JSON.parse(localStorage.getItem(titleCase(drinkIngArray[j])) == 1)) { haveDrinkIng = ' class="haveIng"' }
                             $('#drinkIngredientsUL').append($(`<li` + haveDrinkIng + `></li>`).text(
-                                drinkMeasurements[j] + ' ' + titleCase(drinkIngArray[j])
+                                drinkMeasurements[j] + ' - ' + titleCase(drinkIngArray[j])
                             ));
                         }
                         
@@ -272,7 +272,7 @@ $(document).ready(function () {
                             let haveMealIng = '';
                             if (JSON.parse(localStorage.getItem(titleCase(mealIngArray[l])) == 1)) { haveMealIng = ' class="haveIng"' }
                             $('#mealIngredientsUL').append($(`<li` + haveMealIng + `></li>`).text(
-                                mealMeasurements[l] + ' ' + titleCase(mealIngArray[l])
+                                mealMeasurements[l] + ' - ' + titleCase(mealIngArray[l])
                             ));
                         }
                     }
@@ -318,6 +318,31 @@ $(document).ready(function () {
         $('.searchBar').val("");
         $('.drinkSelector').show();
         $('.mealSelector').show();
+    })
+
+    $('#mealIngredientsUL').on('click', function (event) {
+        event.preventDefault;
+        let _this = event.target;
+        let wIng = $(_this).text().split(" - ")
+        let state = "";
+        if (JSON.parse(localStorage.getItem(wIng[1])) !== null) { state = localStorage.getItem(wIng[1]) };
+
+            // Changes CSS based on saved data state of this ingredient.
+            switch (parseInt(state)) {
+                case 1:
+                    $(_this).attr("data-state", -1);
+                    $(_this).removeClass("haveIng");
+                    $(_this).addClass("badIng");
+                    break;
+                case 0:
+                    $(_this).attr("data-state", 1);
+                    $(_this).addClass("haveIng");
+                    break;
+                case -1:
+                    $(_this).attr("data-state", 0);
+                    $(_this).removeClass("badIng");
+                    break;
+            }
     })
 
     // Input functionality for the Drink search bar.
