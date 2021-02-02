@@ -323,13 +323,13 @@ $(document).ready(function () {
     // Input functionality for the Drink search bar.
     $('#drinkSearch').on('input', function (event) {
         $('.drinkSelector').hide();
-        $('.drinkSelector:contains("' + $(this).val() + '")').show()
+        $('.drinkSelector:contains("' + titleCase($(this).val()) + '")').show()
     })
 
     // Input functionality for the Meal search bar.
     $('#mealSearch').on('input', function (event) {
         $('.mealSelector').hide();
-        $('.mealSelector:contains("' + $(this).val() + '")').show()
+        $('.mealSelector:contains("' + titleCase($(this).val()) + '")').show()
     })
 
     // Function that sets up the parameters for generating a new meal.
@@ -416,7 +416,7 @@ $(document).ready(function () {
     }
 
 
-    // JON JAVA
+    // JON JS
     // jquery for tabs functionality - will need to have this populate with some form of 'data', recipes/ingredients?
     $("#ingredients").on('mouseover', function () {
         $("#ingredients").addClass("is-active")
@@ -443,8 +443,6 @@ $(document).ready(function () {
     //     $('#tab-content p').removeClass('is-active');
     //     $('p[data-content="' + tab + '"]').addClass('is-active');
     // });
-
-// START JON JS!!!!
 
 
 //     // When div holding Recipe | Ingredients | Drink Mixes | Steps is clicked
