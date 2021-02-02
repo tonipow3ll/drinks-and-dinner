@@ -186,10 +186,12 @@ $(document).ready(function () {
                     let itemID = Math.floor(Math.random() * top30.length);
                     if (type === "drink") {
                         // Displays the image and title for the drink.
-                        $("#drinkTitle").text(response[itemID].drinks[0].strDrink);
-                        $("#drinkImg").attr("src", response[itemID].drinks[0].strDrinkThumb);
-                        
                         let drinkDetails = response[itemID].drinks[0];
+                        $("#drinkTitle").text(drinkDetails.strDrink);
+                        $("#drinkImg").attr("src", drinkDetails.strDrinkThumb);
+                        
+                        // INSERT CODE TO POPULATE DRINK INSTRUCTIONS
+
                         let drinkIngArray = [];
                         let drinkMeasurements = [];
 
@@ -230,10 +232,12 @@ $(document).ready(function () {
                         
                     } else if (type === "meal") {
                         // Displays the image and title for the meal.
-                        $("#mealTitle").text(response[itemID].meals[0].strMeal);
-                        $("#mealImg").attr("src", response[itemID].meals[0].strMealThumb);
-
                         let mealDetails = response[itemID].meals[0];
+                        $("#mealTitle").text(mealDetails.strMeal);
+                        $("#mealImg").attr("src", mealDetails.strMealThumb);
+
+                        // INSERT CODE TO POPULATE MEAL INSTRUCTIONS
+
                         let mealIngArray= [];
                         let mealMeasurements = [];
 
@@ -440,8 +444,8 @@ $(document).ready(function () {
     //     $('p[data-content="' + tab + '"]').addClass('is-active');
     // });
 
-// // START JON JS!!!!
-//
+// START JON JS!!!!
+
 
 //     // When div holding Recipe | Ingredients | Drink Mixes | Steps is clicked
 //     // If the paragraph with .pre-p is currently active, show pre tag; else hide the pre tag.
@@ -488,47 +492,47 @@ $(document).ready(function () {
 //         }
 //     });
 
-//     // Function takes 1 argument = user-selected meal, which equates to one of the above keys in the object
-//     function getMealID(meal) {
-//         // Random number between 0-1, in float/decimal form
-//         let rand = Math.random();
-//         // Meal Array length -- for example, vegan.length = 3
-//         let totalMeals = meal.length;
-//         // Floor turns 2.93 into 2, 0.93 into 0, etc.
-//         // For example, 0.78 * 34 = 26.52 -- Floor makes this 26.
-//         let randIndex = Math.floor(rand * totalMeals);
-//         // Random meal equates to something along the lines of: beef[26]...
-//         // ...Which might be something like '52824'
-//         let randomMeal = meal[randIndex];
-//         // Ready to serve https://www.themealdb.com/api/json/v1/1/lookup.php?i=52824 into the API
-//         let queryURL = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + randomMeal;
+// //     // Function takes 1 argument = user-selected meal, which equates to one of the above keys in the object
+// //     function getMealID(meal) {
+// //         // Random number between 0-1, in float/decimal form
+// //         let rand = Math.random();
+// //         // Meal Array length -- for example, vegan.length = 3
+// //         let totalMeals = meal.length;
+// //         // Floor turns 2.93 into 2, 0.93 into 0, etc.
+// //         // For example, 0.78 * 34 = 26.52 -- Floor makes this 26.
+// //         let randIndex = Math.floor(rand * totalMeals);
+// //         // Random meal equates to something along the lines of: beef[26]...
+// //         // ...Which might be something like '52824'
+// //         let randomMeal = meal[randIndex];
+// //         // Ready to serve https://www.themealdb.com/api/json/v1/1/lookup.php?i=52824 into the API
+// //         let queryURL = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + randomMeal;
 
-//         // Sends request to server to retrieve randomMeal object that contains full details of a Meal
-//         // NOTE: full details includes items such as Meal Name, Image, Ingredients, Measures, Instructions...
-//         $.get(queryURL, function (fullDeets) {
-//             // Console log returned object -- this section will change if Ryan's idea is applied here.
-//             console.log(fullDeets);
-//             let details = fullDeets.meals[0];
-//             // Traverse the object and fill in HTML text, save for the image/a which are hrefs.
-//             $("#strMeal").text(details.strMeal);
-//             $("#strMealThumb").attr('src', details.strMealThumb);
-//             $("#strTags").text(details.strTags);
-//             $("#strYoutube").attr('href', details.strYoutube);
-//             // <pre> represents preformatted text which is to be presented exactly as written.
-//             $("pre").text(details.strInstructions);
-//             // $("[data-content=1]").text(details.strInstructions);
-//             // Add an empty unordered list to the ingredients paragraph, where items will be listed.
-//             let ingredientsUL = $(`<ul></ul>`).attr('id', 'ingredientsUL')
-//             $("[data-content=1]").append(ingredientsUL);
+// //         // Sends request to server to retrieve randomMeal object that contains full details of a Meal
+// //         // NOTE: full details includes items such as Meal Name, Image, Ingredients, Measures, Instructions...
+// //         $.get(queryURL, function (fullDeets) {
+// //             // Console log returned object -- this section will change if Ryan's idea is applied here.
+// //             console.log(fullDeets);
+// //             let details = fullDeets.meals[0];
+// //             // Traverse the object and fill in HTML text, save for the image/a which are hrefs.
+// //             $("#strMeal").text(details.strMeal);
+// //             $("#strMealThumb").attr('src', details.strMealThumb);
+// //             $("#strTags").text(details.strTags);
+// //             $("#strYoutube").attr('href', details.strYoutube);
+// //             // <pre> represents preformatted text which is to be presented exactly as written.
+// //             $("pre").text(details.strInstructions);
+// //             // $("[data-content=1]").text(details.strInstructions);
+// //             // Add an empty unordered list to the ingredients paragraph, where items will be listed.
+// //             let ingredientsUL = $(`<ul></ul>`).attr('id', 'ingredientsUL')
+// //             $("[data-content=1]").append(ingredientsUL);
 
-            // Regular expressions start with an open / signifying the start
-            // \b indicates the word we are looking for, in this case strIngredient then strMeasure
-            // Regular expressions end with a close / signifying both end and start of expression flags
-            // g is a global search -- retain the index of the last match, allowing iterative searches
+// //             // Regular expressions start with an open / signifying the start
+// //             // \b indicates the word we are looking for, in this case strIngredient then strMeasure
+// //             // Regular expressions end with a close / signifying both end and start of expression flags
+// //             // g is a global search -- retain the index of the last match, allowing iterative searches
 
-//             }
-//         });
-//     }
+// //             }
+// //         });
+// //     }
 });
 
 
