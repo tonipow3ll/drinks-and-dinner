@@ -91,13 +91,13 @@
                 </p>
                 <img id="mealImg" src="./images/donut.jpg" alt="">
                 <p class="subtitle" id="strTags">
-                  Text Here
+                 
                 </p>
               </div>
               <footer class="card-footer">
                 <p class="card-footer-item">
                   <span>
-                    <a id="strYoutube" href="#" target="_blank">Show me the deets!</a>
+                    <a id="strYoutube" href="#" target="_blank"><i class="fab fa-youtube fa-2x"></i></a>
                   </span>
                 </p>
               </footer>
@@ -109,7 +109,7 @@
         <div class="column is-one-third">
           
           <!-- BUTTON FOR DRINKS -->
-          <button id="buttonDI" class="button centerButtons">Booze I've got lying around</button>
+          <button id="buttonDI" class=" button centerButtons">Booze I've got lying around</button>
           <button id="drinkGenButton" class="button luckybutton centerButtons">Random Drink</button>
 
           <!-- CARD FOR DRINKS -->
@@ -124,13 +124,13 @@
                 <img id="drinkImg" src="./images/drink.jpg" alt="Cocktail">
                 </img>
                 <p class="subtitle" id="strTags">
-                  Text Here
+                 
                 </p>
               </div>
               <footer class="card-footer">
                 <p class="card-footer-item">
                   <span>
-                    <a href="#">Show me the deets!</a>
+                    <a href="#"><i class="fab fa-youtube fa-2x"></i></a>
                   </span>
                 </p>
 
@@ -269,41 +269,51 @@
       <!-- ============================================================================================ -->
 
       <!-- SOCIAL MEDIA BUTTONS FOR SHARING - THINKING OF MOVING TO ABOVE THE FOOTER?  -->
-  <div class="columns  has-text-centered">
-    <div class="column ">
-      <span class="">
-        <a href="#"> <i class="fab fa-2x fa-facebook"></i> </a>
-        <a href="#"> <i class="fab fa-2x fa-twitter"></i></i> </a>
-        <a href="#"> <i class="fab fa-2x fa-instagram"></i></i> </a>
-        <a href="#"> <i class="fab fa-2x fa-pinterest"></i></i> </a>
-      </span>
-      </div>
-    </div>
+
 
       <!-- tabs for full recipe / ingredient cards -->
-      <div class="tabs is-medium is-centered has-text-centered" id="tabs">
-        <ul>
-          <li class="is-active" data-tab="1">
-            <a>
-              <span><i class="fas fa-pizza-slice"></i> Meal Ingredients</span>
-            </a>
-          </li>
-          <li data-tab="2">
-            <a>
-              <span><i class="fas fa-book-open"></i> Meal Recipe</span>
-            </a>
-          </li>
-          <li data-tab="3">
-            <a>
-              <span><i class="fas fa-glass-martini"></i> Drink Ingredients</span>
-            </a>
-          </li>
-          <li data-tab="4">
-            <a>
-              <span><i class="fas fa-glass-cheers"></i> Drink Recipe</span>
-            </a>
-          </li>
-        </ul>
+      <div class="columns">
+        <div class="column">
+              <div class="tabs is-medium is-centered has-text-centered" id="tabs">
+                <ul>
+                  <li class="is-active" data-tab="1">
+                    <a>
+                      <span class="has-text-success-dark"><i class="fas fa-pizza-slice"></i> Meal Ingredients</span>
+                    </a>
+                  </li>
+                  <li data-tab="2">
+                    <a>
+                      <span class="has-text-success-dark"><i class="fas fa-book-open"></i> Meal Recipe</span>
+                    </a>
+                  </li>
+                  <li data-tab="3">
+                    <a>
+                      <span class="has-text-success-dark"><i class="fas fa-glass-martini"></i> Drink Ingredients</span>
+                    </a>
+                  </li>
+                  <li data-tab="4">
+                    <a>
+                      <span class="has-text-success-dark"> <i class="fas fa-glass-cheers"></i> Drink Recipe</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div id="tab-content" class="recipe has-text-centered">
+                <p class="is-active" data-content="1">
+                </p>
+                <p data-content="2" class="mx-4 px-4  pre-p">
+                <pre>
+                      
+                      </pre>
+                </p>
+                <p data-content="3">
+                  
+                </p>
+                <p data-content="4">
+                
+                </p>
+              </div>
+        </div>
       </div>
 
       <div id="tab-content" class="recipe has-text-centered">

@@ -111,6 +111,9 @@ pre {
   display: block;
 }
 
+li , p {
+  color:black;
+}
 /* Ryan's Classes */
 .modalHeight {
   position: absolute;
@@ -182,4 +185,11 @@ pre {
 /* Full HD 1408px and above) */
 @media (min-width: 1408px) { 
     
+}
+
+@media (max-width: 768px) {  
+  .tabs ul {
+    -webkit-flex-direction: column;
+    flex-direction: column;
+  }
 }
