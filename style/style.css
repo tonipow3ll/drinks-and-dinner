@@ -14,13 +14,13 @@ a, .is-active, .tabs{
     background-color: var(--primary);
   }
 
-  .hero.is-info .title {
-    color: #232321;
-  }
+.hero.is-info .title {
+  color: #232321;
+}
 
-  .hero.is-info .subtitle {
-    color: #232321;
-  }
+.hero.is-info .subtitle {
+  color: #232321;
+}
   
 #tab-content p.is-active {
   display: block;
@@ -32,28 +32,10 @@ a, .is-active, .tabs{
   top: 0;
 }
 
-.centerButtons {
-  width: 100%
-}
-
 .heroBorder {
   border-bottom: 5px solid black;
   border-top: 5px solid black;
   margin-bottom: 20px;
-}
-
-.height100 {
-  Height: 100%
-}
-
-.haveIng {
-  color: green;
-  font-weight: bold;
-}
-
-.overflow {
-  height: 200px;
-  overflow-y: scroll;
 }
 
 #tab-content div {
@@ -64,6 +46,72 @@ a, .is-active, .tabs{
   display: block;
 }
 
+.tabSpot.is-active {
+  display: block;
+} 
+
+.owl-height {
+    max-height: 35vh;
+  }
+
+body {
+  background-color: #EAEAE8;
+}
+
+.button {
+  background-color: #6C8C3F;
+  color: var(--primary);
+}
+
+.button:hover {
+  color: var(--primary);
+  background-color: #598c3f;
+
+}
+
+.recipe {
+  background-color: #EAEAE8;
+}
+
+
+.item img {
+  object-fit: cover;
+  object-position: bottom;
+} 
+
+.luckybutton {
+  background-color: #b0170b;
+  
+}
+
+button:hover.luckybutton {
+  background-color: #b00b28;
+}
+
+
+pre {
+  white-space: pre-wrap;
+  text-align: start;
+  font-family: BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+  text-align: center;
+  width: 100%;
+  background-color: var(--primary);
+  font-size: 16px;
+}
+
+.footer {
+  background-color: var(--primary);
+}
+
+#tab-content div {
+  display: none;
+}
+
+#tab-content div.is-active {
+  display: block;
+}
+
+/* Ryan's Classes */
 .modalHeight {
   position: absolute;
   left: 50%;
@@ -71,100 +119,34 @@ a, .is-active, .tabs{
   transform: translate(-50%, -50%);
   height: 90%;
 }
-​
-.heroBorder {
-border-bottom: 5px solid black;
-border-top: 5px solid black;
-margin-bottom: 20px;
-}
-​
-#genButton {
-Height: 100%
-}
-​
+
 .haveIng {
-color: green;
-font-weight: bold;
+  color: green;
+  font-weight: bold;
 }
-​
-.overflow {
-height: 200px;
-overflow-y: scroll;
+
+.badIng {
+  color: red;
+  font-weight: bold;
 }
-​
-pre {
-  white-space: pre-wrap;
-  text-align: start;
-  font-family: BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-  background: #fff;
-  font-size: 16px;
-  /* display: none; */
+
+#genButton {
+  Height: 100%
 }
-  #tab-content p.is-active {
-    display: block;
-  } 
 
-.owl-height {
-    max-height: 35vh;
-  }
+.centerButtons {
+  width: 100%
+}
 
-  body {
-    background-color: #EAEAE8;
-  }
+.height100 {
+  Height: 100%
+}
 
-  .button {
-    background-color: #6C8C3F;
-    color: var(--primary);
-  }
+.centerButtons {
+  width: 100%
+}
+/* End Ryan's Classes*/
 
-  .button:hover {
-    color: var(--primary);
-    background-color: #598c3f;
-
-  }
-
-  .recipe {
-    background-color: #EAEAE8;
-  }
-
-  
-  .item img {
-    object-fit: cover;
-    object-position: bottom;
-  } 
-
-  .luckybutton {
-    background-color: #b0170b;
-    max-width: 10rem;
-    align-items: center;
-    align-content: center;
-  }
-
-  button:hover.luckybutton {
-   background-color: #b00b28;
-  }
-  
-
-  pre {
-    white-space: pre-wrap;
-    text-align: start;
-    font-family: BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-    /* background: #fff; */
-    background-color: var(--primary);
-    font-size: 16px;
-  }
-
-  .footer {
-    background-color: var(--primary);
-  }
-  
-  #tab-content div {
-    display: none;
-  }
-
-  #tab-content div.is-active {
-    display: block;
-  }
 
   /*-------- MEDIA QUERIES --------*/
 /* BULMA Breakpoints */
