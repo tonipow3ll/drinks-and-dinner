@@ -181,7 +181,7 @@ $(document).ready(function () {
                                 $("#drinkIngredients").append(liTemp);
                             }
                         }
-
+                        
                     } else if (type === "meal") {
                         $("#mealTitle").text(response[itemID].meals[0].strMeal);
                         $("#mealImg").attr("src", response[itemID].meals[0].strMealThumb);
