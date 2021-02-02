@@ -2,6 +2,10 @@
   --primary: #EAEAE8;
 }
 
+a, .is-active, .tabs{
+  color: #6C8C3F;
+}
+
 #tab-content p {
     display: none;
   }

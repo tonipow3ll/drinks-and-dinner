@@ -33,5 +33,12 @@ $(document).ready(function() {
       
     });  
 
+    // APIS for Buttons
+
+     const faceBook = {
+      fbKey: "ed7b87dda4d1465a2d3cfe935f385dd8",
+      fbBase: "https://www.facebook.com/sharer.php"
+    }
+
 
   });
