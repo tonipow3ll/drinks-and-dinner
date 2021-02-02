@@ -63,6 +63,7 @@
             </div>
       </div>                   
   </section>
+
   <div class="columns is-centered">
     <div class="column is-one-quarter">
     <button id="genButton" class="button luckybutton centerButtons  height100">I’m feelin’ lucky</button>
@@ -75,34 +76,10 @@
     <div class="columns is-centered">
 
       <div class="column is-one-third">
-        <!--  MODAL FOR MEALS -->
-        <div id="modalMI" class="modal">
-          <div class="modal-background"></div>
-          <div class="modal-card">
-            <header class="modal-card-head">
-              <div class="columns">
-                <div class="column">
-                  <p class="modal-card-title">Meal Ingredients</p>
-                  <div class="column">
-                    <div class="control has-icons-left">
-                      <input id="mealSearch" class="input is-normal" type="text" placeholder="Search">
-                      <span class="icon is-left">
-                        <i class="fas fa-search"></i>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-            </header>
-            <section id="contentMI" class="modal-card-body">
-            </section>
-            <footer class="modal-card-foot">
-              <button class="button is-info saveButton">Close</button>
-            </footer>
-          </div>
-        </div>
+       
         <!-- BUTTON FOR MEALS -->
         <button id="buttonMI" class="button centerButtons">Food I've got lying around</button>
-
+        <button id="mealGenButton" class="button luckybutton centerButtons">Random Meal</button>
         <!-- CARD FOR MEALS -->
         <div class="column is-centered">
           <div class="card">
@@ -128,33 +105,12 @@
         </div>
 
       </div>
-      <!-- MODAL FOR DRINKS -->
+
       <div class="column is-one-third">
-        <div id="modalDI" class="modal">
-          <div class="modal-background"></div>
-          <div class="modal-card">
-            <header class="modal-card-head">
-              <div class="columns">
-                <div class="column">
-                  <p class="modal-card-title">Drink Ingredients</p>
-                </div>
-                <div class="column">
-                  <div class="control has-icons-left">
-                    <input id="drinkSearch" class="input is-normal" type="text" placeholder="Search">
-                    <span class="icon is-left">
-                      <i class="fas fa-search"></i>
-                    </span>
-                  </div>
-            </header>
-            <section id="contentDI" class="modal-card-body">
-            </section>
-            <footer class="modal-card-foot">
-              <button class="button is-info saveButton">Close</button>
-            </footer>
-          </div>
-        </div>
+        
         <!-- BUTTON FOR DRINKS -->
         <button id="buttonDI" class="button centerButtons">Booze I've got lying around</button>
+        <button id="drinkGenButton" class="button luckybutton centerButtons">Random Drink</button>
 
         <!-- CARD FOR DRINKS -->
 
@@ -183,6 +139,63 @@
         </div>
       </div>
     </div>
+
+  <!--  MODAL FOR MEALS -->
+  <div id="modalMI" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card modalHeight">
+      <header class="modal-card-head">
+        <div class="columns centerButtons">
+          <div class="column is-two-fifths">
+            <p class="modal-card-title">Meal Ingredients</p>
+          </div>
+          <div class="column">
+            <div class="control has-icons-left">
+              <input id="mealSearch" class="input is-normal searchBar centerButtons height100" type = "text" placeholder="Search">
+              <span class="icon is-left">
+                <i class="fas fa-search"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </header>
+      <section id="contentMI" class="modal-card-body">
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button is-info saveButton">Close</button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- MODAL FOR DRINKS -->
+  <div id="modalDI" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card modalHeight">
+      <header class="modal-card-head">
+        <div class="columns centerButtons">
+          <div class="column is-two-fifths">
+            <p class="modal-card-title">Drink Ingredients</p>
+          </div>
+          <div class="column">
+            <div class="control has-icons-left">
+              <input id="drinkSearch" class="input is-normal searchBar centerButtons height100" type = "text" placeholder="Search">
+              <span class="icon is-left">
+                <i class="fas fa-search"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </header>
+      <section id="contentDI" class="modal-card-body">
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button is-info saveButton">Close</button>
+      </footer>
+    </div>
+  </div>
+
+
+    
     <!-- OLD TEST BUTTONS, COMMENTED OUT FOR NOW  -->
     <!-- Test button for API calls -->
     <!-- <div class="columns is-centered">

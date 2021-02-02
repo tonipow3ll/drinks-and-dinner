@@ -208,6 +208,16 @@ $(document).ready(function () {
         generatePair();
     });
 
+    $('#mealGenButton').on('click', function (event) {
+        event.preventDefault;
+        generateMeal();
+    });
+
+    $('#drinkGenButton').on('click', function (event) {
+        event.preventDefault;
+        generateDrink();
+    });
+
     $('#buttonMI').on('click', function (event) {
         event.preventDefault;
         $('#modalMI').addClass('is-active');
@@ -236,25 +246,7 @@ $(document).ready(function () {
         $('.mealSelector:contains("' + $(this).val() + '")').show()
     })
 
-    function generatePair() {
-        let drinkGoodList = { "items": [] };
-        let dBadIngred = [];
-        let dGoodIngred = [];
-        let arrGenDrink = [];
-        let badGenDrink = [];
-        let goodCountsDrink = {};
-        let badCountsDrink = {};
-        let drinkGreenButtons = $(".drinkSelector.is-success");
-        let drinkRedButtons = $(".drinkSelector.is-danger");
-        for (let i = 0; i < drinkGreenButtons.length; i++) {
-            dGoodIngred[i] = $(drinkGreenButtons[i]).text()
-        }
-        for (let i = 0; i < drinkRedButtons.length; i++) {
-            dBadIngred[i] = $(drinkRedButtons[i]).text()
-        }
-
-        getIngredPromises(dGoodIngred, dBadIngred, "drink", arrGenDrink, badGenDrink, goodCountsDrink, badCountsDrink, drinkGoodList, drinkURL);
-
+    function generateMeal() {
         let mealGoodList = { "items": [] };
         let mBadIngred = [];
         let mGoodIngred = [];
@@ -272,8 +264,33 @@ $(document).ready(function () {
         }
 
         getIngredPromises(mGoodIngred, mBadIngred, "meal", arrGenMeal, badGenMeal, goodCountsMeal, badCountsMeal, mealGoodList, mealURL);
-
     }
+
+    function generateDrink() {
+        let drinkGoodList = { "items": [] };
+        let dBadIngred = [];
+        let dGoodIngred = [];
+        let arrGenDrink = [];
+        let badGenDrink = [];
+        let goodCountsDrink = {};
+        let badCountsDrink = {};
+        let drinkGreenButtons = $(".drinkSelector.is-success");
+        let drinkRedButtons = $(".drinkSelector.is-danger");
+        for (let i = 0; i < drinkGreenButtons.length; i++) {
+            dGoodIngred[i] = $(drinkGreenButtons[i]).text()
+        }
+        for (let i = 0; i < drinkRedButtons.length; i++) {
+            dBadIngred[i] = $(drinkRedButtons[i]).text()
+        }
+
+        getIngredPromises(dGoodIngred, dBadIngred, "drink", arrGenDrink, badGenDrink, goodCountsDrink, badCountsDrink, drinkGoodList, drinkURL);
+    }
+
+    function generatePair() {
+        generateMeal();
+        generateDrink();
+    }
+
 
     function ingredButtonFormatting(_this) {
         // Switch Data State and CSS on click.
