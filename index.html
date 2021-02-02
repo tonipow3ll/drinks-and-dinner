@@ -28,6 +28,22 @@
 ​
 <body>
   <header>
+      <section class="hero is-info is-small">
+        <div class="hero-body columns">
+          <div class="column is-four-fifths">
+            <p class="title">
+              Dinner and a Drink
+            </p>
+            <p class="subtitle">
+              Randomize recipes with ingredients you have!
+            </p>
+          </div>
+          <div class="column"></div>
+          <div class="column">
+            <!-- <button id="genButton" class="button centerButtons is-danger height100">I'm feelin' lucky</button> -->
+          </div>
+        </div>
+      </section>
     <!-- BANNER, WILL BE CAROUSEL WITH PHOTOS -->
      <!-- Owl carousel -->
      <section class="main-slider mb-6">
@@ -46,23 +62,12 @@
             </div>
       </div>                   
   </section>
-    <!-- <section class="hero is-info is-small heroBorder">
-      <div class="hero-body columns">
-        <div class="column is-four-fifths">
-          <p class="title">
-            Dinner and a Drink
-          </p>
-          <p class="subtitle">
-            Randomize recipes with ingredients you have!
-          </p>
-        </div>
-        <div class="column"></div>
-        <div class="column">
-          <button id="genButton" class="button centerButtons is-danger height100">I'm feelin' lucky</button>
-        </div>
-      </div>
-    </section> -->
-
+  <div class="columns is-centered">
+    <div class="column is-one-quarter">
+    <button id="genButton" class="button luckybutton centerButtons  height100">I’m feelin’ lucky</button>
+    </div>
+  </div>
+ 
   </header>
   <main>
     <!-- START COLUMNS -->
@@ -95,7 +100,7 @@
           </div>
         </div>
         <!-- BUTTON FOR MEALS -->
-        <button id="buttonMI" class="button centerButtons is-info">Food I've got lying around</button>
+        <button id="buttonMI" class="button centerButtons">Food I've got lying around</button>
 
         <!-- CARD FOR MEALS -->
 
@@ -149,7 +154,7 @@
           </div>
         </div>
         <!-- BUTTON FOR DRINKS -->
-        <button id="buttonDI" class="button centerButtons is-info">Booze I've got lying around</button>
+        <button id="buttonDI" class="button centerButtons">Booze I've got lying around</button>
 
         <!-- CARD FOR DRINKS -->
 
@@ -286,7 +291,7 @@
         </li>
       </ul>
     </div>
-    <div id="tab-content" class="has-text-centered">
+    <div id="tab-content" class="recipe has-text-centered">
       <p class="is-active" data-content="1">
       </p>
       <p data-content="2" class="mx-4 px-4  pre-p">
@@ -301,7 +306,7 @@
         Drink steps appear here
       </p>
     </div>
-    </div>
+    <!-- </div> -->
   </main>
 
 
