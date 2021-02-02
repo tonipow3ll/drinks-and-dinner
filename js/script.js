@@ -189,6 +189,7 @@ $(document).ready(function () {
                         let drinkDetails = response[itemID].drinks[0];
                         $("#drinkTitle").text(drinkDetails.strDrink);
                         $("#drinkImg").attr("src", drinkDetails.strDrinkThumb);
+                        $("#drinkRecipe").text(drinkDetails.strInstructions);
                         
                         // INSERT CODE TO POPULATE DRINK INSTRUCTIONS
 
@@ -235,8 +236,7 @@ $(document).ready(function () {
                         let mealDetails = response[itemID].meals[0];
                         $("#mealTitle").text(mealDetails.strMeal);
                         $("#mealImg").attr("src", mealDetails.strMealThumb);
-
-                        // INSERT CODE TO POPULATE MEAL INSTRUCTIONS
+                        $("#mealRecipe").text(mealDetails.strInstructions);
 
                         let mealIngArray= [];
                         let mealMeasurements = [];
