@@ -36,18 +36,6 @@
   overflow-y: scroll;
 }
 
-#tab-content p.is-active {
-  display: block;
-}
-
-pre {
-  white-space: pre-wrap;
-  text-align: start;
-  font-family: BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-  background: #fff;
-  font-size: 16px;
-}
-
 #tab-content div {
   display: none;
 }
@@ -62,4 +50,33 @@ pre {
   top: 50%;
   transform: translate(-50%, -50%);
   height: 90%;
+}
+​
+.heroBorder {
+border-bottom: 5px solid black;
+border-top: 5px solid black;
+margin-bottom: 20px;
+}
+​
+#genButton {
+Height: 100%
+}
+​
+.haveIng {
+color: green;
+font-weight: bold;
+}
+​
+.overflow {
+height: 200px;
+overflow-y: scroll;
+}
+​
+pre {
+  white-space: pre-wrap;
+  text-align: start;
+  font-family: BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+  background: #fff;
+  font-size: 16px;
+  /* display: none; */
 }
