@@ -129,10 +129,15 @@ $(document).ready(function () {
                     else if (type === "meal" && response[i].meals !== null) { badGen = badGen.concat(response[i].meals.map(function (v) { return v.idMeal })) }
                 }
 
+                console.log(arrGen);
+
                 // Counts the number of times each ID appears in the GREEN list.
                 arrGen.forEach(function (x) {
                     goodCounts[x] = (goodCounts[x] || 0) + 1;
                 })
+
+                console.log(goodCounts)
+
 
                 // Counts the number of times each ID appears in the RED list.
                 badGen.forEach(function (x) {
@@ -156,8 +161,12 @@ $(document).ready(function () {
                 // Top 30 empty array.
                 let top30 = [];
 
+                console.log(goodList);
                 // Selects the top 30 IDs from the sorted list of GREEN ingredients and calls the API for them.
-                for (let i = 0; i < 30 || i < goodList.length; i++) { top30[i] = $.get(functionURL + lookUpURL + goodList.items[i].id, ((response) => { return response })) };
+                for (let i = 0; i < 30 || i < goodList.length; i++) { 
+                    top30[i] = $.get(functionURL + lookUpURL + goodList.items[i].id, ((response) => { return response })) 
+                    console.log(top30);
+                };
 
                 // When all promises returned, get a random entry to display.
                 Promise.all(top30).then((response) => {
