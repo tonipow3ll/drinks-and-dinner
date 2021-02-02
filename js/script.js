@@ -8,6 +8,8 @@ $(document).ready(function () {
     const filterURL = "filter.php?i=";
     const lookUpURL = "lookup.php?i=";
     const randomURL = "random.php";
+    const regexIng = /\bstrIngredient/g;
+    const regexMeas = /\bstrMeasure/g;
 
     // Initialize Function
     init();
@@ -105,9 +107,9 @@ $(document).ready(function () {
 
         // Create an array of promises, each index being the response for one of the GREEN ingredients in the array.
         if (array.length === 0) {
-            for (let i = 0; i < 30; i++) {
-                array[i] = $.get(functionURL + randomURL, ((response) => {  return response }));
-            }
+            // for (let i = 0; i < 30; i++) {
+                array[0] = $.get(functionURL + randomURL, ((response) => {  return response }));
+            // }
         } else {    
             for (let i = 0; i < array.length; i++) {
                 array[i] = $.get(functionURL + filterURL + array[i], ((response) => { return response  }));
@@ -152,6 +154,11 @@ $(document).ready(function () {
                     }
                 })
 
+                if(!goodCounts) {
+                    getIngredPromises(array, badArray, type, arrGen, badGen, goodCounts, badCounts, goodList, functionURL);
+                    return false;
+                }
+
                 // Turn the remaining GREEN IDs into a JSON object.
                 Object.entries(goodCounts).forEach(e => goodList["items"].push({ "id": e[0], "count": e[1] }))
 
@@ -174,18 +181,44 @@ $(document).ready(function () {
                         $("#drinkTitle").text(response[itemID].drinks[0].strDrink);
                         $("#drinkImg").attr("src", response[itemID].drinks[0].strDrinkThumb);
                         $("#drinkIngredients").empty();
-                        let liTemp = ""
+                        
+                        let drinkDetails = response[itemID].drinks[0];
+                        let drinkIngredients = [];
+                        let drinkMeasurements = [];
 
-                        // Generate Recipe List, turn GREEN ingredients, well, green.
-                        for (let i = 1; i < 20; i++) {
-                            if (!response[itemID].drinks[0]["strIngredient" + i] === false) {
-                                if (JSON.parse(localStorage.getItem(titleCase(response[itemID].drinks[0]["strIngredient" + i])) == 1)) {
-                                    liTemp = '<li class="haveIng">' + response[itemID].drinks[0]["strMeasure" + i] + ' - ' + titleCase(response[itemID].drinks[0]["strIngredient" + i]) + '</li>';
-                                } else {
-                                    liTemp = '<li>' + response[itemID].drinks[0]["strMeasure" + i] + ' - ' + titleCase(response[itemID].drinks[0]["strIngredient" + i]) + '</li>'
-                                };
-                                $("#drinkIngredients").append(liTemp);
+                        let i = 0;
+                        for (property in drinkDetails) {
+                            let a = `${property}`.match(regexIng);
+
+                            if (a &&
+                                `${drinkDetails[property]}` &&
+                                `${drinkDetails[property]}` !== '' && 
+                                `${drinkDetails[property]}` !== 'null' && 
+                                `${drinkDetails[property]}` !== ' ') {
+                                drinkIngredients[i] = `${drinkDetails[property]}`
+                                i++
                             }
+                        }
+
+                        i = 0;
+                        for (property in drinkDetails) {
+                            let b = `${property}`.match(regexMeas);
+
+                            if (b && 
+                                `${drinkDetails[property]}` &&
+                                `${drinkDetails[property]}` !== '' && 
+                                `${drinkDetails[property]}` !== 'null') {
+                                drinkMeasurements[i] = `${drinkDetails[property]}`
+                                i++
+                            }
+                        }
+
+                        for (let j = 0; j < drinkIngredients.length; j++) {
+                            let haveDrinkIng = ''
+                            if (JSON.parse(localStorage.getItem(titleCase(drinkIngredients[j])) == 1)) { haveDrinkIng = ' class="haveIng"' }
+                            $('#drinkIngredientsUL').append($(`<li` + haveDrinkIng + `></li>`).text(
+                                drinkMeasurements[j] + ' ' + titleCase(drinkIngredients[j])
+                            ));
                         }
                         
                     } else if (type === "meal") {
@@ -193,15 +226,43 @@ $(document).ready(function () {
                         $("#mealImg").attr("src", response[itemID].meals[0].strMealThumb);
                         $("#mealIngredients").empty();
 
-                        for (let i = 1; i < + 20; i++) {
-                            if (!response[itemID].meals[0]["strIngredient" + i] === false) {
-                                if (JSON.parse(localStorage.getItem(titleCase(response[itemID].meals[0]["strIngredient" + i])) == 1)) {
-                                    liTemp = '<li class="haveIng">' + response[itemID].meals[0]["strMeasure" + i] + ' - ' + titleCase(response[itemID].meals[0]["strIngredient" + i]) + '</li>';
-                                } else {
-                                    liTemp = '<li>' + response[itemID].meals[0]["strMeasure" + i] + ' - ' + titleCase(response[itemID].meals[0]["strIngredient" + i]) + '</li>'
-                                };
-                                $("#mealIngredients").append(liTemp);
+                        let mealDetails = response[itemID].meals[0];
+                        let mealIngredients = [];
+                        let mealMeasurements = [];
+
+                        let k = 0;
+                        for (property in mealDetails) {
+                            let c = `${property}`.match(regexIng);
+
+                            if (c &&
+                                `${mealDetails[property]}` &&
+                                `${mealDetails[property]}` !== '' && 
+                                `${mealDetails[property]}` !== 'null' && 
+                                `${mealDetails[property]}` !== ' ') {
+                                mealIngredients[k] = `${mealDetails[property]}`
+                                k++
                             }
+                        }
+
+                        k = 0;
+                        for (property in mealDetails) {
+                            let d = `${property}`.match(regexMeas);
+
+                            if (d && 
+                                `${mealDetails[property]}` &&
+                                `${mealDetails[property]}` !== '' && 
+                                `${mealDetails[property]}` !== 'null') {
+                                mealMeasurements[k] = `${mealDetails[property]}`
+                                k++
+                            }
+                        }
+
+                        for (let l = 0; l < mealIngredients.length; l++) {
+                            let haveMealIng = '';
+                            if (JSON.parse(localStorage.getItem(titleCase(mealIngredients[l])) == 1)) { haveMealIng = ' class="haveIng"' }
+                            $('#mealIngredientsUL').append($(`<li` + haveMealIng + `></li>`).text(
+                                mealMeasurements[l] + ' ' + titleCase(mealIngredients[l])
+                            ));
                         }
                     }
                 });
@@ -269,6 +330,8 @@ $(document).ready(function () {
             mBadIngred[i] = $(mealRedButtons[i]).text()
         }
 
+        $('#mealIngredientsUL').empty();
+
         getIngredPromises(mGoodIngred, mBadIngred, "meal", arrGenMeal, badGenMeal, goodCountsMeal, badCountsMeal, mealGoodList, mealURL);
     }
 
@@ -288,6 +351,8 @@ $(document).ready(function () {
         for (let i = 0; i < drinkRedButtons.length; i++) {
             dBadIngred[i] = $(drinkRedButtons[i]).text()
         }
+
+        $('#drinkIngredientsUL').empty();
 
         getIngredPromises(dGoodIngred, dBadIngred, "drink", arrGenDrink, badGenDrink, goodCountsDrink, badCountsDrink, drinkGoodList, drinkURL);
     }
@@ -355,29 +420,7 @@ $(document).ready(function () {
     // });
 
 // // START JON JS!!!!
-// ​
-// // mealCategories is an object
-// // Each key is a meal category
-// // Each value is an array of meals, represented in the API by an ID
-// // Any ID is the meat (pun intended) of the API call -- it's what becomes randomMeal in the queryURL!!!
-// // How, say, mealCategories["beef"] is called from HTML will be explained in comments below this object
-// // NOTE: Normally, mealCategories["beef"] would be the syntax. However, the HTML value (beef) is a string!
-// let mealCategories = {
-//     beef: ["52874", "52878", "52997", "52904", "52812", "52873", "52952", "52834", "52824", "52803", "53013", "52979", "52826", "52998", "53031", "53021", "52781", "52938", "52947", "52827", "52876", "52927", "53006", "53029", "52943", "53017", "52930", "52941", "52992", "52770", "52881", "52935", "52950", "53000"],
-//     breakfast: ["52965", "52895", "52957", "52896", "52967", "52962", "52964"],
-//     chicken: ["52940", "53016", "52846", "52796", "52934", "52956", "52850", "52765", "52818", "52875", "52795", "52831", "52920", "52879", "53011", "52832", "52830", "52996", "52951", "52993", "52937", "52820", "52813", "52945", "52851", "52774", "52780", "52933", "53020", "53028", "52806", "52772", "52814"],
-//     dessert: ["52893", "52768", "52767", "52855", "52894", "52928", "52891", "52792", "52961", "52923", "52897", "52976", "52898", "52910", "52856", "52853", "52966", "52776", "52860", "52905", "52990", "52788", "52989", "52988", "52899", "52888", "52791", "53007", "52787", "52890", "52859", "53015", "52900", "52991", "52924", "52858", "52854", "52902", "52862", "52861", "52958", "52916", "53022", "52932", "52857", '52901', '52786', '53024', '52833', '52886', '52883', '52793', '53005', '52931', '52889', '52909', '52929', '52892', '52970', '52917'],
-//     goat: ["52968"],
-//     lamb: ["52769", "52974", "53009", "52877", "52805", "52808", "52843", "52782", "53010", "52884", "52880", "52783", "53008", "52972"],
-//     miscellaneous: ["52848", "52939", "52969", "52907", "52815", "52915", "52810", "53014", "52804", "52912", "52845"],
-//     pasta: ["52839", "52835", "52829", "52987", "52844", "52837", "52982", "52838"],
-//     pork: ["52885", "52995", "53018", "53036", "53037", "52999", "53035", "52954", "53034", "52847", "52994", "52980", "52949", "52822", "53032", "52926", "52828", "52948"],
-//     seafood: ["52959", "52819", "52944", "52802", "52918", "52764", "52773", "52887", "52946", "52821", "52777", "52809", "52960", "52823", "52936", "52836", "52953", "53023", "52882", "52975", "52852"],
-//     side: ["52914", "52913", "52977", "52919", "53030", "52903", "53033", "52978", "53038", "53019", "52922", "52981", "52925"],
-//     starter: ["52842", "52840", "52779", "52841"],
-//     vegan: ["52942", "52794", "52775"],
-//     vegetarian: ["52807", "52870", "52785", "52955", "52906", "53025", "53012", "52971", "52868", "53027", "52973", "52865", "52864", "52921", "52908", "52811", "52816", "52963", "52784", "52872", "52771", "52797", "52849", "52866", "52817", "52911", "52869", "53026", "52863", "52867", "52871"]
-// }
+//
 
 //     // When div holding Recipe | Ingredients | Drink Mixes | Steps is clicked
 //     // If the paragraph with .pre-p is currently active, show pre tag; else hide the pre tag.
@@ -457,61 +500,11 @@ $(document).ready(function () {
 //             let ingredientsUL = $(`<ul></ul>`).attr('id', 'ingredientsUL')
 //             $("[data-content=1]").append(ingredientsUL);
 
-//             // Regular expressions start with an open / signifying the start
-//             // \b indicates the word we are looking for, in this case strIngredient then strMeasure
-//             // Regular expressions end with a close / signifying both end and start of expression flags
-//             // g is a global search -- retain the index of the last match, allowing iterative searches
-//             const regexIng = /\bstrIngredient/g;
-//             const regexMeas = /\bstrMeasure/g;
-//             // these empty arrays will store they value for each key that matches the regular expression
-//             let ingredients = [];
-//             let measurements = [];
-//             // i serves as the dynamic beginning of the array, and will be set to 0 for both 
-//             let i = 0;
-//             // OBJECT TRAVERSAL: response a.k.a. fullDeets.meals[0]. here could be idMeal, str... etc.
-//             // for each property in full details, see if the property has strIngredient in it.
-//             // if it does, and equates to true, isn't string 'null' or an empty space...
-//             // ... then populate the strIngredient key's value into the ingredients array.
-//             for (property in details) {
-//                 let a = `${property}`.match(regexIng);
-//                 // console.log(`key= ${property} value= ${details[property]}`)
+            // Regular expressions start with an open / signifying the start
+            // \b indicates the word we are looking for, in this case strIngredient then strMeasure
+            // Regular expressions end with a close / signifying both end and start of expression flags
+            // g is a global search -- retain the index of the last match, allowing iterative searches
 
-//                 if (a &&
-//                     `${details[property]}` &&
-//                     `${details[property]}` !== '' && 
-//                     `${details[property]}` !== 'null' && 
-//                     `${details[property]}` !== ' ') {
-//                     // console.log('The Ingredient is: ' + `${property}`);
-//                     // console.log(`Ingredient ${i} is: ` + `${details[property]}`);
-//                     // console.log(i);
-//                     ingredients[i] = `${details[property]}`
-//                     i++
-//                 }
-//             }
-//             // reset i to once again serve as the dynamic beginning of the array, this time for measure
-//             i = 0;
-//             // same idea as above, except this time ' ' space strings are acceptable for measurements
-//             for (property in details) {
-//                 let b = `${property}`.match(regexMeas);
-
-//                 if (b && 
-//                     `${details[property]}` &&
-//                     `${details[property]}` !== '' && 
-//                     `${details[property]}` !== 'null') {
-
-//                     // console.log(`Measurement ${i} is: ` + `${details[property]}`);
-//                     measurements[i] = `${details[property]}`
-//                     i++
-//                 }
-//             }
-//             // NOTE: ingredients and measurements array length are always the same
-//             // for each ingredient in the array, append it to a list and add it to the unordered list
-//             for (let j = 0; j < ingredients.length; j++) {
-//                 // let ingredientsUL = $(`<ul></ul>`).attr('id', 'ingredientsUL')
-//                 $('#ingredientsUL').append($(`<li></li>`).text(
-//                     measurements[j] + ' ' + ingredients[j]
-//                 ));
-//                 // console.log(`${j}:` + ' ' + measurements[j] + ' ' + ingredients[j])
 //             }
 //         });
 //     }
