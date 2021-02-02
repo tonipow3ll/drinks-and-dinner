@@ -129,15 +129,10 @@ $(document).ready(function () {
                     else if (type === "meal" && response[i].meals !== null) { badGen = badGen.concat(response[i].meals.map(function (v) { return v.idMeal })) }
                 }
 
-                console.log(arrGen);
-
                 // Counts the number of times each ID appears in the GREEN list.
                 arrGen.forEach(function (x) {
                     goodCounts[x] = (goodCounts[x] || 0) + 1;
                 })
-
-                console.log(goodCounts)
-
 
                 // Counts the number of times each ID appears in the RED list.
                 badGen.forEach(function (x) {
@@ -159,13 +154,13 @@ $(document).ready(function () {
 
                 // Top 30 empty array.
                 let top30 = [];
-
-                console.log(goodList);
+                console.log(goodList)
+                console.log(goodList.length)
                 // Selects the top 30 IDs from the sorted list of GREEN ingredients and calls the API for them.
-                for (let i = 0; i < 30 || i < goodList.length; i++) {
+                for (let i = 0; (i < 30) && (i < goodList.items.length) ; i++) {
                     top30[i] = $.get(functionURL + lookUpURL + goodList.items[i].id, ((response) => { return response }))
-                    console.log(top30);
                 };
+
 
                 // When all promises returned, get a random entry to display.
                 Promise.all(top30).then((response) => {
@@ -245,7 +240,7 @@ $(document).ready(function () {
     function generatePair() {
         let drinkGoodList = { "items": [] };
         let dBadIngred = [];
-        let dIng2Pass = [];
+        let dGoodIngred = [];
         let arrGenDrink = [];
         let badGenDrink = [];
         let goodCountsDrink = {};
@@ -253,17 +248,17 @@ $(document).ready(function () {
         let drinkGreenButtons = $(".drinkSelector.is-success");
         let drinkRedButtons = $(".drinkSelector.is-danger");
         for (let i = 0; i < drinkGreenButtons.length; i++) {
-            dIng2Pass[i] = $(drinkGreenButtons[i]).text()
+            dGoodIngred[i] = $(drinkGreenButtons[i]).text()
         }
         for (let i = 0; i < drinkRedButtons.length; i++) {
             dBadIngred[i] = $(drinkRedButtons[i]).text()
         }
 
-        getIngredPromises(dIng2Pass, dBadIngred, "drink", arrGenDrink, badGenDrink, goodCountsDrink, badCountsDrink, drinkGoodList, drinkURL);
+        getIngredPromises(dGoodIngred, dBadIngred, "drink", arrGenDrink, badGenDrink, goodCountsDrink, badCountsDrink, drinkGoodList, drinkURL);
 
         let mealGoodList = { "items": [] };
         let mBadIngred = [];
-        let mIng2Pass = [];
+        let mGoodIngred = [];
         let arrGenMeal = [];
         let badGenMeal = [];
         let goodCountsMeal = {};
@@ -271,13 +266,13 @@ $(document).ready(function () {
         let mealGreenButtons = $(".mealSelector.is-success");
         let mealRedButtons = $(".mealSelector.is-danger");
         for (let i = 0; i < mealGreenButtons.length; i++) {
-            mIng2Pass[i] = $(mealGreenButtons[i]).text()
+            mGoodIngred[i] = $(mealGreenButtons[i]).text()
         }
         for (let i = 0; i < mealRedButtons.length; i++) {
             mBadIngred[i] = $(mealRedButtons[i]).text()
         }
 
-        getIngredPromises(mIng2Pass, mBadIngred, "meal", arrGenMeal, badGenMeal, goodCountsMeal, badCountsMeal, mealGoodList, mealURL);
+        getIngredPromises(mGoodIngred, mBadIngred, "meal", arrGenMeal, badGenMeal, goodCountsMeal, badCountsMeal, mealGoodList, mealURL);
 
     }
 
