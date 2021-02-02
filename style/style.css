@@ -37,7 +37,16 @@
 }
   #tab-content p.is-active {
     display: block;
+  } 
+
+.owl-height {
+    max-height: 35vh;
   }
+
+  .item img {
+    object-fit: cover;
+    object-position: bottom;
+  } 
 
   pre {
     white-space: pre-wrap;
@@ -54,3 +63,39 @@
   #tab-content div.is-active {
     display: block;
   }
+
+  /*-------- MEDIA QUERIES --------*/
+/* BULMA Breakpoints */
+/* Mobile Up to 768px */
+@media (max-width: 768px) {  
+
+}
+
+ /* Tablets 769px and 1023px */
+@media (min-width: 769px) { 
+    .owl-height {
+      max-height: 55vh;
+    }
+    .owl-carousel .image-2 {
+      transform: translateY(-2%); 
+    }
+    
+    .owl-carousel .image-3{
+      transform: translateY(-25%); 
+    }
+}
+
+ /* Desktops 1024px and 1215px) */
+ @media (min-width: 1024px) { 
+    
+}
+
+/* Widescreen 1216px and 1407px) */
+@media (min-width: 1216px) { 
+
+}
+
+/* Full HD 1408px and above) */
+@media (min-width: 1408px) { 
+    
+}
