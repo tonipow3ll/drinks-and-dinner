@@ -96,7 +96,7 @@ pre {
   font-size: 16px;
   /* display: none; */
 }
-  #tab-content p.is-active {
+#tab-content p.is-active {
     display: block;
   } 
 

@@ -8,22 +8,28 @@ $(document).ready(function () {
     const filterURL = "filter.php?i=";
     const lookUpURL = "lookup.php?i=";
     const randomURL = "random.php";
+
+    // regex Constants
     const regexIng = /\bstrIngredient/g;
     const regexMeas = /\bstrMeasure/g;
 
     // Initialize Function
     init();
 
-    // FUNCTION: Initialize. Generate ingredient buttons and establish on click for said buttons. Generate a meal and drink based on previously saved data.
+    /* 
+    FUNCTION: Initialize. 
+    Generates the Meal and Drink ingredient buttons for users to select in the modal windows and assigns associated on.click functionality.
+    Selects a random meal and drink based on previously saved ingredient inputs, if no saved ingredient inputs exists then generates a truly random meal.
+    */
     function init() {
 
-        // API get meal ingredients and sort alphabetically
+        // API call to generate a list of meal ingredients and sorts the list alphabetically.
         Promise.resolve(mealIngredients).then(function (response) {
             response.meals.sort(function (a, b) {
                 return a.strIngredient.localeCompare(b.strIngredient);
             });
 
-            // Meal ingredient button generation loop.
+            // This loop generates all of the UI Meal Ingredient buttons in the modal windows.
             for (let i = 0; i < response.meals.length; i++) {
 
                 // Default variables.
@@ -43,27 +49,27 @@ $(document).ready(function () {
                         break;
                 }
 
-                // Append buttons into the modal windows for this ingredient.
+                // Creates a row template for the respective ingredient button to be added.
                 let rowTemp = '<button class="button mealSelector' + classAdd + '" data-state=' + storeMeal + '>' + titleCase(response.meals[i].strIngredient) + '</button>';
 
-                // Append Button
+                // Appends the button element.
                 $("#contentMI").append(rowTemp);
             };
 
-            // On Click function for meal ingredient buttons.
+            // On Click functionality for meal ingredient buttons.
             $('.mealSelector').on('click', function (event) {
                 event.preventDefault;
                 ingredButtonFormatting(this);
             });
         });
 
-        // API get drink ingredients and sort alphabetically
+        // API call to generate a list of drink ingredients and sorts the list alphabetically.
         Promise.resolve(drinkIngredients).then(function (response) {
             response.drinks.sort(function (a, b) {
                 return a.strIngredient1.localeCompare(b.strIngredient1);
             });
 
-            // Drink ingredient button generation loop.
+            // This loop generates all of the UI Drink Ingredient buttons in the modal windows.
             for (let i = 0; i < response.drinks.length; i++) {
 
                 // Default Variables
@@ -83,14 +89,14 @@ $(document).ready(function () {
                         break;
                 }
 
-                // Changes CSS based on saved data state of this ingredient.
+                // Creates a row template for the respective ingredient button to be added.
                 let rowTemp = '<button class="button drinkSelector' + classAdd + '" data-state=' + storeDrink + '>' + titleCase(response.drinks[i].strIngredient1) + '</button>';
 
-                // Append Button
+                // Append the button element.
                 $("#contentDI").append(rowTemp);
             };
 
-            // On Click function for drink ingredient buttons.
+            // On Click functionality for drink ingredient buttons.
             $('.drinkSelector').on('click', function (event) {
                 event.preventDefault;
                 ingredButtonFormatting(this);
@@ -102,17 +108,17 @@ $(document).ready(function () {
         Promise.all([mealIngredients, drinkIngredients]).then((response) => { generatePair() })
     };
 
-    // get Ingredient Promises function
+    /* 
+    FUNCTION: Generates a meal or drink based on parameter inputs including user selected 'Good' (GREEN modal buttons) ingredients, and user selected 'Bad' ingredients (RED modal buttons). If there is no stored button data, generates a truly random meal. If there are only RED buttons, generates a truly random meal but excludes recipes with those ingredients. If GREEN buttons exist, finds all recipes with any of those ingredients in them and sorts the meals by most ingredients present to least. Currently, the program selects a random meal from the Top 30 in this list. If there are less than 30 meals, it selects a random meal from the whole list. Recipes with RED button ingredients are still excluded in this case.
+    */
     function getIngredPromises(array, badArray, type, arrGen, badGen, goodCounts, badCounts, goodList, functionURL) {
 
-        // Create an array of promises, each index being the response for one of the GREEN ingredients in the array.
+        // Create an array of promises, each index being the response for one of the GREEN ingredients in the array. If no GREEN ingredients exist, calls one completely random recipe from the API.
         if (array.length === 0) {
-            // for (let i = 0; i < 30; i++) {
-                array[0] = $.get(functionURL + randomURL, ((response) => {  return response }));
-            // }
+            array[0] = $.get(functionURL + randomURL, ((response) => {  return response }));
         } else {    
             for (let i = 0; i < array.length; i++) {
-                array[i] = $.get(functionURL + filterURL + array[i], ((response) => { return response  }));
+                array[i] = $.get(functionURL + filterURL + array[i], ((response) => { return response }));
             }
         }
 
@@ -121,9 +127,9 @@ $(document).ready(function () {
             badArray[i] = $.get(functionURL + filterURL + badArray[i], ((response) => { return response }));
         };
 
-        // Waits for all GREEN promises, then generates a list of IDs for the drinks/meals that use the ingredients. Sorts the list by most ingredients found to least.
-        Promise.all(array).then((response) => {
+        // Waits for all GREEN promises (or 1 RANDOM promise), then generates a list of IDs for the drinks/meals that use the ingredients. Sorts the list by most ingredients found to least.
 
+        Promise.all(array).then((response) => {
             // Loop to concat the arrays of the GREEN IDs together.
             for (let i = 0; i < response.length; i++) {
                 if (type === "drink" && response[i].drinks !== null) { arrGen = arrGen.concat(response[i].drinks.map(function (v) { return v.idDrink })) }
@@ -154,7 +160,9 @@ $(document).ready(function () {
                     }
                 })
 
+                // If no recipes remain after removing RED ingredient recipes from GREEN ingredient recipes, removes all GREEN ingredients from the GREEN ingredient array and reruns the function to generate a completely random meal with no RED ingredients.
                 if(!goodCounts) {
+                    array = [];
                     getIngredPromises(array, badArray, type, arrGen, badGen, goodCounts, badCounts, goodList, functionURL);
                     return false;
                 }
@@ -168,22 +176,21 @@ $(document).ready(function () {
                 // Top 30 empty array.
                 let top30 = [];
 
-                // Selects the top 30 IDs from the sorted list of GREEN ingredients and calls the API for them.
+                // Selects the top 30 IDs from the sorted list of GREEN ingredients and calls the API for them. If the list is less than 30 elements long, returns entire list.
                 for (let i = 0; (i < 30) && (i < goodList.items.length) ; i++) {
                     top30[i] = $.get(functionURL + lookUpURL + goodList.items[i].id, ((response) => { return response }))
                 };
-
 
                 // When all promises returned, get a random entry to display.
                 Promise.all(top30).then((response) => {
                     let itemID = Math.floor(Math.random() * top30.length);
                     if (type === "drink") {
+                        // Displays the image and title for the drink.
                         $("#drinkTitle").text(response[itemID].drinks[0].strDrink);
                         $("#drinkImg").attr("src", response[itemID].drinks[0].strDrinkThumb);
-                        $("#drinkIngredients").empty();
                         
                         let drinkDetails = response[itemID].drinks[0];
-                        let drinkIngredients = [];
+                        let drinkIngArray = [];
                         let drinkMeasurements = [];
 
                         let i = 0;
@@ -195,7 +202,7 @@ $(document).ready(function () {
                                 `${drinkDetails[property]}` !== '' && 
                                 `${drinkDetails[property]}` !== 'null' && 
                                 `${drinkDetails[property]}` !== ' ') {
-                                drinkIngredients[i] = `${drinkDetails[property]}`
+                                drinkIngArray[i] = `${drinkDetails[property]}`
                                 i++
                             }
                         }
@@ -213,21 +220,21 @@ $(document).ready(function () {
                             }
                         }
 
-                        for (let j = 0; j < drinkIngredients.length; j++) {
+                        for (let j = 0; j < drinkIngArray.length; j++) {
                             let haveDrinkIng = ''
-                            if (JSON.parse(localStorage.getItem(titleCase(drinkIngredients[j])) == 1)) { haveDrinkIng = ' class="haveIng"' }
+                            if (JSON.parse(localStorage.getItem(titleCase(drinkIngArray[j])) == 1)) { haveDrinkIng = ' class="haveIng"' }
                             $('#drinkIngredientsUL').append($(`<li` + haveDrinkIng + `></li>`).text(
-                                drinkMeasurements[j] + ' ' + titleCase(drinkIngredients[j])
+                                drinkMeasurements[j] + ' ' + titleCase(drinkIngArray[j])
                             ));
                         }
                         
                     } else if (type === "meal") {
+                        // Displays the image and title for the meal.
                         $("#mealTitle").text(response[itemID].meals[0].strMeal);
                         $("#mealImg").attr("src", response[itemID].meals[0].strMealThumb);
-                        $("#mealIngredients").empty();
 
                         let mealDetails = response[itemID].meals[0];
-                        let mealIngredients = [];
+                        let mealIngArray= [];
                         let mealMeasurements = [];
 
                         let k = 0;
@@ -239,7 +246,7 @@ $(document).ready(function () {
                                 `${mealDetails[property]}` !== '' && 
                                 `${mealDetails[property]}` !== 'null' && 
                                 `${mealDetails[property]}` !== ' ') {
-                                mealIngredients[k] = `${mealDetails[property]}`
+                                mealIngArray[k] = `${mealDetails[property]}`
                                 k++
                             }
                         }
@@ -257,11 +264,11 @@ $(document).ready(function () {
                             }
                         }
 
-                        for (let l = 0; l < mealIngredients.length; l++) {
+                        for (let l = 0; l < mealIngArray.length; l++) {
                             let haveMealIng = '';
-                            if (JSON.parse(localStorage.getItem(titleCase(mealIngredients[l])) == 1)) { haveMealIng = ' class="haveIng"' }
+                            if (JSON.parse(localStorage.getItem(titleCase(mealIngArray[l])) == 1)) { haveMealIng = ' class="haveIng"' }
                             $('#mealIngredientsUL').append($(`<li` + haveMealIng + `></li>`).text(
-                                mealMeasurements[l] + ' ' + titleCase(mealIngredients[l])
+                                mealMeasurements[l] + ' ' + titleCase(mealIngArray[l])
                             ));
                         }
                     }
@@ -270,31 +277,37 @@ $(document).ready(function () {
         })
     };
 
+    // On Click functionality for the "I'm feelin' lucky" button.
     $('#genButton').on('click', function (event) {
         event.preventDefault;
         generatePair();
     });
 
+    // On Click functionality for the "Random Meal" button.
     $('#mealGenButton').on('click', function (event) {
         event.preventDefault;
         generateMeal();
     });
 
+    // On Click functionality for the "Random Drink" button.
     $('#drinkGenButton').on('click', function (event) {
         event.preventDefault;
         generateDrink();
     });
 
+    // On Click funcionality for the "Food I've got Lying around" button to open Modal window.
     $('#buttonMI').on('click', function (event) {
         event.preventDefault;
         $('#modalMI').addClass('is-active');
     });
 
+    // On Click funcionality for the "Booze I've got Lying around" button to open Modal window.
     $('#buttonDI').on('click', function (event) {
         event.preventDefault;
         $('#modalDI').addClass('is-active');
     });
 
+    // On Click funcionality for the close buttons in the modal windows.
     $('.saveButton').on('click', function (event) {
         event.preventDefault;
         $('.modal').removeClass("is-active");
@@ -303,16 +316,19 @@ $(document).ready(function () {
         $('.mealSelector').show();
     })
 
+    // Input functionality for the Drink search bar.
     $('#drinkSearch').on('input', function (event) {
         $('.drinkSelector').hide();
         $('.drinkSelector:contains("' + $(this).val() + '")').show()
     })
 
+    // Input functionality for the Meal search bar.
     $('#mealSearch').on('input', function (event) {
         $('.mealSelector').hide();
         $('.mealSelector:contains("' + $(this).val() + '")').show()
     })
 
+    // Function that sets up the parameters for generating a new meal.
     function generateMeal() {
         let mealGoodList = { "items": [] };
         let mBadIngred = [];
@@ -335,6 +351,7 @@ $(document).ready(function () {
         getIngredPromises(mGoodIngred, mBadIngred, "meal", arrGenMeal, badGenMeal, goodCountsMeal, badCountsMeal, mealGoodList, mealURL);
     }
 
+    // Function that sets up the parameters for generating a new drink.
     function generateDrink() {
         let drinkGoodList = { "items": [] };
         let dBadIngred = [];
@@ -357,11 +374,13 @@ $(document).ready(function () {
         getIngredPromises(dGoodIngred, dBadIngred, "drink", arrGenDrink, badGenDrink, goodCountsDrink, badCountsDrink, drinkGoodList, drinkURL);
     }
 
+    // Function to generate a pair.
     function generatePair() {
         generateMeal();
         generateDrink();
     }
 
+    // Function that formats the ingredient buttons on click and stores the data to local storage.
     function ingredButtonFormatting(_this) {
         // Switch Data State and CSS on click.
         switch (parseInt($(_this).attr("data-state"))) {
@@ -383,6 +402,7 @@ $(document).ready(function () {
         localStorage.setItem(titleCase($(_this).text()), $(_this).attr("data-state"));
     }
 
+    // Returns a string to Title Case.
     function titleCase(str) {
         str = str.toLowerCase().split(' ');
         for (var i = 0; i < str.length; i++) {
@@ -392,6 +412,7 @@ $(document).ready(function () {
     }
 
 
+    // JON JAVA
     // jquery for tabs functionality - will need to have this populate with some form of 'data', recipes/ingredients?
     $("#ingredients").on('mouseover', function () {
         $("#ingredients").addClass("is-active")
