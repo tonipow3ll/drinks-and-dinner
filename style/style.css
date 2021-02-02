@@ -1,5 +1,21 @@
+:root {
+  --primary: #EAEAE8;
+}
+
 #tab-content p {
     display: none;
+  }
+
+  .hero.is-info {
+    background-color: var(--primary);
+  }
+
+  .hero.is-info .title {
+    color: #232321;
+  }
+
+  .hero.is-info .subtitle {
+    color: #232321;
   }
   
 #tab-content p.is-active {
@@ -43,17 +59,52 @@
     max-height: 35vh;
   }
 
+  body {
+    background-color: #EAEAE8;
+  }
+
+  .button {
+    background-color: #6C8C3F;
+    color: var(--primary);
+  }
+
+  .button:hover {
+    color: var(--primary);
+    background-color: #598c3f;
+
+  }
+
+  .recipe {
+    background-color: #EAEAE8;
+  }
+
+  
   .item img {
     object-fit: cover;
     object-position: bottom;
   } 
 
+  .luckybutton {
+    background-color: #b0170b;
+    
+  }
+
+  button:hover.luckybutton {
+   background-color: #b00b28;
+  }
+  
+
   pre {
     white-space: pre-wrap;
     text-align: start;
     font-family: BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-    background: #fff;
+    /* background: #fff; */
+    background-color: var(--primary);
     font-size: 16px;
+  }
+
+  .footer {
+    background-color: var(--primary);
   }
   
   #tab-content div {
