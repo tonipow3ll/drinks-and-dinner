@@ -1,7 +1,7 @@
 $(document).ready(function() {
     $('#tabs li').on('click', function() {
       let _this = this;
-      var tab = $(this).data('tab');
+      var tab = $(_this).data('tab');
   
       $('#tabs li').removeClass('is-active');
       $(_this).addClass('is-active');
