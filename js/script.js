@@ -7,7 +7,7 @@ $(document).ready(function () {
     const mealURL = "https://www.themealdb.com/api/json/v1/" + mealAPIkey + "/";
     const filterURL = "filter.php?i=";
     const lookUpURL = "lookup.php?i=";
-    const searchURL = "search.php?s=";
+    const randomURL = "random.php";
 
     // Initialize Function
     init();
@@ -104,9 +104,15 @@ $(document).ready(function () {
     function getIngredPromises(array, badArray, type, arrGen, badGen, goodCounts, badCounts, goodList, functionURL) {
 
         // Create an array of promises, each index being the response for one of the GREEN ingredients in the array.
-        for (let i = 0; i < array.length; i++) {
-            array[i] = $.get(functionURL + filterURL + array[i], ((response) => { return response }));
-        };
+        if (array.length === 0) {
+            for (let i = 0; i < 30; i++) {
+                array[i] = $.get(functionURL + randomURL, ((response) => {  return response }));
+            }
+        } else {    
+            for (let i = 0; i < array.length; i++) {
+                array[i] = $.get(functionURL + filterURL + array[i], ((response) => { return response  }));
+            }
+        }
 
         // Create an array of promises, each index being the response for one of the RED ingredients in the array.
         for (let i = 0; i < badArray.length; i++) {
@@ -290,7 +296,6 @@ $(document).ready(function () {
         generateMeal();
         generateDrink();
     }
-
 
     function ingredButtonFormatting(_this) {
         // Switch Data State and CSS on click.
