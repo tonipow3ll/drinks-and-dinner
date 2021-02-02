@@ -154,8 +154,7 @@ $(document).ready(function () {
 
                 // Top 30 empty array.
                 let top30 = [];
-                console.log(goodList)
-                console.log(goodList.length)
+
                 // Selects the top 30 IDs from the sorted list of GREEN ingredients and calls the API for them.
                 for (let i = 0; (i < 30) && (i < goodList.items.length) ; i++) {
                     top30[i] = $.get(functionURL + lookUpURL + goodList.items[i].id, ((response) => { return response }))
