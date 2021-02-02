@@ -38,19 +38,6 @@
   margin-bottom: 20px;
 }
 
-.height100 {
-  Height: 100%
-}
-
-.haveIng {
-  color: green;
-  font-weight: bold;
-}
-
-.overflow {
-  height: 200px;
-  overflow-y: scroll;
-}
 
 #tab-content div {
   display: none;
@@ -60,33 +47,9 @@
   display: block;
 }
 
-.modalHeight {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  height: 90%;
-}
-​
-.heroBorder {
-border-bottom: 5px solid black;
-border-top: 5px solid black;
-margin-bottom: 20px;
-}
-​
-#genButton {
-Height: 100%
-}
-​
-.haveIng {
-color: green;
-font-weight: bold;
-}
-​
-.overflow {
-height: 200px;
-overflow-y: scroll;
-}
+
+
+
 ​
 pre {
   white-space: pre-wrap;
@@ -159,6 +122,38 @@ pre {
   #tab-content div.is-active {
     display: block;
   }
+
+/* Ryan's Classes */
+.modalHeight {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: 90%;
+}
+
+.haveIng {
+  color: green;
+  font-weight: bold;
+}
+
+#genButton {
+  Height: 100%
+}
+
+.centerButtons {
+  width: 100%
+}
+
+.height100 {
+  Height: 100%
+}
+
+.centerButtons {
+  width: 100%
+}
+/* End Ryan's Classes*/
+
 
   /*-------- MEDIA QUERIES --------*/
 /* BULMA Breakpoints */
