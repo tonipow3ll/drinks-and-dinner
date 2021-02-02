@@ -131,7 +131,9 @@ pre {
 
   .luckybutton {
     background-color: #b0170b;
-    
+    max-width: 10rem;
+    align-items: center;
+    align-content: center;
   }
 
   button:hover.luckybutton {

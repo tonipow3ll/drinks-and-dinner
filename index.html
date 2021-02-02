@@ -39,10 +39,10 @@
               Randomize recipes with ingredients you have!
             </p>
           </div>
-          <div class="column"></div>
-          <div class="column">
+          <!-- <div class="column"></div> -->
+          <!-- <div class="column"> -->
             <!-- <button id="genButton" class="button centerButtons is-danger height100">I'm feelin' lucky</button> -->
-          </div>
+          <!-- </div> -->
         </div>
       </section>
     <!-- BANNER, WILL BE CAROUSEL WITH PHOTOS -->
@@ -50,7 +50,7 @@
      <section class="main-slider mb-6">
       <div class="columns is-centered">
             <div class="column is-full">
-              <div class="owl-carousel owl-theme">
+                <div class="owl-carousel owl-theme">
                     <div class="item">
                       <img src="images/starter-2435602_1920-1152.jpg"
                       srcset="images/starter-2435602_1920-1536.jpg 1408w, images/starter-2435602_1920-1152.jpg 1024w, images/starter-2435602_1920-960.jpg 769w, images/starter-2435602_1920-384.jpg 300w" alt="Puff pastry with cream cheese tomatoes basil" class="image-1">
@@ -63,8 +63,9 @@
             </div>
       </div>                   
   </section>
-  <div class="columns is-centered">
-    <div class="column is-one-quarter">
+
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-one-quarter is-centered">
     <button id="genButton" class="button luckybutton centerButtons  height100">I’m feelin’ lucky</button>
     </div>
   </div>
@@ -72,48 +73,23 @@
   </header>
   <main>
     <!-- START COLUMNS -->
-    <div class="columns is-centered">
+    <div class="columns is-centered has-text-centered">
 
-      <div class="column is-one-third">
-        <!--  MODAL FOR MEALS -->
-        <div id="modalMI" class="modal">
-          <div class="modal-background"></div>
-          <div class="modal-card">
-            <header class="modal-card-head">
-              <div class="columns">
-                <div class="column">
-                  <p class="modal-card-title">Meal Ingredients</p>
-                  <div class="column">
-                    <div class="control has-icons-left">
-                      <input id="mealSearch" class="input is-normal" type="text" placeholder="Search">
-                      <span class="icon is-left">
-                        <i class="fas fa-search"></i>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-            </header>
-            <section id="contentMI" class="modal-card-body">
-            </section>
-            <footer class="modal-card-foot">
-              <button class="button is-info saveButton">Close</button>
-            </footer>
-          </div>
-        </div>
+      <div class="column is-one-third is-centered">
+       
         <!-- BUTTON FOR MEALS -->
         <button id="buttonMI" class="button centerButtons">Food I've got lying around</button>
-
+        <button id="mealGenButton" class="button luckybutton centerButtons is-centered">Eat it!</button>
         <!-- CARD FOR MEALS -->
-
         <div class="column is-centered">
           <div class="card">
             <!-- added ID for 'strMealThumb - thumbnail with image should populate here' -->
             <div class="card-content py-5">
               <!-- <img src="https://via.placeholder.com/150" alt=""> -->
-              <p class="title" id="strMeal">
+              <p id="mealTitle" class="title">
                 Dinner will appear here
               </p>
-              <img id="strMealThumb" src="" alt="">
+              <img id="mealImg" src="" alt="">
               <p class="subtitle" id="strTags">
                 Text Here
               </p>
@@ -129,33 +105,12 @@
         </div>
 
       </div>
-      <!-- MODAL FOR DRINKS -->
-      <div class="column is-one-third">
-        <div id="modalDI" class="modal">
-          <div class="modal-background"></div>
-          <div class="modal-card">
-            <header class="modal-card-head">
-              <div class="columns">
-                <div class="column">
-                  <p class="modal-card-title">Drink Ingredients</p>
-                </div>
-                <div class="column">
-                  <div class="control has-icons-left">
-                    <input id="drinkSearch" class="input is-normal" type="text" placeholder="Search">
-                    <span class="icon is-left">
-                      <i class="fas fa-search"></i>
-                    </span>
-                  </div>
-            </header>
-            <section id="contentDI" class="modal-card-body">
-            </section>
-            <footer class="modal-card-foot">
-              <button class="button is-info saveButton">Close</button>
-            </footer>
-          </div>
-        </div>
+
+      <div class="column is-centered is-one-third">
+        
         <!-- BUTTON FOR DRINKS -->
         <button id="buttonDI" class="button centerButtons">Booze I've got lying around</button>
+        <button id="drinkGenButton" class="button luckybutton centerButtons is-centered">Mix it!</button>
 
         <!-- CARD FOR DRINKS -->
 
@@ -184,18 +139,75 @@
         </div>
       </div>
     </div>
+
+  <!--  MODAL FOR MEALS -->
+  <div id="modalMI" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card modalHeight">
+      <header class="modal-card-head">
+        <div class="columns centerButtons">
+          <div class="column is-two-fifths">
+            <p class="modal-card-title">Meal Ingredients</p>
+          </div>
+          <div class="column">
+            <div class="control has-icons-left">
+              <input id="mealSearch" class="input is-normal searchBar centerButtons height100" type = "text" placeholder="Search">
+              <span class="icon is-left">
+                <i class="fas fa-search"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </header>
+      <section id="contentMI" class="modal-card-body">
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button is-info saveButton">Close</button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- MODAL FOR DRINKS -->
+  <div id="modalDI" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card modalHeight">
+      <header class="modal-card-head">
+        <div class="columns centerButtons">
+          <div class="column is-two-fifths">
+            <p class="modal-card-title">Drink Ingredients</p>
+          </div>
+          <div class="column">
+            <div class="control has-icons-left">
+              <input id="drinkSearch" class="input is-normal searchBar centerButtons height100" type = "text" placeholder="Search">
+              <span class="icon is-left">
+                <i class="fas fa-search"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </header>
+      <section id="contentDI" class="modal-card-body">
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button is-info saveButton">Close</button>
+      </footer>
+    </div>
+  </div>
+
+
+    
     <!-- OLD TEST BUTTONS, COMMENTED OUT FOR NOW  -->
     <!-- Test button for API calls -->
-    <div class="columns is-centered">
+    <!-- <div class="columns is-centered">
         <div class="column is-one-quarter">
           <button class="button" type="submit" id="getMealBtn">JHam's Test Button</button>
-        </div>
+        </div> -->
 
     <!-- Test button for API calls -->
-    <div class="column is-one-quarter">
+    <!-- <div class="column is-one-quarter">
           <button id="ryansButton" class="button" type="submit">Ryan's Test Button</button>
         </div>
-      </div>
+      </div> -->
 
     <!-- ============================================================================================ -->
     <!-- BELOW IS HIDDEN  -->
@@ -206,10 +218,11 @@
           <!-- added ID for 'strMealThumb - thumbnail with image should populate here' -->
           <div class="card-content py-5">
             <!-- <img src="https://via.placeholder.com/150" alt=""> -->
-            <p class="title" id="strMeal">
-              Dinner will appear here
+            <p id="mealTitle" class="title">
+              Meal will appear here
             </p>
-            <img id="strMealThumb" src="" alt="">
+            <img id="mealImg" src="" alt="">
+            </img>
             <p class="subtitle" id="strTags">
               Text Here
             </p>
@@ -325,15 +338,10 @@
   <!-- JS BELOW  -->
    <!-- Owl Carousel -->
    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-  <script src="js/tabs.js"></script>
-  <script src="./ryanjsfolder/ryan.js"></script>
-  <script src="./ryanjsfolder/ryan2.js"></script>
-  <script src="./jhamjsfolder/jham.js"></script>
-  <script src="js/script.js"></script>
-  <script src="js/lists.js"></script>
-  
-  <!-- <script src="./jhamjsfolder/jham2.js"></script> -->
-  <!-- <script src="./js/script.js"></script> -->
+  <script src="./js/tabs.js"></script>
+  <script src="./js/script.js"></script>
+  <script src="./js/lists.js"></script>
+
 </body>
 
 </html>
