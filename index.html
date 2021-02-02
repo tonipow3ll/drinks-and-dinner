@@ -101,7 +101,7 @@
           </div>
         </div>
         <!-- BUTTON FOR MEALS -->
-        <button id="buttonMI" class="button centerButtons">Food I've got lying around</button>
+       <div class="px-3"><button id="buttonMI" class="button centerButtons">Food I've got lying around</button></div> 
 
         <!-- CARD FOR MEALS -->
 
@@ -155,7 +155,7 @@
           </div>
         </div>
         <!-- BUTTON FOR DRINKS -->
-        <button id="buttonDI" class="button centerButtons">Booze I've got lying around</button>
+        <div class="px-3"><button id="buttonDI" class="button centerButtons">Booze I've got lying around</button></div>
 
         <!-- CARD FOR DRINKS -->
 
@@ -256,8 +256,8 @@
     <!-- ============================================================================================ -->
 
     <!-- SOCIAL MEDIA BUTTONS FOR SHARING - THINKING OF MOVING TO ABOVE THE FOOTER?  -->
-<div class="columns  has-text-centered">
-  <div class="column ">
+<div class="columns has-text-centered">
+  <div class="column">
     <span class="">
       <a href="#"> <i class="fab fa-2x fa-facebook"></i> </a>
       <a href="#"> <i class="fab fa-2x fa-twitter"></i></i> </a>
@@ -265,48 +265,52 @@
       <a href="#"> <i class="fab fa-2x fa-pinterest"></i></i> </a>
     </span>
     </div>
-  </div>
+</div>
 
     <!-- tabs for full recipe / ingredient cards -->
-    <div class="tabs is-medium is-centered has-text-centered" id="tabs">
-      <ul>
-        <li class="is-active" data-tab="1">
-          <a>
-            <span><i class="fas fa-pizza-slice"></i> Meal Ingredients</span>
-          </a>
-        </li>
-        <li data-tab="2">
-          <a>
-            <span><i class="fas fa-book-open"></i> Meal Recipe</span>
-          </a>
-        </li>
-        <li data-tab="3">
-          <a>
-            <span><i class="fas fa-glass-martini"></i> Drink Ingredients</span>
-          </a>
-        </li>
-        <li data-tab="4">
-          <a>
-            <span><i class="fas fa-glass-cheers"></i> Drink Recipe</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-    <div id="tab-content" class="recipe has-text-centered">
-      <p class="is-active" data-content="1">
-      </p>
-      <p data-content="2" class="mx-4 px-4  pre-p">
-      <pre>
-              Recipes appear here
-            </pre>
-      </p>
-      <p data-content="3">
-        Drink ingredients appear here
-      </p>
-      <p data-content="4">
-        Drink steps appear here
-      </p>
-    </div>
+    <div class="columns">
+      <div class="column">
+            <div class="tabs is-medium is-centered has-text-centered" id="tabs">
+              <ul>
+                <li class="is-active" data-tab="1">
+                  <a>
+                    <span><i class="fas fa-pizza-slice"></i> Meal Ingredients</span>
+                  </a>
+                </li>
+                <li data-tab="2">
+                  <a>
+                    <span><i class="fas fa-book-open"></i> Meal Recipe</span>
+                  </a>
+                </li>
+                <li data-tab="3">
+                  <a>
+                    <span><i class="fas fa-glass-martini"></i> Drink Ingredients</span>
+                  </a>
+                </li>
+                <li data-tab="4">
+                  <a>
+                    <span><i class="fas fa-glass-cheers"></i> Drink Recipe</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div id="tab-content" class="recipe has-text-centered">
+              <p class="is-active" data-content="1">
+              </p>
+              <p data-content="2" class="mx-4 px-4  pre-p">
+              <pre>
+                      Recipes appear here
+                    </pre>
+              </p>
+              <p data-content="3">
+                Drink ingredients appear here
+              </p>
+              <p data-content="4">
+                Drink steps appear here
+              </p>
+            </div>
+      </div>
+    </div>    
     <!-- </div> -->
   </main>
 
