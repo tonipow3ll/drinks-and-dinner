@@ -2,8 +2,45 @@
     display: none;
   }
   
+#tab-content p.is-active {
+  display: block;
+}
+
+.fixedHeader {
+  position: fixed;
+  width: 100%;
+  top: 0;
+}
+
+.centerButtons {
+  width: 100%
+}
+
+.heroBorder {
+  border-bottom: 5px solid black;
+  border-top: 5px solid black;
+  margin-bottom: 20px;
+}
+
+#genButton {
+  Height: 100%
+}
+
+.haveIng {
+  color: green;
+  font-weight: bold;
+}
+
+.overflow {
+  height: 200px;
+  overflow-y: scroll;
+}
   #tab-content p.is-active {
     display: block;
+  } 
+
+.owl-height {
+    max-height: 35vh;
   }
 
   body {
@@ -18,3 +55,59 @@
     background-color: #6C8C3F;
   }
   
+  .item img {
+    object-fit: cover;
+    object-position: bottom;
+  } 
+
+  pre {
+    white-space: pre-wrap;
+    text-align: start;
+    font-family: BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    background: #fff;
+    font-size: 16px;
+  }
+  
+  #tab-content div {
+    display: none;
+  }
+
+  #tab-content div.is-active {
+    display: block;
+  }
+
+  /*-------- MEDIA QUERIES --------*/
+/* BULMA Breakpoints */
+/* Mobile Up to 768px */
+@media (max-width: 768px) {  
+
+}
+
+ /* Tablets 769px and 1023px */
+@media (min-width: 769px) { 
+    .owl-height {
+      max-height: 55vh;
+    }
+    .owl-carousel .image-2 {
+      transform: translateY(-2%); 
+    }
+    
+    .owl-carousel .image-3{
+      transform: translateY(-25%); 
+    }
+}
+
+ /* Desktops 1024px and 1215px) */
+ @media (min-width: 1024px) { 
+    
+}
+
+/* Widescreen 1216px and 1407px) */
+@media (min-width: 1216px) { 
+
+}
+
+/* Full HD 1408px and above) */
+@media (min-width: 1408px) { 
+    
+}
