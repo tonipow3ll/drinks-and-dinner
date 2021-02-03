@@ -197,6 +197,7 @@ $(document).ready(function () {
                         let drinkMeasurements = [];
 
                         let i = 0;
+                        console.log(drinkDetails)
                         for (property in drinkDetails) {
                             let a = `${property}`.match(regexIng);
 
@@ -204,7 +205,8 @@ $(document).ready(function () {
                                 `${drinkDetails[property]}` &&
                                 `${drinkDetails[property]}` !== '' && 
                                 `${drinkDetails[property]}` !== 'null' && 
-                                `${drinkDetails[property]}` !== ' ') {
+                                `${drinkDetails[property]}` !== null &&
+                                `${drinkDetails[property]}` !== ' ' ){
                                 drinkIngArray[i] = `${drinkDetails[property]}`
                                 i++
                             }
@@ -224,10 +226,12 @@ $(document).ready(function () {
                         }
 
                         for (let j = 0; j < drinkIngArray.length; j++) {
-                            let haveDrinkIng = ''
+                            let haveDrinkIng = "";
+                            let drinkNullString = "";
                             if (JSON.parse(localStorage.getItem(titleCase(drinkIngArray[j])) == 1)) { haveDrinkIng = ' class="haveIng"' }
+                            if (!drinkMeasurements[j] === false) { drinkNullString = drinkMeasurements[j] + " " }
                             $('#drinkIngredientsUL').append($(`<li` + haveDrinkIng + `></li>`).text(
-                                drinkMeasurements[j] + ' - ' + titleCase(drinkIngArray[j])
+                                drinkNullString + titleCase(drinkIngArray[j])
                             ));
                         }
                         
@@ -237,6 +241,7 @@ $(document).ready(function () {
                         $("#mealTitle").text(mealDetails.strMeal);
                         $("#mealImg").attr("src", mealDetails.strMealThumb);
                         $("#mealRecipe").text(mealDetails.strInstructions);
+                        console.log(mealDetails);
 
                         let mealIngArray= [];
                         let mealMeasurements = [];
@@ -269,10 +274,12 @@ $(document).ready(function () {
                         }
 
                         for (let l = 0; l < mealIngArray.length; l++) {
-                            let haveMealIng = '';
+                            let haveMealIng = "";
+                            let mealNullString = "";
                             if (JSON.parse(localStorage.getItem(titleCase(mealIngArray[l])) == 1)) { haveMealIng = ' class="haveIng"' }
+                            if (!mealMeasurements[l] === false) { mealNullString = mealMeasurements[l] + " " }
                             $('#mealIngredientsUL').append($(`<li` + haveMealIng + `></li>`).text(
-                                mealMeasurements[l] + ' - ' + titleCase(mealIngArray[l])
+                                mealNullString + titleCase(mealIngArray[l])
                             ));
                         }
                     }
