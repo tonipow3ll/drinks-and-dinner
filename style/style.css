@@ -50,7 +50,7 @@ body {
   background-color: #EAEAE8;
 }
 
-.button {
+.button.mbb {
   background-color: #6C8C3F;
   color: var(--primary);
 }
@@ -80,6 +80,9 @@ button:hover.luckybutton {
   background-color: #b00b28;
 }
 
+button.luckybutton {
+color: white;
+}
 
 pre {
   white-space: pre-wrap;
