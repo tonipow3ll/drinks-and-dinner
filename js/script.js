@@ -130,10 +130,11 @@ $(document).ready(function () {
 
         // Waits for all GREEN promises (or 1 RANDOM promise), then generates a list of IDs for the drinks/meals that use the ingredients. Sorts the list by most ingredients found to least.
         Promise.all(goodArray).then((response) => {
+            console.log(response)
             // Loop to concat the arrays of the GREEN IDs together.
             for (let i = 0; i < response.length; i++) {
-                if (type === "drink" && response[i].drinks !== null) { goodGen = goodGen.concat(response[i].drinks.map(function (v) { return v.idDrink })); 
-                } else if (type === "meal" && response[i].meals !== null) { goodGen = goodGen.concat(response[i].meals.map(function (v) { return v.idMeal })); };
+                if (type === "drink" && response[i].drinks !== null && response[i].drinks !== "None Found") { goodGen = goodGen.concat(response[i].drinks.map(function (v) { return v.idDrink })); 
+                } else if (type === "meal" && response[i].meals !== null && response[i].meals !== "None Found") { goodGen = goodGen.concat(response[i].meals.map(function (v) { return v.idMeal })); };
             }
 
             Promise.all(badArray).then((response) => {
