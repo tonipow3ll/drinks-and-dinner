@@ -373,7 +373,6 @@ $(document).ready(function () {
     }
     // END FUNCTION
 
-
     // FUNCTION: Title Case
     function titleCase(str) {
         str = str.toLowerCase().split(' ');
@@ -460,8 +459,6 @@ $(document).ready(function () {
         $('.mealSelector').hide();
         $('.mealSelector:contains("' + titleCase($(this).val()) + '")').show()
     })
-
-
 });
 
 
