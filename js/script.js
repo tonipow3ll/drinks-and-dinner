@@ -231,6 +231,7 @@ $(document).ready(function () {
                             let haveDrinkIng = "";
                             let drinkNullString = "";
                             if (JSON.parse(localStorage.getItem(titleCase(drinkIngArray[j])) == 1)) { haveDrinkIng = ' class="haveIng"' }
+                            else if(JSON.parse(localStorage.getItem(titleCase(drinkIngArray[j])) == -1)) { haveDrinkIng = ' class="badIng"' }
                             if (!drinkMeasurements[j] === false) { drinkNullString = drinkMeasurements[j] + " " }
                             $('#drinkIngredientsUL').append($(`<li` + haveDrinkIng + `></li>`).text(
                                 drinkNullString + titleCase(drinkIngArray[j])
