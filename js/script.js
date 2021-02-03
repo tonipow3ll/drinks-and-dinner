@@ -164,8 +164,7 @@ $(document).ready(function () {
 
                 // If no recipes remain after removing RED ingredient recipes from GREEN ingredient recipes, removes all GREEN ingredients from the GREEN ingredient array and reruns the function to generate a completely random meal with no RED ingredients.
                 if(!goodCounts === true) {
-                    Promise.all(array).then(function(response) {
-                        console.log(array)
+                    Promise.all(array).then(function() {
                         array = [];
                         getIngredPromises(array, badArray, type, arrGen, badGen, goodCounts, badCounts, goodList, functionURL)
                         return false;
@@ -211,7 +210,6 @@ $(document).ready(function () {
                                 `${drinkDetails[property]}` &&
                                 `${drinkDetails[property]}` !== '' && 
                                 `${drinkDetails[property]}` !== 'null' && 
-                                `${drinkDetails[property]}` !== null &&
                                 `${drinkDetails[property]}` !== ' ' ){
                                 drinkIngArray[i] = `${drinkDetails[property]}`
                                 i++
@@ -263,7 +261,6 @@ $(document).ready(function () {
                                 `${mealDetails[property]}` &&
                                 `${mealDetails[property]}` !== '' && 
                                 `${mealDetails[property]}` !== 'null' &&
-                                `${mealDetails[property]}` !== null &&  
                                 `${mealDetails[property]}` !== ' ') {
                                 mealIngArray[k] = `${mealDetails[property]}`
                                 k++
