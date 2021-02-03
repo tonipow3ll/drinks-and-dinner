@@ -112,14 +112,14 @@ $(document).ready(function () {
     /* 
     FUNCTION: Generates a meal or drink based on parameter inputs including user selected 'Good' (GREEN modal buttons) ingredients, and user selected 'Bad' ingredients (RED modal buttons). If there is no stored button data, generates a truly random meal. If there are only RED buttons, generates a truly random meal but excludes recipes with those ingredients. If GREEN buttons exist, finds all recipes with any of those ingredients in them and sorts the meals by most ingredients present to least. Currently, the program selects a random meal from the Top 30 in this list. If there are less than 30 meals, it selects a random meal from the whole list. Recipes with RED button ingredients are still excluded in this case.
     */
-    function getIngredPromises(array, badArray, type, arrGen, badGen, goodCounts, badCounts, goodList, functionURL) {
+    function getIngredPromises(goodArray, badArray, type, goodGen, badGen, goodCounts, badCounts, goodList, functionURL) {
 
         // Create an array of promises, each index being the response for one of the GREEN ingredients in the array. If no GREEN ingredients exist, calls one completely random recipe from the API.
-        if (array.length === 0) {
-            array[0] = $.get(functionURL + randomURL, ((response) => { return response }));
+        if (goodArray.length === 0) {
+            goodArray[0] = $.get(functionURL + randomURL, ((response) => { return response }));
         } else {
-            for (let i = 0; i < array.length; i++) {
-                array[i] = $.get(functionURL + filterURL + array[i], ((response) => { return response }));
+            for (let i = 0; i < goodArray.length; i++) {
+                goodArray[i] = $.get(functionURL + filterURL + goodArray[i], ((response) => { return response }));
             };
         };
 
@@ -129,11 +129,11 @@ $(document).ready(function () {
         };
 
         // Waits for all GREEN promises (or 1 RANDOM promise), then generates a list of IDs for the drinks/meals that use the ingredients. Sorts the list by most ingredients found to least.
-        Promise.all(array).then((response) => {
+        Promise.all(goodArray).then((response) => {
             // Loop to concat the arrays of the GREEN IDs together.
             for (let i = 0; i < response.length; i++) {
-                if (type === "drink" && response[i].drinks !== null) { arrGen = arrGen.concat(response[i].drinks.map(function (v) { return v.idDrink })); 
-                } else if (type === "meal" && response[i].meals !== null) { arrGen = arrGen.concat(response[i].meals.map(function (v) { return v.idMeal })); };
+                if (type === "drink" && response[i].drinks !== null) { goodGen = goodGen.concat(response[i].drinks.map(function (v) { return v.idDrink })); 
+                } else if (type === "meal" && response[i].meals !== null) { goodGen = goodGen.concat(response[i].meals.map(function (v) { return v.idMeal })); };
             }
 
             Promise.all(badArray).then((response) => {
@@ -144,7 +144,7 @@ $(document).ready(function () {
                 };
 
                 // Counts the number of times each ID appears in the GREEN list.
-                arrGen.forEach(function (x) {
+                goodGen.forEach(function (x) {
                     goodCounts[x] = (goodCounts[x] || 0) + 1;
                 });
 
@@ -155,7 +155,6 @@ $(document).ready(function () {
 
                 // If an id exists in the RED object, remove it from the GREEN object.
                 Object.entries(goodCounts).forEach(function (e) {
-
                     if (!badCounts[e[0]] === false) {
                         delete goodCounts[e[0]];
                     };
@@ -163,9 +162,9 @@ $(document).ready(function () {
 
                 // If no recipes remain after removing RED ingredient recipes from GREEN ingredient recipes, removes all GREEN ingredients from the GREEN ingredient array and reruns the function to generate a completely random meal with no RED ingredients.
                 if (!goodCounts === true) {
-                    Promise.all(array).then(function () {
-                        array = [];
-                        getIngredPromises(array, badArray, type, arrGen, badGen, goodCounts, badCounts, goodList, functionURL);
+                    Promise.all(goodArray).then(function () {
+                        goodArray = [];
+                        getIngredPromises(goodArray, badArray, type, goodGen, badGen, goodCounts, badCounts, goodList, functionURL);
                         return false;
                     });
                 };
@@ -185,10 +184,12 @@ $(document).ready(function () {
                     if (type === "drink") {
                         // Displays the image and title for the drink.
                         $('#drinkIngredientsUL').empty();
+        
+                        let drinkDetails = response.drinks[0];
                         $("#drinkTitle").text(drinkDetails.strDrink);
                         $("#drinkImg").attr("src", drinkDetails.strDrinkThumb);
                         $("#drinkRecipe").text(drinkDetails.strInstructions);
-                        let drinkDetails = response.drinks[0];
+        
                         let drinkIngArray = [];
                         let drinkMeasurements = [];
         
@@ -231,11 +232,14 @@ $(document).ready(function () {
                         };
         
                     } else if (type === "meal") {
+                        // Displays the image and title for the meal.
                         $('#mealIngredientsUL').empty();
+        
+                        let mealDetails = response.meals[0];
                         $("#mealTitle").text(mealDetails.strMeal);
                         $("#mealImg").attr("src", mealDetails.strMealThumb);
                         $("#mealRecipe").text(mealDetails.strInstructions);
-                        let mealDetails = response.meals[0];
+        
                         let mealIngArray = [];
                         let mealMeasurements = [];
         
@@ -278,18 +282,20 @@ $(document).ready(function () {
                         };
                     };
                 })
-                .catch(function() {
-                    getIngredPromises(array, badArray, type, arrGen, badGen, goodCounts, badCounts, goodList, functionURL);
-                    return false;
-                });
-            }).catch(function() {
-                getIngredPromises(array, badArray, type, arrGen, badGen, goodCounts, badCounts, goodList, functionURL);
-                return false;
-            });
-        }).catch(function() {
-            getIngredPromises(array, badArray, type, arrGen, badGen, goodCounts, badCounts, goodList, functionURL);
-            return false;
-        });
+                // .catch(function() {
+                //     getIngredPromises(goodArray, badArray, type, goodGen, badGen, goodCounts, badCounts, goodList, functionURL);
+                //     return false;
+                // });
+            })
+            // .catch(function() {
+            //     getIngredPromises(goodArray, badArray, type, goodGen, badGen, goodCounts, badCounts, goodList, functionURL);
+            //     return false;
+            // });
+        })
+        // .catch(function() {
+        //     getIngredPromises(goodArray, badArray, type, goodGen, badGen, goodCounts, badCounts, goodList, functionURL);
+        //     return false;
+        // });
     };
     // END FUNCTION: Get Ingredient Promises
 
@@ -298,7 +304,7 @@ $(document).ready(function () {
         let mealGoodList = { "items": [] };
         let mBadIngred = [];
         let mGoodIngred = [];
-        let arrGenMeal = [];
+        let goodGenMeal = [];
         let badGenMeal = [];
         let goodCountsMeal = {};
         let badCountsMeal = {};
@@ -311,7 +317,7 @@ $(document).ready(function () {
             mBadIngred[i] = $(mealRedButtons[i]).text()
         }
 
-        getIngredPromises(mGoodIngred, mBadIngred, "meal", arrGenMeal, badGenMeal, goodCountsMeal, badCountsMeal, mealGoodList, mealURL);
+        getIngredPromises(mGoodIngred, mBadIngred, "meal", goodGenMeal, badGenMeal, goodCountsMeal, badCountsMeal, mealGoodList, mealURL);
     }
     //END FUNCTION: Meal parameters
 
@@ -320,7 +326,7 @@ $(document).ready(function () {
         let drinkGoodList = { "items": [] };
         let dBadIngred = [];
         let dGoodIngred = [];
-        let arrGenDrink = [];
+        let goodGenDrink = [];
         let badGenDrink = [];
         let goodCountsDrink = {};
         let badCountsDrink = {};
@@ -333,7 +339,7 @@ $(document).ready(function () {
             dBadIngred[i] = $(drinkRedButtons[i]).text()
         }
 
-        getIngredPromises(dGoodIngred, dBadIngred, "drink", arrGenDrink, badGenDrink, goodCountsDrink, badCountsDrink, drinkGoodList, drinkURL);
+        getIngredPromises(dGoodIngred, dBadIngred, "drink", goodGenDrink, badGenDrink, goodCountsDrink, badCountsDrink, drinkGoodList, drinkURL);
     }
     /*END FUNCTION: Drink parameters*/
 
