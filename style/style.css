@@ -196,10 +196,3 @@ li , p {
 @media (min-width: 1408px) { 
     
 }
-
-@media (max-width: 768px) {  
-  .tabs ul {
-    -webkit-flex-direction: column;
-    flex-direction: column;
-  }
-}
