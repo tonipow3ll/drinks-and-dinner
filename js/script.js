@@ -143,6 +143,7 @@ $(document).ready(function () {
                     else if (type === "meal" && response[i].meals !== null) { badGen = badGen.concat(response[i].meals.map(function (v) { return v.idMeal })) }
                 }
 
+
                 // Counts the number of times each ID appears in the GREEN list.
                 arrGen.forEach(function (x) {
                     goodCounts[x] = (goodCounts[x] || 0) + 1;
@@ -156,7 +157,7 @@ $(document).ready(function () {
                 // If an id exists in the RED object, remove it from the GREEN object.
                 Object.entries(goodCounts).forEach(function (e) {
                     if (!badCounts[e[0]] === false) {
-                        goodCounts[e[0]].delete;
+                        goodCounts = goodCounts[e[0]].delete;
                     }
                 })
 
@@ -197,7 +198,6 @@ $(document).ready(function () {
                         let drinkMeasurements = [];
 
                         let i = 0;
-                        console.log(drinkDetails)
                         for (property in drinkDetails) {
                             let a = `${property}`.match(regexIng);
 
@@ -241,7 +241,6 @@ $(document).ready(function () {
                         $("#mealTitle").text(mealDetails.strMeal);
                         $("#mealImg").attr("src", mealDetails.strMealThumb);
                         $("#mealRecipe").text(mealDetails.strInstructions);
-                        console.log(mealDetails);
 
                         let mealIngArray= [];
                         let mealMeasurements = [];
