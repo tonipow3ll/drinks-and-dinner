@@ -1,10 +1,10 @@
 $(document).ready(function () {
 
     // API Constants
-    const drinkAPIkey = "1";
-    const mealAPIkey = "1";
-    const drinkURL = "https://www.thecocktaildb.com/api/json/v1/" + drinkAPIkey + "/";
-    const mealURL = "https://www.themealdb.com/api/json/v1/" + mealAPIkey + "/";
+    const drinkAPIkey = "9973533";
+    const mealAPIkey = "9973533";
+    const drinkURL = "https://www.thecocktaildb.com/api/json/v2/" + drinkAPIkey + "/";
+    const mealURL = "https://www.themealdb.com/api/json/v2/" + mealAPIkey + "/";
     const filterURL = "filter.php?i=";
     const lookUpURL = "lookup.php?i=";
     const randomURL = "random.php";
@@ -188,6 +188,7 @@ $(document).ready(function () {
                         let drinkDetails = response.drinks[0];
                         $("#drinkTitle").text(drinkDetails.strDrink);
                         $("#drinkImg").attr("src", drinkDetails.strDrinkThumb);
+                        $("#mealImg").attr("alt", drinkDetails.strDrink);
                         $("#drinkRecipe").text(drinkDetails.strInstructions);
         
                         let drinkIngArray = [];
@@ -238,6 +239,7 @@ $(document).ready(function () {
                         let mealDetails = response.meals[0];
                         $("#mealTitle").text(mealDetails.strMeal);
                         $("#mealImg").attr("src", mealDetails.strMealThumb);
+                        $("#mealImg").attr("alt", mealDetails.strMeal);
                         $("#mealRecipe").text(mealDetails.strInstructions);
         
                         let mealIngArray = [];
@@ -274,24 +276,48 @@ $(document).ready(function () {
                             let haveMealIng = "";
                             let mealNullString = "";
                             if (JSON.parse(localStorage.getItem(titleCase(mealIngArray[l])) == 1)) { haveMealIng = ' class="haveIng"';
-                            } else if (JSON.parse(localStorage.getItem(titleCase(mealIngArray[j])) == -1)) { haveMealIng = ' class="badIng"'; };
+                            } else if (JSON.parse(localStorage.getItem(titleCase(mealIngArray[l])) == -1)) { haveMealIng = ' class="badIng"'; };
                             if (!mealMeasurements[l] === false) { mealNullString = mealMeasurements[l] + " "; };
                             $('#mealIngredientsUL').append($(`<li` + haveMealIng + `></li>`).text(
                                 mealNullString + titleCase(mealIngArray[l])
                             ));
                         };
                     };
-                }).catch(function() {
-                    getIngredPromises(goodArray, badArray, type, goodGen, badGen, goodCounts, badCounts, goodList, functionURL);
-                    return false;
+                }).catch(function(error) {
+                    if (type==="meal") {
+                        $("#mealTitle").text("API Error. Try Again");
+                        $("#mealImg").attr("src", "./images/unhappy-burger.jpg");
+                        $("#mealImg").attr("alt", "API error");
+                    } else if (type==="drink") {
+                        $("#drinkTitle").text("API Error. Try Again");
+                        $("#drinkImg").attr("src", "./images/unhappy-cocktail.jpg");
+                        $("#drinkImg").attr("alt", "API Error");
+                    }
+                    console.log(error);
                 });
-            }).catch(function() {
-                getIngredPromises(goodArray, badArray, type, goodGen, badGen, goodCounts, badCounts, goodList, functionURL);
-                return false;
+            }).catch(function(error) {
+                if (type==="meal") {
+                    $("#mealTitle").text("API Error. Try Again");
+                    $("#mealImg").attr("src", "./images/unhappy-burger.jpg");
+                    $("#mealImg").attr("alt", "API error");
+                } else if (type==="drink") {
+                    $("#drinkTitle").text("API Error. Try Again");
+                    $("#drinkImg").attr("src", "./images/unhappy-cocktail.jpg");
+                    $("#drinkImg").attr("alt", "API Error");
+                }
+                console.log(error);
             });
-        }).catch(function() {
-            getIngredPromises(goodArray, badArray, type, goodGen, badGen, goodCounts, badCounts, goodList, functionURL);
-            return false;
+        }).catch(function(error) {
+            if (type==="meal") {
+                $("#mealTitle").text("API Error. Try Again");
+                $("#mealImg").attr("src", "./images/unhappy-burger.jpg");
+                $("#mealImg").attr("alt", "API error");
+            } else if (type==="drink") {
+                $("#drinkTitle").text("API Error. Try Again");
+                $("#drinkImg").attr("src", "./images/unhappy-cocktail.jpg");
+                $("#drinkImg").attr("alt", "API Error");
+            }
+            console.log(error);
         });
     };
     // END FUNCTION: Get Ingredient Promises
