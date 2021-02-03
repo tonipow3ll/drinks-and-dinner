@@ -1,144 +1,156 @@
 <!DOCTYPE html>
 
-  <html lang="en">
-    <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bulma -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-    <!-- Font Awesome -->
-    <script src="https://kit.fontawesome.com/45e97f819a.js" crossorigin="anonymous"></script>
+<html lang="en">
 
-    <!-- Owl Carousel -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-    <!-- Owl Carousel optional css but required for default nav controls like dots or next buttons  -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bulma -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/45e97f819a.js" crossorigin="anonymous"></script>
 
-    <!-- css -->
-    <link rel="stylesheet" href="style/style.css">
-    ​
-    <!-- js -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
-      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-    
+  <!-- Owl Carousel -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+  <!-- Owl Carousel optional css but required for default nav controls like dots or next buttons  -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
 
-    <title>Recipe Card App</title>
-  </head>
+  <!-- css -->
+  <link rel="stylesheet" href="style/style.css">
   ​
-  <!-- Shall we communicate with comments? -->
-  ​
-  <body>
-    <header>
-        <section class="hero is-info is-small">
-          <div class="hero-body columns">
-            <div class="column is-four-fifths">
-              <p class="title">
-                Dinner and a Drink
-              </p>
-              <p class="subtitle">
-                Randomize recipes with ingredients you have!
-              </p>
+  <!-- js -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+
+  <title>Recipe Card App</title>
+</head>
+​
+<!-- Shall we communicate with comments? -->
+​
+
+<body>
+  <header>
+    <section class="hero is-info is-small">
+      <div class="hero-body columns">
+        <div class="column is-four-fifths">
+          <p class="title">
+            Dinner and a Drink
+          </p>
+          <p class="subtitle">
+            Randomize recipes with ingredients you have!
+          </p>
+        </div>
+        <!-- <div class="column"></div> -->
+        <!-- <div class="column"> -->
+        <!-- <button id="genButton" class="button centerButtons is-danger height100">I'm feelin' lucky</button> -->
+        <!-- </div> -->
+      </div>
+    </section>
+    <!-- BANNER, WILL BE CAROUSEL WITH PHOTOS -->
+    <!-- Owl carousel -->
+    <section class="main-slider mb-6">
+      <div class="columns is-centered">
+        <div class="column is-full">
+          <div class="owl-carousel owl-theme">
+            <div class="item">
+              <img src="images/starter-2435602_1920-1152.jpg"
+                srcset="images/starter-2435602_1920-1536.jpg 1408w, images/starter-2435602_1920-1152.jpg 1024w, images/starter-2435602_1920-960.jpg 769w, images/starter-2435602_1920-384.jpg 300w"
+                alt="Puff pastry with cream cheese tomatoes basil" class="image-1">
             </div>
-            <!-- <div class="column"></div> -->
-            <!-- <div class="column"> -->
-              <!-- <button id="genButton" class="button centerButtons is-danger height100">I'm feelin' lucky</button> -->
-            <!-- </div> -->
+            <div class="item"><img src="images/schnitzel-3279045_1920-1152.jpg"
+                srcset="images/schnitzel-3279045_1920-1536.jpg 1408w, images/schnitzel-3279045_1920-1152.jpg 1024w, images/schnitzel-3279045_1920-960.jpg 769w, images/schnitzel-3279045_1920-384.jpg 300w"
+                alt="Pork cutlet with lemon cranberries garnish" class="image-2"></div>
+            <div class="item"><img src="images/strawberries-932383_1920-1152.jpg"
+                srcset="images/strawberries-932383_1920-1536.jpg 1408w, images/strawberries-932383_1920-1152.jpg 1024w, images/strawberries-932383_1920-960.jpg 769w, images/strawberries-932383_1920-384.jpg 300w"
+                alt="Pancake with strawberries on top" class="image-3"></div>
+            <div class="item"><img src="images/pizza-5179939_1920-1152.jpg"
+                srcset="images/pizza-5179939_1920-1536.jpg 1408w, images/pizza-5179939_1920-1152.jpg 1024w, images/pizza-5179939_1920-960.jpg 769w, images/pizza-5179939_1920-384.jpg 300w"
+                alt="Pizza topped with cheese tomatoes olives" class="image-4"></div>
+            <div class="item"><img src="images/peach-1827105_1920-1152.jpg"
+                srcset="images/peach-1827105_1920-1536.jpg 1408w, images/peach-1827105_1920-1152.jpg 1024w, images/peach-1827105_1920-960.jpg 769w, images/peach-1827105_1920-384.jpg 300w"
+                alt="Fruit salad with peaches and plums" class="image-5"></div>
           </div>
-        </section>
-      <!-- BANNER, WILL BE CAROUSEL WITH PHOTOS -->
-      <!-- Owl carousel -->
-      <section class="main-slider mb-6">
-        <div class="columns is-centered">
-              <div class="column is-full">
-                  <div class="owl-carousel owl-theme">
-                      <div class="item">
-                        <img src="images/starter-2435602_1920-1152.jpg"
-                        srcset="images/starter-2435602_1920-1536.jpg 1408w, images/starter-2435602_1920-1152.jpg 1024w, images/starter-2435602_1920-960.jpg 769w, images/starter-2435602_1920-384.jpg 300w" alt="Puff pastry with cream cheese tomatoes basil" class="image-1">
-                      </div>
-                      <div class="item"><img src="images/schnitzel-3279045_1920-1152.jpg" srcset="images/schnitzel-3279045_1920-1536.jpg 1408w, images/schnitzel-3279045_1920-1152.jpg 1024w, images/schnitzel-3279045_1920-960.jpg 769w, images/schnitzel-3279045_1920-384.jpg 300w" alt="Pork cutlet with lemon cranberries garnish" class="image-2"></div>
-                      <div class="item"><img src="images/strawberries-932383_1920-1152.jpg" srcset="images/strawberries-932383_1920-1536.jpg 1408w, images/strawberries-932383_1920-1152.jpg 1024w, images/strawberries-932383_1920-960.jpg 769w, images/strawberries-932383_1920-384.jpg 300w" alt="Pancake with strawberries on top" class="image-3"></div>
-                      <div class="item"><img src="images/pizza-5179939_1920-1152.jpg" srcset="images/pizza-5179939_1920-1536.jpg 1408w, images/pizza-5179939_1920-1152.jpg 1024w, images/pizza-5179939_1920-960.jpg 769w, images/pizza-5179939_1920-384.jpg 300w" alt="Pizza topped with cheese tomatoes olives" class="image-4"></div>
-                      <div class="item"><img src="images/peach-1827105_1920-1152.jpg" srcset="images/peach-1827105_1920-1536.jpg 1408w, images/peach-1827105_1920-1152.jpg 1024w, images/peach-1827105_1920-960.jpg 769w, images/peach-1827105_1920-384.jpg 300w" alt="Fruit salad with peaches and plums" class="image-5"></div>
-                  </div>
-              </div>
-        </div>                   
+        </div>
+      </div>
     </section>
 
     <div class="columns is-centered">
       <div class="column is-one-quarter">
-      <button id="genButton" class="button luckybutton centerButtons  height100">I’m feelin’ lucky</button>
+        <button id="genButton" class="button luckybutton centerButtons  height100 by-5">I’m feelin’ lucky</button>
       </div>
     </div>
-  
-    </header>
-    <main>
-      <!-- START COLUMNS -->
-      <div class="columns is-centered">
 
-        <div class="column is-one-third">
-        
-          <!-- BUTTON FOR MEALS -->
-          <button id="buttonMI" class="button centerButtons">Food I've got lying around</button>
-          <button id="mealGenButton" class="button luckybutton centerButtons">Random Meal</button>
-          <!-- CARD FOR MEALS -->
-          <div class="column is-centered">
-            <div class="card">
-              <!-- added ID for 'strMealThumb - thumbnail with image should populate here' -->
-              <div class="card-content py-5">
-                <!-- <img src="https://via.placeholder.com/150" alt=""> -->
-                <p id="mealTitle" class="title">
-                  Loading Dinner...
-                </p>
-                <img id="mealImg" src="./images/donut.jpg" alt="">
-                <p class="subtitle" id="strTags">
-                  Text Here
-                </p>
-              </div>
-              <footer class="card-footer">
+  </header>
+  <main>
+    <!-- START COLUMNS -->
+    <div class="columns is-centered">
+
+      <div class="column is-one-third is-centered has-text-centered">
+
+        <!-- BUTTON FOR MEALS -->
+        <button id="buttonMI" class="button mbb centerButtons mb-3">Food Ingredient(s)</button>
+        <button id="mealGenButton" class="button luckybutton centerButton is-one-quarter has-text-centered">Eat it!</button>
+        <!-- CARD FOR MEALS -->
+        <div class="column is-centered">
+          <div class="card">
+            <!-- added ID for 'strMealThumb - thumbnail with image should populate here' -->
+            <div class="card-content py-5">
+              <!-- <img src="https://via.placeholder.com/150" alt=""> -->
+              <p id="mealTitle" class="title">
+                Loading Dinner...
+              </p>
+              <img id="mealImg" src="./images/donut.jpg" alt="">
+              <!-- <p class="subtitle" id="strTags">
+
+              </p> -->
+            </div>
+            <!-- <footer class="card-footer">
                 <p class="card-footer-item">
                   <span>
-                    <a id="strYoutube" href="#" target="_blank">Show me the deets!</a>
+                    <a id="strYoutube" href="#" target="_blank"><i class="fab fa-youtube fa-2x"></i></a>
                   </span>
                 </p>
-              </footer>
-            </div>
+              </footer> -->
           </div>
-
         </div>
 
-        <div class="column is-one-third">
-          
-          <!-- BUTTON FOR DRINKS -->
-          <button id="buttonDI" class="button centerButtons">Booze I've got lying around</button>
-          <button id="drinkGenButton" class="button luckybutton centerButtons">Random Drink</button>
+      </div>
 
-          <!-- CARD FOR DRINKS -->
+      <div class="column is-one-third has-text-centered">
 
-          <div class="column is-centered ">
-            <div class="card ">
-              <div class="card-content py-5">
+        <!-- BUTTON FOR DRINKS -->
+        <button id="buttonDI" class=" button mbb centerButtons mb-3">Drink Ingredient(s)</button>
+        <button id="drinkGenButton" class="button luckybutton centerButton is-one-quarter has-text-centered">Mix me up!</button>
 
-                <p id="drinkTitle" class="title">
-                  Loading Cocktail...
-                </p>
-                <img id="drinkImg" src="./images/drink.jpg" alt="Cocktail">
-                </img>
-                <p class="subtitle" id="strTags">
-                  Text Here
-                </p>
-              </div>
-              <footer class="card-footer">
+        <!-- CARD FOR DRINKS -->
+
+        <div class="column is-centered ">
+          <div class="card ">
+            <div class="card-content py-5">
+
+              <p id="drinkTitle" class="title">
+                Loading Cocktail...
+              </p>
+              <img id="drinkImg" src="./images/drink.jpg" alt="Cocktail">
+              </img>
+              <!-- <p class="subtitle" id="strTags">
+
+              </p> -->
+            </div>
+            <!-- <footer class="card-footer">
                 <p class="card-footer-item">
                   <span>
-                    <a href="#">Show me the deets!</a>
+                    <a href="#"><i class="fab fa-youtube fa-2x"></i></a>
                   </span>
                 </p>
 
-              </footer>
-            </div>
+              </footer> -->
           </div>
         </div>
       </div>
+    </div>
 
     <!--  MODAL FOR MEALS -->
     <div id="modalMI" class="modal">
@@ -151,7 +163,8 @@
             </div>
             <div class="column">
               <div class="control has-icons-left">
-                <input id="mealSearch" class="input is-normal searchBar centerButtons height100" type = "text" placeholder="Search">
+                <input id="mealSearch" class="input is-normal searchBar centerButtons height100" type="text"
+                  placeholder="Search">
                 <span class="icon is-left">
                   <i class="fas fa-search"></i>
                 </span>
@@ -178,7 +191,8 @@
             </div>
             <div class="column">
               <div class="control has-icons-left">
-                <input id="drinkSearch" class="input is-normal searchBar centerButtons height100" type = "text" placeholder="Search">
+                <input id="drinkSearch" class="input is-normal searchBar centerButtons height100" type="text"
+                  placeholder="Search">
                 <span class="icon is-left">
                   <i class="fas fa-search"></i>
                 </span>
@@ -194,160 +208,79 @@
       </div>
     </div>
 
-
-      
-      <!-- OLD TEST BUTTONS, COMMENTED OUT FOR NOW  -->
-      <!-- Test button for API calls -->
-      <!-- <div class="columns is-centered">
-          <div class="column is-one-quarter">
-            <button class="button" type="submit" id="getMealBtn">JHam's Test Button</button>
-          </div> -->
-
-      <!-- Test button for API calls -->
-      <!-- <div class="column is-one-quarter">
-            <button id="ryansButton" class="button" type="submit">Ryan's Test Button</button>
-          </div>
-        </div> -->
-
-      <!-- ============================================================================================ -->
-      <!-- BELOW IS HIDDEN  -->
-      <div class="is-centered is-hidden">
-        <!-- Card for previews - 1 -->
-        <div class="is-centered">
-          <div class="card py-5 my-5 ml-2 mr-2">
-            <!-- added ID for 'strMealThumb - thumbnail with image should populate here' -->
-            <div class="card-content py-5">
-              <!-- <img src="https://via.placeholder.com/150" alt=""> -->
-              <p id="mealTitle" class="title">
-                Meal will appear here
-              </p>
-              <img id="mealImg" src="" alt="Donut">
-              </img>
-              <p class="subtitle" id="strTags">
-                Text Here
-              </p>
-            </div>
-            <footer class="card-footer">
-              <p class="card-footer-item">
-                <span>
-                  <a id="strYoutube" href="#" target="_blank"><i class=“fab fa-youtube fa-2x”></i></a>
-                </span>
-              </p>
-            </footer>
-          </div>
+    <!-- tabs for full recipe / ingredient cards -->
+    <div class="columns">
+      <div class="column">
+        <div class="tabs is-medium is-centered has-text-centered" id="tabs">
+          <ul>
+            <li class="is-active" data-tab="1">
+              <a>
+                <span><i class="fas fa-pizza-slice"></i> Meal Ingredients</span>
+              </a>
+            </li>
+            <li data-tab="2">
+              <a>
+                <span><i class="fas fa-book-open"></i> Meal Recipe</span>
+              </a>
+            </li>
+            <li data-tab="3">
+              <a>
+                <span><i class="fas fa-glass-martini"></i> Drink Ingredients</span>
+              </a>
+            </li>
+            <li data-tab="4">
+              <a>
+                <span > <i class="fas fa-glass-cheers"></i> Drink Recipe</span>
+              </a>
+            </li>
+          </ul>
         </div>
-        <!-- Card for previews- 2 -->
-        <div class="column is-one-quarter">
-          <div class="card py-5 my-5 ml-2 mr-2">
-            <div class="card-content py-5">
-              <p id="drinkTitle" class="title">
-              </p>
-              <img id="drinkImg" src="" alt="">
-              </img>
-            </div>
-            <footer class="card-footer">
-              <p class="card-footer-item">
-                <span>
-                  <a href="#"><i class=“fab fa-youtube fa-2x”></i></a>
-                </span>
-              </p>
-              <!-- ADDED ICONS FOR SOCIAL MEDIA  -->
-              <p class="card-footer-item">
-                <span>
-                  <a href="#"> <i class="fab fa-2x fa-facebook"></i> </a>
-                  <a href="#"> <i class="fab fa-2x fa-twitter"></i></i> </a>
-                  <a href="#"> <i class="fab fa-2x fa-instagram"></i></i> </a>
-                  <a href="#"> <i class="fab fa-2x fa-pinterest"></i></i> </a>
-                </span>
-              </p>
-            </footer>
-          </div>
-        </div>
-      </div>
-
-      <!-- ABOVE IS HIDDEN  -->
-      <!-- ============================================================================================ -->
-
-      <!-- SOCIAL MEDIA BUTTONS FOR SHARING - THINKING OF MOVING TO ABOVE THE FOOTER?  -->
-  <div class="columns  has-text-centered">
-    <div class="column ">
-      <span class="">
-        <a href="#"> <i class="fab fa-2x fa-facebook"></i> </a>
-        <a href="#"> <i class="fab fa-2x fa-twitter"></i></i> </a>
-        <a href="#"> <i class="fab fa-2x fa-instagram"></i></i> </a>
-        <a href="#"> <i class="fab fa-2x fa-pinterest"></i></i> </a>
-      </span>
       </div>
     </div>
 
-      <!-- tabs for full recipe / ingredient cards -->
-      <div class="tabs is-medium is-centered has-text-centered" id="tabs">
-        <ul>
-          <li class="is-active" data-tab="1">
-            <a>
-              <span><i class="fas fa-pizza-slice"></i> Meal Ingredients</span>
-            </a>
-          </li>
-          <li data-tab="2">
-            <a>
-              <span><i class="fas fa-book-open"></i> Meal Recipe</span>
-            </a>
-          </li>
-          <li data-tab="3">
-            <a>
-              <span><i class="fas fa-glass-martini"></i> Drink Ingredients</span>
-            </a>
-          </li>
-          <li data-tab="4">
-            <a>
-              <span><i class="fas fa-glass-cheers"></i> Drink Recipe</span>
-            </a>
-          </li>
+    <div id="tab-content" class="recipe has-text-centered">
+      <div class="is-active tabSlot" data-content="1">
+        <ul id="mealIngredientsUL">
         </ul>
       </div>
-
-      <div id="tab-content" class="recipe has-text-centered">
-        <div class="is-active tabSlot" data-content="1">
-          <ul id = "mealIngredientsUL">
-          </ul>
-        </div>
-        <div class="tabSlot" data-content="2">
-          <pre id = "mealRecipe">
+      <div class="tabSlot" data-content="2">
+        <pre id="mealRecipe">
           </pre>
-        </div>
-        <div class="tabSlot" data-content="3">
-          <ul id = "drinkIngredientsUL">
-          </ul>
-        </div>
-        <div class="tabSlot" data-content="4">
-          <pre id = "drinkRecipe">
+      </div>
+      <div class="tabSlot" data-content="3">
+        <ul id="drinkIngredientsUL">
+        </ul>
+      </div>
+      <div class="tabSlot" data-content="4">
+        <pre id="drinkRecipe">
           </pre>
-        </div>
       </div>
-      <!-- </div> -->
-    </main>
+    </div>
+    <!-- </div> -->
+  </main>
 
 
-    <footer class="footer">
-      <div class="content has-text-centered">
-        <p>
-          <!-- updated A tags so we each will have our own link  -->
-          <strong></strong> Created by <a href="#">Bjorn Yourey</a>, <a href="#">Cathy Marchese</a>, <a
-            href="#">Jonathan Hammond</a>, <a href="#">Ryan Royalty</a> & <a href="#">Toni
-            Powell</a>. The source code is licensed
-          <a href="http://opensource.org/licenses/mit-license.php">MIT</a>
-        </p>
-      </div>
-    </footer>
-    <!-- JS BELOW  -->
-    <!-- Owl Carousel -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    <script src="./js/tabs.js"></script>
-    <script src="./js/script.js"></script>
-    <script src="./js/lists.js"></script>
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        <!-- updated A tags so we each will have our own link  -->
+        <strong></strong> Created by <a href="#">Bjorn Yourey</a>, <a href="#">Cathy Marchese</a>, <a href="#">Jonathan
+          Hammond</a>, <a href="#">Ryan Royalty</a> & <a href="#">Toni
+          Powell</a>. The source code is licensed
+        <a href="http://opensource.org/licenses/mit-license.php">MIT</a>
+      </p>
+    </div>
+  </footer>
+  <!-- JS BELOW  -->
+  <!-- Owl Carousel -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  <script src="./js/tabs.js"></script>
+  <script src="./js/script.js"></script>
+  <script src="./js/lists.js"></script>
 
-  </body>
-  </html>
+</body>
+
+</html>
 <!-- 
 <span>
   <a href="#"> <i class="fab fa-2x fa-facebook"></i> </a>
