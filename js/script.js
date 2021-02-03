@@ -154,7 +154,6 @@ $(document).ready(function () {
                     badCounts[x] = (badCounts[x] || 0) + 1;
                 })
 
-                let chopOut = [];
                 // If an id exists in the RED object, remove it from the GREEN object.
                 Object.entries(goodCounts).forEach(function (e) {
 
