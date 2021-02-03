@@ -163,8 +163,10 @@ $(document).ready(function () {
 
                 // If no recipes remain after removing RED ingredient recipes from GREEN ingredient recipes, removes all GREEN ingredients from the GREEN ingredient array and reruns the function to generate a completely random meal with no RED ingredients.
                 if(!goodCounts) {
-                    array = [];
-                    getIngredPromises(array, badArray, type, arrGen, badGen, goodCounts, badCounts, goodList, functionURL);
+                    Promise.all(array).then(function(response) {
+                        array = [];
+                        getIngredPromises(array, badArray, type, arrGen, badGen, goodCounts, badCounts, goodList, functionURL)
+                    });
                     return false;
                 }
 
