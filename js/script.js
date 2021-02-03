@@ -253,7 +253,8 @@ $(document).ready(function () {
                             if (c &&
                                 `${mealDetails[property]}` &&
                                 `${mealDetails[property]}` !== '' && 
-                                `${mealDetails[property]}` !== 'null' && 
+                                `${mealDetails[property]}` !== 'null' &&
+                                `${mealDetails[property]}` !== null &&  
                                 `${mealDetails[property]}` !== ' ') {
                                 mealIngArray[k] = `${mealDetails[property]}`
                                 k++
