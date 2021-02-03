@@ -163,12 +163,13 @@ $(document).ready(function () {
                 })
 
                 // If no recipes remain after removing RED ingredient recipes from GREEN ingredient recipes, removes all GREEN ingredients from the GREEN ingredient array and reruns the function to generate a completely random meal with no RED ingredients.
-                if(!goodCounts) {
+                if(!goodCounts === true) {
                     Promise.all(array).then(function(response) {
+                        console.log(array)
                         array = [];
                         getIngredPromises(array, badArray, type, arrGen, badGen, goodCounts, badCounts, goodList, functionURL)
+                        return false;
                     });
-                    return false;
                 }
 
                 // Turn the remaining GREEN IDs into a JSON object.
@@ -181,6 +182,7 @@ $(document).ready(function () {
                 let top30 = [];
 
                 // Selects the top 30 IDs from the sorted list of GREEN ingredients and calls the API for them. If the list is less than 30 elements long, returns entire list.
+
                 for (let i = 0; (i < 30) && (i < goodList.items.length) ; i++) {
                     top30[i] = $.get(functionURL + lookUpURL + goodList.items[i].id, ((response) => { return response }))
                 };
@@ -194,8 +196,6 @@ $(document).ready(function () {
                         $("#drinkTitle").text(drinkDetails.strDrink);
                         $("#drinkImg").attr("src", drinkDetails.strDrinkThumb);
                         $("#drinkRecipe").text(drinkDetails.strInstructions);
-                        
-                        // INSERT CODE TO POPULATE DRINK INSTRUCTIONS
 
                         let drinkIngArray = [];
                         let drinkMeasurements = [];
@@ -287,8 +287,17 @@ $(document).ready(function () {
                             ));
                         }
                     }
-                });
+                }).catch(function() {
+                    getIngredPromises(array, badArray, type, arrGen, badGen, goodCounts, badCounts, goodList, functionURL);
+                    return false;
+                })
+            }).catch(function() {
+                getIngredPromises(array, badArray, type, arrGen, badGen, goodCounts, badCounts, goodList, functionURL);
+                return false;
             })
+        }).catch(function() {
+            getIngredPromises(array, badArray, type, arrGen, badGen, goodCounts, badCounts, goodList, functionURL);
+            return false;
         })
     };
 
@@ -331,30 +340,31 @@ $(document).ready(function () {
         $('.mealSelector').show();
     })
 
-    $('#mealIngredientsUL').on('click', function (event) {
-        event.preventDefault;
-        let _this = event.target;
-        let wIng = $(_this).text().split(" - ")
-        let state = "";
-        if (JSON.parse(localStorage.getItem(wIng[1])) !== null) { state = localStorage.getItem(wIng[1]) };
+    /* This event will allow users to change ingredient status on the fly from the Ingredients Tabs, if we have time to get to it. */
+    // $('#mealIngredientsUL').on('click', function (event) {
+    //     event.preventDefault;
+    //     let _this = event.target;
+    //     let wIng = $(_this).text().split(" - ")
+    //     let state = "";
+    //     if (JSON.parse(localStorage.getItem(wIng[1])) !== null) { state = localStorage.getItem(wIng[1]) };
 
-            // Changes CSS based on saved data state of this ingredient.
-            switch (parseInt(state)) {
-                case 1:
-                    $(_this).attr("data-state", -1);
-                    $(_this).removeClass("haveIng");
-                    $(_this).addClass("badIng");
-                    break;
-                case 0:
-                    $(_this).attr("data-state", 1);
-                    $(_this).addClass("haveIng");
-                    break;
-                case -1:
-                    $(_this).attr("data-state", 0);
-                    $(_this).removeClass("badIng");
-                    break;
-            }
-    })
+    //         // Changes CSS based on saved data state of this ingredient.
+    //         switch (parseInt(state)) {
+    //             case 1:
+    //                 $(_this).attr("data-state", -1);
+    //                 $(_this).removeClass("haveIng");
+    //                 $(_this).addClass("badIng");
+    //                 break;
+    //             case 0:
+    //                 $(_this).attr("data-state", 1);
+    //                 $(_this).addClass("haveIng");
+    //                 break;
+    //             case -1:
+    //                 $(_this).attr("data-state", 0);
+    //                 $(_this).removeClass("badIng");
+    //                 break;
+    //         }
+    // })
 
     // Input functionality for the Drink search bar.
     $('#drinkSearch').on('input', function (event) {
@@ -454,119 +464,21 @@ $(document).ready(function () {
 
     // JON JS
     // jquery for tabs functionality - will need to have this populate with some form of 'data', recipes/ingredients?
-    $("#ingredients").on('mouseover', function () {
-        $("#ingredients").addClass("is-active")
-    })
+    // $("#ingredients").on('mouseover', function () {
+    //     $("#ingredients").addClass("is-active")
+    // })
 
-    $("#ingredients").on('mouseleave', function () {
-        $("#ingredients").removeClass("is-active")
-    })
+    // $("#ingredients").on('mouseleave', function () {
+    //     $("#ingredients").removeClass("is-active")
+    // })
 
-    $("#recipes").on('mouseover', function () {
-        $("#recipes").addClass("is-active")
-    })
+    // $("#recipes").on('mouseover', function () {
+    //     $("#recipes").addClass("is-active")
+    // })
 
-    $("#recipes").on('mouseleave', function () {
-        $("#recipes").removeClass("is-active")
-    })
-
-    // $('#tabs li').on('click', function () {
-    //     var tab = $(this).data('tab');
-
-    //     $('#tabs li').removeClass('is-active');
-    //     $(this).addClass('is-active');
-
-    //     $('#tab-content p').removeClass('is-active');
-    //     $('p[data-content="' + tab + '"]').addClass('is-active');
-    // });
-
-
-//     // When div holding Recipe | Ingredients | Drink Mixes | Steps is clicked
-//     // If the paragraph with .pre-p is currently active, show pre tag; else hide the pre tag.
-//     $('#tabs').on('click', function() {
-//         if ($('.pre-p').hasClass('is-active')) {
-//             $('pre').each(function()
-//             {
-//                 this.style.display = 'block';
-//             })
-//         } else {
-//             $('pre').each(function()
-//             {
-//                 this.style.display = 'none';
-//             })
-//         }
-//     })
-
-//     // When Submit button on front end is clicked:
-//     // $('#getMealBtn').on('click', function (event) {
-//     $('#genButton').on('click', function (event) {
-//     // Prevent normal page refresh associated with submit buttons from occurring
-//         event.preventDefault();
-//         // Empty the ingredients paragraph every time to remove the UL and corresponding list items.
-//         // Each time user clicks, the AJAX returns, and below code makes a new UL and adds list items.
-//         $("[data-content=1]").empty();
-//         // Get the value of the dropdown at time of submission
-//         // NOTE: <select> is comprised of <option values=""> -- the selected option === <select> value!!!
-//         // let selection = $('#meals').val();
-//         let selection = 'chicken';
-//         // Console logs 'beef' to help explain what information is being acquired here
-//         // console.log('Selected meal category: ' + selection);
-//         // Calls below function that randomizes array item from user-selected meal key
-//         getMealID(mealCategories[selection]);
-//         if ($('.pre-p').hasClass('is-active')) {
-//             $('pre').each(function()
-//             {
-//                 this.style.display = 'block';
-//             })
-//         } else {
-//             $('pre').each(function()
-//             {
-//                 this.style.display = 'none';
-//             })
-//         }
-//     });
-
-// //     // Function takes 1 argument = user-selected meal, which equates to one of the above keys in the object
-// //     function getMealID(meal) {
-// //         // Random number between 0-1, in float/decimal form
-// //         let rand = Math.random();
-// //         // Meal Array length -- for example, vegan.length = 3
-// //         let totalMeals = meal.length;
-// //         // Floor turns 2.93 into 2, 0.93 into 0, etc.
-// //         // For example, 0.78 * 34 = 26.52 -- Floor makes this 26.
-// //         let randIndex = Math.floor(rand * totalMeals);
-// //         // Random meal equates to something along the lines of: beef[26]...
-// //         // ...Which might be something like '52824'
-// //         let randomMeal = meal[randIndex];
-// //         // Ready to serve https://www.themealdb.com/api/json/v1/1/lookup.php?i=52824 into the API
-// //         let queryURL = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + randomMeal;
-
-// //         // Sends request to server to retrieve randomMeal object that contains full details of a Meal
-// //         // NOTE: full details includes items such as Meal Name, Image, Ingredients, Measures, Instructions...
-// //         $.get(queryURL, function (fullDeets) {
-// //             // Console log returned object -- this section will change if Ryan's idea is applied here.
-// //             console.log(fullDeets);
-// //             let details = fullDeets.meals[0];
-// //             // Traverse the object and fill in HTML text, save for the image/a which are hrefs.
-// //             $("#strMeal").text(details.strMeal);
-// //             $("#strMealThumb").attr('src', details.strMealThumb);
-// //             $("#strTags").text(details.strTags);
-// //             $("#strYoutube").attr('href', details.strYoutube);
-// //             // <pre> represents preformatted text which is to be presented exactly as written.
-// //             $("pre").text(details.strInstructions);
-// //             // $("[data-content=1]").text(details.strInstructions);
-// //             // Add an empty unordered list to the ingredients paragraph, where items will be listed.
-// //             let ingredientsUL = $(`<ul></ul>`).attr('id', 'ingredientsUL')
-// //             $("[data-content=1]").append(ingredientsUL);
-
-// //             // Regular expressions start with an open / signifying the start
-// //             // \b indicates the word we are looking for, in this case strIngredient then strMeasure
-// //             // Regular expressions end with a close / signifying both end and start of expression flags
-// //             // g is a global search -- retain the index of the last match, allowing iterative searches
-
-// //             }
-// //         });
-// //     }
+    // $("#recipes").on('mouseleave', function () {
+    //     $("#recipes").removeClass("is-active")
+    // })
 });
 
 
