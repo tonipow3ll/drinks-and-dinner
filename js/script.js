@@ -178,21 +178,17 @@ $(document).ready(function () {
 
                 let randomCount = 30;
                 if (goodList.items.length < 30) { randomCount = goodList.items.length };
-
                 let displayItem = goodList.items[Math.floor(Math.random() * randomCount)].id;
                 let displayPromise = $.get(functionURL + lookUpURL + displayItem, ((response) => { return response }));
 
                 Promise.resolve(displayPromise).then((response) => {
                     if (type === "drink") {
                         // Displays the image and title for the drink.
-        
                         $('#drinkIngredientsUL').empty();
-        
-                        let drinkDetails = response.drinks[0];
                         $("#drinkTitle").text(drinkDetails.strDrink);
                         $("#drinkImg").attr("src", drinkDetails.strDrinkThumb);
                         $("#drinkRecipe").text(drinkDetails.strInstructions);
-        
+                        let drinkDetails = response.drinks[0];
                         let drinkIngArray = [];
                         let drinkMeasurements = [];
         
@@ -235,14 +231,11 @@ $(document).ready(function () {
                         };
         
                     } else if (type === "meal") {
-                        // Displays the image and title for the meal.
                         $('#mealIngredientsUL').empty();
-        
-                        let mealDetails = response.meals[0];
                         $("#mealTitle").text(mealDetails.strMeal);
                         $("#mealImg").attr("src", mealDetails.strMealThumb);
                         $("#mealRecipe").text(mealDetails.strInstructions);
-        
+                        let mealDetails = response.meals[0];
                         let mealIngArray = [];
                         let mealMeasurements = [];
         
@@ -276,19 +269,19 @@ $(document).ready(function () {
                         for (let l = 0; l < mealIngArray.length; l++) {
                             let haveMealIng = "";
                             let mealNullString = "";
-                            if (JSON.parse(localStorage.getItem(titleCase(mealIngArray[l])) == 1)) { haveMealIng = ' class="haveIng"' }
-                            if (!mealMeasurements[l] === false) { mealNullString = mealMeasurements[l] + " " }
+                            if (JSON.parse(localStorage.getItem(titleCase(mealIngArray[l])) == 1)) { haveMealIng = ' class="haveIng"';
+                            } else if (JSON.parse(localStorage.getItem(titleCase(mealIngArray[j])) == -1)) { haveMealIng = ' class="badIng"'; };
+                            if (!mealMeasurements[l] === false) { mealNullString = mealMeasurements[l] + " "; };
                             $('#mealIngredientsUL').append($(`<li` + haveMealIng + `></li>`).text(
                                 mealNullString + titleCase(mealIngArray[l])
                             ));
-                        }
-                    }
+                        };
+                    };
                 })
                 .catch(function() {
                     getIngredPromises(array, badArray, type, arrGen, badGen, goodCounts, badCounts, goodList, functionURL);
                     return false;
-                })
-
+                });
             }).catch(function() {
                 getIngredPromises(array, badArray, type, arrGen, badGen, goodCounts, badCounts, goodList, functionURL);
                 return false;
