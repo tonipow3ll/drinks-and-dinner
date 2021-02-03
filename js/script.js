@@ -281,21 +281,18 @@ $(document).ready(function () {
                             ));
                         };
                     };
-                })
-                // .catch(function() {
-                //     getIngredPromises(goodArray, badArray, type, goodGen, badGen, goodCounts, badCounts, goodList, functionURL);
-                //     return false;
-                // });
-            })
-            // .catch(function() {
-            //     getIngredPromises(goodArray, badArray, type, goodGen, badGen, goodCounts, badCounts, goodList, functionURL);
-            //     return false;
-            // });
-        })
-        // .catch(function() {
-        //     getIngredPromises(goodArray, badArray, type, goodGen, badGen, goodCounts, badCounts, goodList, functionURL);
-        //     return false;
-        // });
+                }).catch(function() {
+                    getIngredPromises(goodArray, badArray, type, goodGen, badGen, goodCounts, badCounts, goodList, functionURL);
+                    return false;
+                });
+            }).catch(function() {
+                getIngredPromises(goodArray, badArray, type, goodGen, badGen, goodCounts, badCounts, goodList, functionURL);
+                return false;
+            });
+        }).catch(function() {
+            getIngredPromises(goodArray, badArray, type, goodGen, badGen, goodCounts, badCounts, goodList, functionURL);
+            return false;
+        });
     };
     // END FUNCTION: Get Ingredient Promises
 
