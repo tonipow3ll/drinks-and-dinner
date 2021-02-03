@@ -149,7 +149,10 @@ li , p {
   width: 100%
 }
 /* End Ryan's Classes*/
-
+.tabs li.is-active a {
+  border-bottom-color: #6C8C3F;
+  color: #6C8C3F;
+}
 
   /*-------- MEDIA QUERIES --------*/
 /* BULMA Breakpoints */
