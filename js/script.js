@@ -87,7 +87,7 @@ $(document).ready(function () {
                     case -1:
                         classAdd = " is-danger"
                         break;
-                }
+                };
 
                 // Creates a row template for the respective ingredient button to be added.
                 let rowTemp = '<button class="button drinkSelector' + classAdd + '" data-state=' + storeDrink + '>' + titleCase(response.drinks[i].strIngredient1) + '</button>';
@@ -100,13 +100,14 @@ $(document).ready(function () {
             $('.drinkSelector').on('click', function (event) {
                 event.preventDefault;
                 ingredButtonFormatting(this);
-
             });
         });
 
         // Generate first meal and drink pair on website open.
-        Promise.all([mealIngredients, drinkIngredients]).then((response) => { generatePair() })
+        Promise.all([mealIngredients, drinkIngredients]).then((response) => { generatePair() });
     };
+    //END FUNCTION: Initialize
+
 
     /* 
     FUNCTION: Generates a meal or drink based on parameter inputs including user selected 'Good' (GREEN modal buttons) ingredients, and user selected 'Bad' ingredients (RED modal buttons). If there is no stored button data, generates a truly random meal. If there are only RED buttons, generates a truly random meal but excludes recipes with those ingredients. If GREEN buttons exist, finds all recipes with any of those ingredients in them and sorts the meals by most ingredients present to least. Currently, the program selects a random meal from the Top 30 in this list. If there are less than 30 meals, it selects a random meal from the whole list. Recipes with RED button ingredients are still excluded in this case.
@@ -115,12 +116,12 @@ $(document).ready(function () {
 
         // Create an array of promises, each index being the response for one of the GREEN ingredients in the array. If no GREEN ingredients exist, calls one completely random recipe from the API.
         if (array.length === 0) {
-            array[0] = $.get(functionURL + randomURL, ((response) => {  return response }));
-        } else {    
+            array[0] = $.get(functionURL + randomURL, ((response) => { return response }));
+        } else {
             for (let i = 0; i < array.length; i++) {
                 array[i] = $.get(functionURL + filterURL + array[i], ((response) => { return response }));
-            }
-        }
+            };
+        };
 
         // Create an array of promises, each index being the response for one of the RED ingredients in the array.
         for (let i = 0; i < badArray.length; i++) {
@@ -128,158 +129,150 @@ $(document).ready(function () {
         };
 
         // Waits for all GREEN promises (or 1 RANDOM promise), then generates a list of IDs for the drinks/meals that use the ingredients. Sorts the list by most ingredients found to least.
-
         Promise.all(array).then((response) => {
             // Loop to concat the arrays of the GREEN IDs together.
             for (let i = 0; i < response.length; i++) {
-                if (type === "drink" && response[i].drinks !== null) { arrGen = arrGen.concat(response[i].drinks.map(function (v) { return v.idDrink })) }
-                else if (type === "meal" && response[i].meals !== null) { arrGen = arrGen.concat(response[i].meals.map(function (v) { return v.idMeal })) }
+                if (type === "drink" && response[i].drinks !== null) { arrGen = arrGen.concat(response[i].drinks.map(function (v) { return v.idDrink })); 
+                } else if (type === "meal" && response[i].meals !== null) { arrGen = arrGen.concat(response[i].meals.map(function (v) { return v.idMeal })); };
             }
 
             Promise.all(badArray).then((response) => {
                 // Loop to concat the arrays of the RED IDs together.
                 for (let i = 0; i < response.length; i++) {
-                    if (type === "drink" && response[i].drinks !== null) { badGen = badGen.concat(response[i].drinks.map(function (v) { return v.idDrink })) }
-                    else if (type === "meal" && response[i].meals !== null) { badGen = badGen.concat(response[i].meals.map(function (v) { return v.idMeal })) }
-                }
+                    if (type === "drink" && response[i].drinks !== null) { badGen = badGen.concat(response[i].drinks.map(function (v) { return v.idDrink })); 
+                    } else if (type === "meal" && response[i].meals !== null) { badGen = badGen.concat(response[i].meals.map(function (v) { return v.idMeal })); };
+                };
 
                 // Counts the number of times each ID appears in the GREEN list.
-                
                 arrGen.forEach(function (x) {
                     goodCounts[x] = (goodCounts[x] || 0) + 1;
-                })
+                });
 
                 // Counts the number of times each ID appears in the RED list.
                 badGen.forEach(function (x) {
                     badCounts[x] = (badCounts[x] || 0) + 1;
-                })
+                });
 
                 // If an id exists in the RED object, remove it from the GREEN object.
                 Object.entries(goodCounts).forEach(function (e) {
 
                     if (!badCounts[e[0]] === false) {
                         delete goodCounts[e[0]];
-                    }
-                })
+                    };
+                });
 
                 // If no recipes remain after removing RED ingredient recipes from GREEN ingredient recipes, removes all GREEN ingredients from the GREEN ingredient array and reruns the function to generate a completely random meal with no RED ingredients.
-                if(!goodCounts === true) {
-                    Promise.all(array).then(function() {
+                if (!goodCounts === true) {
+                    Promise.all(array).then(function () {
                         array = [];
-                        getIngredPromises(array, badArray, type, arrGen, badGen, goodCounts, badCounts, goodList, functionURL)
+                        getIngredPromises(array, badArray, type, arrGen, badGen, goodCounts, badCounts, goodList, functionURL);
                         return false;
                     });
-                }
+                };
 
                 // Turn the remaining GREEN IDs into a JSON object.
-                Object.entries(goodCounts).forEach(e => goodList["items"].push({ "id": e[0], "count": e[1] }))
+                Object.entries(goodCounts).forEach(e => goodList["items"].push({ "id": e[0], "count": e[1] }));
 
                 // Sorts the JSON object descending by the number of GREEN ingredients in it.
                 goodList.items.sort(function (a, b) { return b.count - a.count });
 
-                // Top 30 empty array.
-                let top30 = [];
+                let randomCount = 30;
+                if (goodList.items.length < 30) { randomCount = goodList.items.length };
 
-                // Selects the top 30 IDs from the sorted list of GREEN ingredients and calls the API for them. If the list is less than 30 elements long, returns entire list.
+                let displayItem = goodList.items[Math.floor(Math.random() * randomCount)].id;
+                let displayPromise = $.get(functionURL + lookUpURL + displayItem, ((response) => { return response }));
 
-                for (let i = 0; (i < 30) && (i < goodList.items.length) ; i++) {
-                    top30[i] = $.get(functionURL + lookUpURL + goodList.items[i].id, ((response) => { return response }))
-                };
-
-                // When all promises returned, get a random entry to display.
-                Promise.all(top30).then((response) => {
-                    let itemID = Math.floor(Math.random() * top30.length);
+                Promise.resolve(displayPromise).then((response) => {
                     if (type === "drink") {
                         // Displays the image and title for the drink.
-
+        
                         $('#drinkIngredientsUL').empty();
-
-                        let drinkDetails = response[itemID].drinks[0];
+        
+                        let drinkDetails = response.drinks[0];
                         $("#drinkTitle").text(drinkDetails.strDrink);
                         $("#drinkImg").attr("src", drinkDetails.strDrinkThumb);
                         $("#drinkRecipe").text(drinkDetails.strInstructions);
-
+        
                         let drinkIngArray = [];
                         let drinkMeasurements = [];
-
+        
                         let i = 0;
                         for (property in drinkDetails) {
                             let a = `${property}`.match(regexIng);
-
+        
                             if (a &&
                                 `${drinkDetails[property]}` &&
-                                `${drinkDetails[property]}` !== '' && 
-                                `${drinkDetails[property]}` !== 'null' && 
-                                `${drinkDetails[property]}` !== ' ' ){
+                                `${drinkDetails[property]}` !== '' &&
+                                `${drinkDetails[property]}` !== 'null' &&
+                                `${drinkDetails[property]}` !== ' ') {
                                 drinkIngArray[i] = `${drinkDetails[property]}`
                                 i++
                             }
                         }
-
+        
                         i = 0;
                         for (property in drinkDetails) {
                             let b = `${property}`.match(regexMeas);
-
-                            if (b && 
+        
+                            if (b &&
                                 `${drinkDetails[property]}` &&
-                                `${drinkDetails[property]}` !== '' && 
+                                `${drinkDetails[property]}` !== '' &&
                                 `${drinkDetails[property]}` !== 'null') {
                                 drinkMeasurements[i] = `${drinkDetails[property]}`
                                 i++
                             }
                         }
-
+        
                         for (let j = 0; j < drinkIngArray.length; j++) {
                             let haveDrinkIng = "";
                             let drinkNullString = "";
-                            if (JSON.parse(localStorage.getItem(titleCase(drinkIngArray[j])) == 1)) { haveDrinkIng = ' class="haveIng"' }
-                            else if(JSON.parse(localStorage.getItem(titleCase(drinkIngArray[j])) == -1)) { haveDrinkIng = ' class="badIng"' }
-                            if (!drinkMeasurements[j] === false) { drinkNullString = drinkMeasurements[j] + " " }
+                            if (JSON.parse(localStorage.getItem(titleCase(drinkIngArray[j])) == 1)) { haveDrinkIng = ' class="haveIng"'; 
+                            } else if (JSON.parse(localStorage.getItem(titleCase(drinkIngArray[j])) == -1)) { haveDrinkIng = ' class="badIng"'; };
+                            if (!drinkMeasurements[j] === false) { drinkNullString = drinkMeasurements[j] + " "; };
                             $('#drinkIngredientsUL').append($(`<li` + haveDrinkIng + `></li>`).text(
                                 drinkNullString + titleCase(drinkIngArray[j])
                             ));
-                        }
-                        
+                        };
+        
                     } else if (type === "meal") {
                         // Displays the image and title for the meal.
-                        
                         $('#mealIngredientsUL').empty();
-
-                        let mealDetails = response[itemID].meals[0];
+        
+                        let mealDetails = response.meals[0];
                         $("#mealTitle").text(mealDetails.strMeal);
                         $("#mealImg").attr("src", mealDetails.strMealThumb);
                         $("#mealRecipe").text(mealDetails.strInstructions);
-
-                        let mealIngArray= [];
+        
+                        let mealIngArray = [];
                         let mealMeasurements = [];
-
+        
                         let k = 0;
                         for (property in mealDetails) {
                             let c = `${property}`.match(regexIng);
-
+        
                             if (c &&
                                 `${mealDetails[property]}` &&
-                                `${mealDetails[property]}` !== '' && 
+                                `${mealDetails[property]}` !== '' &&
                                 `${mealDetails[property]}` !== 'null' &&
                                 `${mealDetails[property]}` !== ' ') {
                                 mealIngArray[k] = `${mealDetails[property]}`
                                 k++
                             }
                         }
-
+        
                         k = 0;
                         for (property in mealDetails) {
                             let d = `${property}`.match(regexMeas);
-
-                            if (d && 
+        
+                            if (d &&
                                 `${mealDetails[property]}` &&
-                                `${mealDetails[property]}` !== '' && 
+                                `${mealDetails[property]}` !== '' &&
                                 `${mealDetails[property]}` !== 'null') {
                                 mealMeasurements[k] = `${mealDetails[property]}`
                                 k++
                             }
                         }
-
+        
                         for (let l = 0; l < mealIngArray.length; l++) {
                             let haveMealIng = "";
                             let mealNullString = "";
@@ -290,19 +283,106 @@ $(document).ready(function () {
                             ));
                         }
                     }
-                }).catch(function() {
+                })
+                .catch(function() {
                     getIngredPromises(array, badArray, type, arrGen, badGen, goodCounts, badCounts, goodList, functionURL);
                     return false;
                 })
+
             }).catch(function() {
                 getIngredPromises(array, badArray, type, arrGen, badGen, goodCounts, badCounts, goodList, functionURL);
                 return false;
-            })
+            });
         }).catch(function() {
             getIngredPromises(array, badArray, type, arrGen, badGen, goodCounts, badCounts, goodList, functionURL);
             return false;
-        })
+        });
     };
+    // END FUNCTION: Get Ingredient Promises
+
+    // FUNCTION: Sets up the parameters for generating a new meal.
+    function generateMeal() {
+        let mealGoodList = { "items": [] };
+        let mBadIngred = [];
+        let mGoodIngred = [];
+        let arrGenMeal = [];
+        let badGenMeal = [];
+        let goodCountsMeal = {};
+        let badCountsMeal = {};
+        let mealGreenButtons = $(".mealSelector.is-success");
+        let mealRedButtons = $(".mealSelector.is-danger");
+        for (let i = 0; i < mealGreenButtons.length; i++) {
+            mGoodIngred[i] = $(mealGreenButtons[i]).text()
+        }
+        for (let i = 0; i < mealRedButtons.length; i++) {
+            mBadIngred[i] = $(mealRedButtons[i]).text()
+        }
+
+        getIngredPromises(mGoodIngred, mBadIngred, "meal", arrGenMeal, badGenMeal, goodCountsMeal, badCountsMeal, mealGoodList, mealURL);
+    }
+    //END FUNCTION: Meal parameters
+
+    // FUNCTION: Sets up the parameters for generating a new drink.
+    function generateDrink() {
+        let drinkGoodList = { "items": [] };
+        let dBadIngred = [];
+        let dGoodIngred = [];
+        let arrGenDrink = [];
+        let badGenDrink = [];
+        let goodCountsDrink = {};
+        let badCountsDrink = {};
+        let drinkGreenButtons = $(".drinkSelector.is-success");
+        let drinkRedButtons = $(".drinkSelector.is-danger");
+        for (let i = 0; i < drinkGreenButtons.length; i++) {
+            dGoodIngred[i] = $(drinkGreenButtons[i]).text()
+        }
+        for (let i = 0; i < drinkRedButtons.length; i++) {
+            dBadIngred[i] = $(drinkRedButtons[i]).text()
+        }
+
+        getIngredPromises(dGoodIngred, dBadIngred, "drink", arrGenDrink, badGenDrink, goodCountsDrink, badCountsDrink, drinkGoodList, drinkURL);
+    }
+    /*END FUNCTION: Drink parameters*/
+
+    // FUNCTION: Generate a pair.
+    function generatePair() {
+        generateMeal();
+        generateDrink();
+    }
+    // END FUNCTION
+
+    // FUNCTION Formats the ingredient buttons on click and stores the data to local storage.
+    function ingredButtonFormatting(_this) {
+        switch (parseInt($(_this).attr("data-state"))) {
+            case 1:
+                $(_this).attr("data-state", -1);
+                $(_this).removeClass("is-success");
+                $(_this).addClass("is-danger");
+                break;
+            case 0:
+                $(_this).attr("data-state", 1);
+                $(_this).addClass("is-success");
+                break;
+            case -1:
+                $(_this).attr("data-state", 0);
+                $(_this).removeClass("is-danger");
+                break;
+        }
+
+        localStorage.setItem(titleCase($(_this).text()), $(_this).attr("data-state"));
+    }
+    // END FUNCTION
+
+
+    // FUNCTION: Title Case
+    function titleCase(str) {
+        str = str.toLowerCase().split(' ');
+        for (var i = 0; i < str.length; i++) {
+            str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+        }
+        return str.join(' ');
+    }
+    // END FUNCTION
 
     // On Click functionality for the "I'm feelin' lucky" button.
     $('#genButton').on('click', function (event) {
@@ -381,103 +461,7 @@ $(document).ready(function () {
         $('.mealSelector:contains("' + titleCase($(this).val()) + '")').show()
     })
 
-    // Function that sets up the parameters for generating a new meal.
-    function generateMeal() {
-        let mealGoodList = { "items": [] };
-        let mBadIngred = [];
-        let mGoodIngred = [];
-        let arrGenMeal = [];
-        let badGenMeal = [];
-        let goodCountsMeal = {};
-        let badCountsMeal = {};
-        let mealGreenButtons = $(".mealSelector.is-success");
-        let mealRedButtons = $(".mealSelector.is-danger");
-        for (let i = 0; i < mealGreenButtons.length; i++) {
-            mGoodIngred[i] = $(mealGreenButtons[i]).text()
-        }
-        for (let i = 0; i < mealRedButtons.length; i++) {
-            mBadIngred[i] = $(mealRedButtons[i]).text()
-        }
 
-        getIngredPromises(mGoodIngred, mBadIngred, "meal", arrGenMeal, badGenMeal, goodCountsMeal, badCountsMeal, mealGoodList, mealURL);
-    }
-
-    // Function that sets up the parameters for generating a new drink.
-    function generateDrink() {
-        let drinkGoodList = { "items": [] };
-        let dBadIngred = [];
-        let dGoodIngred = [];
-        let arrGenDrink = [];
-        let badGenDrink = [];
-        let goodCountsDrink = {};
-        let badCountsDrink = {};
-        let drinkGreenButtons = $(".drinkSelector.is-success");
-        let drinkRedButtons = $(".drinkSelector.is-danger");
-        for (let i = 0; i < drinkGreenButtons.length; i++) {
-            dGoodIngred[i] = $(drinkGreenButtons[i]).text()
-        }
-        for (let i = 0; i < drinkRedButtons.length; i++) {
-            dBadIngred[i] = $(drinkRedButtons[i]).text()
-        }
-
-        getIngredPromises(dGoodIngred, dBadIngred, "drink", arrGenDrink, badGenDrink, goodCountsDrink, badCountsDrink, drinkGoodList, drinkURL);
-    }
-
-    // Function to generate a pair.
-    function generatePair() {
-        generateMeal();
-        generateDrink();
-    }
-
-    // Function that formats the ingredient buttons on click and stores the data to local storage.
-    function ingredButtonFormatting(_this) {
-        // Switch Data State and CSS on click.
-        switch (parseInt($(_this).attr("data-state"))) {
-            case 1:
-                $(_this).attr("data-state", -1);
-                $(_this).removeClass("is-success");
-                $(_this).addClass("is-danger");
-                break;
-            case 0:
-                $(_this).attr("data-state", 1);
-                $(_this).addClass("is-success");
-                break;
-            case -1:
-                $(_this).attr("data-state", 0);
-                $(_this).removeClass("is-danger");
-                break;
-        }
-
-        localStorage.setItem(titleCase($(_this).text()), $(_this).attr("data-state"));
-    }
-
-    // Returns a string to Title Case.
-    function titleCase(str) {
-        str = str.toLowerCase().split(' ');
-        for (var i = 0; i < str.length; i++) {
-            str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
-        }
-        return str.join(' ');
-    }
-
-
-    // JON JS
-    // jquery for tabs functionality - will need to have this populate with some form of 'data', recipes/ingredients?
-    // $("#ingredients").on('mouseover', function () {
-    //     $("#ingredients").addClass("is-active")
-    // })
-
-    // $("#ingredients").on('mouseleave', function () {
-    //     $("#ingredients").removeClass("is-active")
-    // })
-
-    // $("#recipes").on('mouseover', function () {
-    //     $("#recipes").addClass("is-active")
-    // })
-
-    // $("#recipes").on('mouseleave', function () {
-    //     $("#recipes").removeClass("is-active")
-    // })
 });
 
 
