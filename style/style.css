@@ -12,14 +12,17 @@
 
   .hero.is-info {
     background-color: var(--primary);
+    /* background-color: #6C8C3F; */
   }
 
 .hero.is-info .title {
   color: #232321;
+  /* color: white; */
 }
 
 .hero.is-info .subtitle {
   color: #232321;
+  /* color: white; */
 }
   
 #tab-content p.is-active {
@@ -102,9 +105,29 @@ pre {
   font-size: 16px;
 }
 
-.footer {
-  background-color: var(--primary);
+footer.footer {
+  /* background-color: var(--primary); */
+  /* background-color: #eaae8a; */
+  /* if all colors are commented out footer defaults to white */
+
+  /* orangey hue */
+  /* background-color: #CBA426; */
+
+  /* a little tooooooo green */
+  /* background-color: #cbc026;  */
+
+  /* yellowey */
+  /* background-color: #cbb226; */
+
+  /* green to match */
+  background-color: #6C8C3F;
+  padding: 1.5rem 1.5rem 1.5rem !important;
 }
+/* changes link colors to white */
+a{
+  color: white;
+}
+
 
 #tab-content div {
   display: none;
