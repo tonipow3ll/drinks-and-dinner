@@ -2,9 +2,17 @@
   --primary: #EAEAE8;
 }
 
-.hero.is-info {
-  background-color: var(--primary);
+.is-active .tabs{
+  color: #232321;
 }
+
+#tab-content p {
+    display: none;
+  }
+
+  .hero.is-info {
+    background-color: var(--primary);
+  }
 
 .hero.is-info .title {
   color: #232321;
@@ -50,7 +58,7 @@ body {
   background-color: #EAEAE8;
 }
 
-.button {
+.button.mbb {
   background-color: #6C8C3F;
   color: var(--primary);
 }
@@ -80,6 +88,9 @@ button:hover.luckybutton {
   background-color: #b00b28;
 }
 
+button.luckybutton {
+color: white;
+}
 
 pre {
   white-space: pre-wrap;
@@ -103,6 +114,9 @@ pre {
   display: block;
 }
 
+li , p {
+  color:black;
+}
 /* Ryan's Classes */
 .modalHeight {
   position: absolute;
@@ -138,7 +152,10 @@ pre {
   width: 100%
 }
 /* End Ryan's Classes*/
-
+.tabs li.is-active a {
+  border-bottom-color: #6C8C3F;
+  color: #6C8C3F;
+}
 
   /*-------- MEDIA QUERIES --------*/
 /* BULMA Breakpoints */
@@ -174,4 +191,11 @@ pre {
 /* Full HD 1408px and above) */
 @media (min-width: 1408px) { 
     
+}
+
+@media (max-width: 768px) {  
+  .tabs ul {
+    -webkit-flex-direction: column;
+    flex-direction: column;
+  }
 }
