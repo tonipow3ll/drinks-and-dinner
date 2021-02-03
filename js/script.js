@@ -143,8 +143,8 @@ $(document).ready(function () {
                     else if (type === "meal" && response[i].meals !== null) { badGen = badGen.concat(response[i].meals.map(function (v) { return v.idMeal })) }
                 }
 
-
                 // Counts the number of times each ID appears in the GREEN list.
+                
                 arrGen.forEach(function (x) {
                     goodCounts[x] = (goodCounts[x] || 0) + 1;
                 })
@@ -154,10 +154,12 @@ $(document).ready(function () {
                     badCounts[x] = (badCounts[x] || 0) + 1;
                 })
 
+                let chopOut = [];
                 // If an id exists in the RED object, remove it from the GREEN object.
                 Object.entries(goodCounts).forEach(function (e) {
+
                     if (!badCounts[e[0]] === false) {
-                        goodCounts = goodCounts[e[0]].delete;
+                        delete goodCounts[e[0]];
                     }
                 })
 
