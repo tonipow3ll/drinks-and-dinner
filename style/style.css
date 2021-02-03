@@ -28,14 +28,17 @@ body {
 
 .hero.is-info {
     background-color: var(--primary);
+    /* background-color: #6C8C3F; */
   }
 
 .hero.is-info .title {
   color: #232321;
+  /* color: white; */
 }
 
 .hero.is-info .subtitle {
   color: #232321;
+  /* color: white; */
 }
   
 .fixedHeader {
@@ -102,8 +105,15 @@ pre {
   font-size: 16px;
 }
 
-.footer {
-  background-color: var(--primary);
+footer.footer {
+  /* green to match */
+  background-color: #6C8C3F;
+  padding: 1.5rem 1.5rem 1.5rem !important;
+}
+
+/* changes link colors to white */
+a{
+  color: white;
 }
 
 /* #tab-content div {
