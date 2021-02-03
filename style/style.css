@@ -4,6 +4,7 @@
 
 body {
   background-color: #EAEAE8;
+  overflow-x: hidden;
 }
 
 .is-active .tabs{
@@ -87,6 +88,14 @@ body {
   
 }
 
+button:focus .mbb{
+  color:white;
+}
+
+button:focus .luckybutton {
+color:white;
+}
+
 button:hover.luckybutton {
   background-color: #b00b28;
 }
@@ -99,10 +108,12 @@ pre {
   white-space: pre-wrap;
   text-align: start;
   font-family: BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-  text-align: center;
+  text-align: left;
   width: 100%;
   background-color: var(--primary);
   font-size: 16px;
+  max-width:75%;
+  margin:0 auto;
 }
 
 footer.footer {
@@ -110,7 +121,6 @@ footer.footer {
   background-color: #6C8C3F;
   padding: 1.5rem 1.5rem 1.5rem !important;
 }
-
 /* changes link colors to white */
 a{
   color: white;
