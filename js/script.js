@@ -176,8 +176,8 @@ $(document).ready(function () {
                 // Sorts the JSON object descending by the number of GREEN ingredients in it.
                 goodList.items.sort(function (a, b) { return b.count - a.count });
 
-                let randomCount = 30;
-                if (goodList.items.length < 30) { randomCount = goodList.items.length };
+                let randomCount = 50;
+                if (goodList.items.length < 50) { randomCount = goodList.items.length };
                 let displayItem = goodList.items[Math.floor(Math.random() * randomCount)].id;
                 let displayPromise = $.get(functionURL + lookUpURL + displayItem, ((response) => { return response }));
 
