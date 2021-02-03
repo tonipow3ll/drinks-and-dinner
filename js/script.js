@@ -192,6 +192,9 @@ $(document).ready(function () {
                     let itemID = Math.floor(Math.random() * top30.length);
                     if (type === "drink") {
                         // Displays the image and title for the drink.
+
+                        $('#drinkIngredientsUL').empty();
+
                         let drinkDetails = response[itemID].drinks[0];
                         $("#drinkTitle").text(drinkDetails.strDrink);
                         $("#drinkImg").attr("src", drinkDetails.strDrinkThumb);
@@ -241,6 +244,9 @@ $(document).ready(function () {
                         
                     } else if (type === "meal") {
                         // Displays the image and title for the meal.
+                        
+                        $('#mealIngredientsUL').empty();
+
                         let mealDetails = response[itemID].meals[0];
                         $("#mealTitle").text(mealDetails.strMeal);
                         $("#mealImg").attr("src", mealDetails.strMealThumb);
@@ -396,8 +402,6 @@ $(document).ready(function () {
             mBadIngred[i] = $(mealRedButtons[i]).text()
         }
 
-        $('#mealIngredientsUL').empty();
-
         getIngredPromises(mGoodIngred, mBadIngred, "meal", arrGenMeal, badGenMeal, goodCountsMeal, badCountsMeal, mealGoodList, mealURL);
     }
 
@@ -418,8 +422,6 @@ $(document).ready(function () {
         for (let i = 0; i < drinkRedButtons.length; i++) {
             dBadIngred[i] = $(drinkRedButtons[i]).text()
         }
-
-        $('#drinkIngredientsUL').empty();
 
         getIngredPromises(dGoodIngred, dBadIngred, "drink", arrGenDrink, badGenDrink, goodCountsDrink, badCountsDrink, drinkGoodList, drinkURL);
     }
