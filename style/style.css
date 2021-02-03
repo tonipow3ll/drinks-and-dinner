@@ -2,8 +2,8 @@
   --primary: #EAEAE8;
 }
 
-a, .is-active, .tabs{
-  color: #6C8C3F;
+.is-active .tabs{
+  color: #232321;
 }
 
 #tab-content p {
