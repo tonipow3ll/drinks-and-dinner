@@ -94,7 +94,6 @@ color: white;
 
 .luckybutton {
   background-color: #b0170b;
-  
 }
 
 .recipe {
@@ -202,6 +201,25 @@ li , p {
   margin: 0 auto !important;
   }
 }
+
+@media (max-width: 768px){
+  .modal-card{
+    max-width: 95%;
+    margin: 0 auto;
+  }
+  .modal-card-head{
+    padding: 2rem;
+  }
+  .button:hover {
+    background-color: var(--primary);
+    color: black;
+  }
+  #mealRecipe, #drinkRecipe{
+    max-width: 100%;
+  }
+}
+
+
  /* Desktops 1024px and 1215px) */
  @media (min-width: 1024px) { 
     
