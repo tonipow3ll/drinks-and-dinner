@@ -61,8 +61,10 @@ color: #232321;
 .owl-height {
     max-height: 35vh;
   }
+  
   header, section, .hero {
     margin:0px;
+    margin-top: -1.5rem;
   }
 
 .button.mbb {
