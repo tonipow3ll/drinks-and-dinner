@@ -136,7 +136,6 @@ $(document).ready(function () {
 
         // Waits for all GREEN promises (or 1 RANDOM promise), then generates a list of IDs for the drinks/meals that use the ingredients. Sorts the list by most ingredients found to least.
         Promise.all(goodArray).then((response) => {
-            console.log(response)
             // Loop to concat the arrays of the GREEN IDs together.
             for (let i = 0; i < response.length; i++) {
                 if (type === "drink" && response[i].drinks !== null && response[i].drinks !== "None Found") { goodGen = goodGen.concat(response[i].drinks.map(function (v) { return v.idDrink })); 
@@ -154,6 +153,7 @@ $(document).ready(function () {
                 goodGen.forEach(function (x) {
                     goodCounts[x] = (goodCounts[x] || 0) + 1;
                 });
+                console.log(goodCounts)
 
                 // Counts the number of times each ID appears in the RED list.
                 badGen.forEach(function (x) {
@@ -168,7 +168,7 @@ $(document).ready(function () {
                 });
 
                 // If no recipes remain after removing RED ingredient recipes from GREEN ingredient recipes, removes all GREEN ingredients from the GREEN ingredient array and reruns the function to generate a completely random meal with no RED ingredients.
-                console.log(!goodCounts === true)
+
                 if (!goodCounts === true) {
                     Promise.all(goodArray).then(function () {
                         goodArray = [];
@@ -196,7 +196,7 @@ $(document).ready(function () {
                         let drinkDetails = response.drinks[0];
                         $("#drinkTitle").text(drinkDetails.strDrink);
                         $("#drinkImg").attr("src", drinkDetails.strDrinkThumb);
-                        $("#mealImg").attr("alt", drinkDetails.strDrink);
+                        $("#drinkImg").attr("alt", drinkDetails.strDrink);
                         $("#drinkRecipe").text(drinkDetails.strInstructions);
         
                         let drinkIngArray = [];
