@@ -1,7 +1,7 @@
 const version = "1.00";
-if(JSON.parse(localStorage.getItem("ezrpzWorkingVersion")) !== version) {
+if(JSON.parse(localStorage.getItem("ezrpzWorkingVersion")) != version) {
     localStorage.clear;
-    localStorage.setItem("ezrpzWorkingVersion", version);
+    localStorage.setItem(JSON.stringify("ezrpzWorkingVersion"), version);
 }
 
 $(document).ready(function () {
@@ -168,6 +168,7 @@ $(document).ready(function () {
                 });
 
                 // If no recipes remain after removing RED ingredient recipes from GREEN ingredient recipes, removes all GREEN ingredients from the GREEN ingredient array and reruns the function to generate a completely random meal with no RED ingredients.
+                console.log(!goodCounts === true)
                 if (!goodCounts === true) {
                     Promise.all(goodArray).then(function () {
                         goodArray = [];
@@ -300,7 +301,6 @@ $(document).ready(function () {
                         $("#drinkImg").attr("src", "./images/unhappy-cocktail.jpg");
                         $("#drinkImg").attr("alt", "API Error");
                     }
-                    console.log(error);
                 });
             }).catch(function(error) {
                 if (type==="meal") {
@@ -312,7 +312,6 @@ $(document).ready(function () {
                     $("#drinkImg").attr("src", "./images/unhappy-cocktail.jpg");
                     $("#drinkImg").attr("alt", "API Error");
                 }
-                console.log(error);
             });
         }).catch(function(error) {
             if (type==="meal") {
@@ -324,7 +323,6 @@ $(document).ready(function () {
                 $("#drinkImg").attr("src", "./images/unhappy-cocktail.jpg");
                 $("#drinkImg").attr("alt", "API Error");
             }
-            console.log(error);
         });
     };
     // END FUNCTION: Get Ingredient Promises
