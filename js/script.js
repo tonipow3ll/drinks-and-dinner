@@ -1,5 +1,5 @@
 const version = "1.00";
-if(JSON.parse(localStorage.getItem("ezrpzWorkingVersion")) != version) {
+if(JSON.parse(localStorage.getItem("ezrpzWorkingVersion")) !== version) {
     localStorage.clear;
     localStorage.setItem(JSON.stringify("ezrpzWorkingVersion"), version);
 }
