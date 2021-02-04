@@ -12,18 +12,18 @@ body {
 }
 
   .hero.is-info {
-    /* background-color: var(--primary); */
+  
     background-color: #6C8C3F;
   }
 
 .hero.is-info .title {
 color: #232321;
-/* color: white; */
+
 }
 
 .hero.is-info .subtitle {
 color: #232321;
-/* color: white; */
+
 }
 
 #tab-content p {
