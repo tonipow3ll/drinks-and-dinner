@@ -211,7 +211,7 @@ li , p {
     padding: 2rem;
   }
   .button:hover {
-    background-color: var(--primary);
+    background-color: #fff;
     color: black;
   }
   #mealRecipe, #drinkRecipe{
