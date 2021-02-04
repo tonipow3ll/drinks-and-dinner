@@ -3,7 +3,7 @@
 }
 
 body {
-  background-color: #EAEAE8;
+  background-color: var(--primary);
   overflow-x: hidden;
 }
 
@@ -78,11 +78,11 @@ color: #232321;
 
 }
 button:focus .mbb{
-  color:white;
+  color: var(--primary);
 }
 
-button:focus .luckybutton {
-color:white;
+.button:focus .luckybutton {
+  color:white;
 }
 
 button:hover.luckybutton {
@@ -90,12 +90,11 @@ button:hover.luckybutton {
 }
 
 button.luckybutton {
-color: white;
+  color: white;
 }
 
 .luckybutton {
-  background-color: #b0170b;
-  
+  background-color: #b0170b; 
 }
 
 .recipe {
