@@ -75,34 +75,20 @@ color: #232321;
   background-color: #598c3f;
 
 }
-<<<<<<< HEAD
-.button:focus.mbb{
-  color:white;
-}
-
-.button:focus.luckybutton {
-color:white;
-=======
 button:focus .mbb{
   color: var(--primary);
 }
 
 .button:focus .luckybutton {
   color:white;
->>>>>>> cf63d44da6600f655ff25b3ed33e6cdaf555babd
 }
 
 .button:hover.luckybutton {
   background-color: #b00b28;
 }
 
-<<<<<<< HEAD
-.button.luckybutton {
-color: white;
-=======
 button.luckybutton {
   color: white;
->>>>>>> cf63d44da6600f655ff25b3ed33e6cdaf555babd
 }
 
 .luckybutton {
