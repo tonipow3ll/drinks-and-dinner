@@ -2,33 +2,46 @@
   --primary: #EAEAE8;
 }
 
+body {
+  background-color: #EAEAE8;
+  overflow-x: hidden;
+}
+
 .is-active .tabs{
   color: #232321;
+}
+
+.hero.is-info {
+  background-color: var(--primary);
+  /* background-color: #6C8C3F; */
+}
+
+.hero.is-info .title {
+color: #232321;
+/* color: white; */
+}
+
+.hero.is-info .subtitle {
+color: #232321;
+/* color: white; */
 }
 
 #tab-content p {
     display: none;
   }
 
-  .hero.is-info {
-    background-color: var(--primary);
-    /* background-color: #6C8C3F; */
+#tab-content p.is-active {
+    display: block;
   }
 
-.hero.is-info .title {
-  color: #232321;
-  /* color: white; */
-}
-
-.hero.is-info .subtitle {
-  color: #232321;
-  /* color: white; */
-}
+#tab-content div {
+    display: none;
+  }
   
-#tab-content p.is-active {
-  display: block;
-}
-
+#tab-content div.is-active {
+    display: block;
+  }
+  
 .fixedHeader {
   position: fixed;
   width: 100%;
@@ -41,14 +54,6 @@
   margin-bottom: 20px;
 }
 
-#tab-content div {
-  display: none;
-}
-
-#tab-content div.is-active {
-  display: block;
-}
-
 .tabSpot.is-active {
   display: block;
 } 
@@ -56,10 +61,6 @@
 .owl-height {
     max-height: 35vh;
   }
-
-body {
-  background-color: #EAEAE8;
-}
 
 .button.mbb {
   background-color: #6C8C3F;
@@ -70,6 +71,26 @@ body {
   color: var(--primary);
   background-color: #598c3f;
 
+}
+button:focus .mbb{
+  color:white;
+}
+
+button:focus .luckybutton {
+color:white;
+}
+
+button:hover.luckybutton {
+  background-color: #b00b28;
+}
+
+button.luckybutton {
+color: white;
+}
+
+.luckybutton {
+  background-color: #b0170b;
+  
 }
 
 .recipe {
@@ -82,27 +103,16 @@ body {
   object-position: bottom;
 } 
 
-.luckybutton {
-  background-color: #b0170b;
-  
-}
-
-button:hover.luckybutton {
-  background-color: #b00b28;
-}
-
-button.luckybutton {
-color: white;
-}
-
 pre {
   white-space: pre-wrap;
   text-align: start;
   font-family: BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-  text-align: center;
+  text-align: left;
   width: 100%;
   background-color: var(--primary);
   font-size: 16px;
+  max-width:75%;
+  margin:0 auto;
 }
 
 footer.footer {
@@ -110,19 +120,18 @@ footer.footer {
   background-color: #6C8C3F;
   padding: 1.5rem 1.5rem 1.5rem !important;
 }
-
 /* changes link colors to white */
 a{
   color: white;
 }
 
-#tab-content div {
+/* #tab-content div {
   display: none;
 }
 
 #tab-content div.is-active {
   display: block;
-}
+} */
 
 li , p {
   color:black;
