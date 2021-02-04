@@ -76,12 +76,11 @@ color: #232321;
   background-color: #598c3f;
 
 }
-button:focus .mbb{
+button:focus .mbb,
+#mealGenButton,
+#genButton,
+#drinkGenButton {
   color:white;
-}
-
-button:focus .luckybutton {
-color:white;
 }
 
 button:hover.luckybutton {
@@ -115,7 +114,7 @@ pre {
   width: 100%;
   background-color: var(--primary);
   font-size: 16px;
-  max-width:75%;
+  max-width:100%;
   margin:0 auto;
 }
 
@@ -197,10 +196,14 @@ li , p {
     }
 }
 @media (max-width: 900px){
-.modal-card{
-  max-width: 95% !important;
-  margin: 0 auto !important;
-  }
+  .modal-card{
+    max-width: 95% !important;
+    margin: 0 auto !important;
+    }
+
+    pre {
+      max-width: 75%;
+    }
 }
  /* Desktops 1024px and 1215px) */
  @media (min-width: 1024px) { 
