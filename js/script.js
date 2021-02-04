@@ -1,3 +1,9 @@
+const version = "1.00";
+if(JSON.parse(localStorage.getItem("ezrpzWorkingVersion")) !== version) {
+    localStorage.clear;
+    localStorage.setItem("ezrpzWorkingVersion", version);
+}
+
 $(document).ready(function () {
 
     // API Constants
@@ -130,6 +136,7 @@ $(document).ready(function () {
 
         // Waits for all GREEN promises (or 1 RANDOM promise), then generates a list of IDs for the drinks/meals that use the ingredients. Sorts the list by most ingredients found to least.
         Promise.all(goodArray).then((response) => {
+            console.log(response)
             // Loop to concat the arrays of the GREEN IDs together.
             for (let i = 0; i < response.length; i++) {
                 if (type === "drink" && response[i].drinks !== null && response[i].drinks !== "None Found") { goodGen = goodGen.concat(response[i].drinks.map(function (v) { return v.idDrink })); 
@@ -293,6 +300,7 @@ $(document).ready(function () {
                         $("#drinkImg").attr("src", "./images/unhappy-cocktail.jpg");
                         $("#drinkImg").attr("alt", "API Error");
                     }
+                    console.log(error);
                 });
             }).catch(function(error) {
                 if (type==="meal") {
@@ -304,6 +312,7 @@ $(document).ready(function () {
                     $("#drinkImg").attr("src", "./images/unhappy-cocktail.jpg");
                     $("#drinkImg").attr("alt", "API Error");
                 }
+                console.log(error);
             });
         }).catch(function(error) {
             if (type==="meal") {
@@ -315,6 +324,7 @@ $(document).ready(function () {
                 $("#drinkImg").attr("src", "./images/unhappy-cocktail.jpg");
                 $("#drinkImg").attr("alt", "API Error");
             }
+            console.log(error);
         });
     };
     // END FUNCTION: Get Ingredient Promises
