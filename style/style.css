@@ -3,7 +3,7 @@
 }
 
 body {
-  background-color: var(--primary);
+  background-color: #EAEAE8;
   overflow-x: hidden;
 }
 
@@ -11,8 +11,7 @@ body {
   color: #232321;
 }
 
-  .hero.is-info {
-  
+.hero.is-info {
     background-color: #6C8C3F;
   }
 
@@ -61,7 +60,7 @@ color: #232321;
 .owl-height {
     max-height: 35vh;
   }
-  
+
   header, section, .hero {
     margin:0px;
     margin-top: -1.5rem;
@@ -78,11 +77,11 @@ color: #232321;
 
 }
 button:focus .mbb{
-  color: var(--primary);
+  color:white;
 }
 
-.button:focus .luckybutton {
-  color:white;
+button:focus .luckybutton {
+color:white;
 }
 
 button:hover.luckybutton {
@@ -90,11 +89,12 @@ button:hover.luckybutton {
 }
 
 button.luckybutton {
-  color: white;
+color: white;
 }
 
 .luckybutton {
-  background-color: #b0170b; 
+  background-color: #b0170b;
+  
 }
 
 .recipe {
