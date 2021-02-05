@@ -107,16 +107,30 @@ This repo is a Group Project created by Toni Powell, Cathy Marchese, Bjorn Youre
 
 [jQuery css()](https://www.w3schools.com/jquery/jquery_css.asp)
 
-## Future Improvements
-Tapping an ingredient button twice assigns it a 'dislike' value in localStorage to prevent recipes from showing up. However double tapping the zooms in the screen on mobile. This should be fixed to improve UX
+[Favicon](https://css-tricks.com/favicon-quiz/)
 
-Carousel images are different sizes. Because of this, the slider increases and decreases in height every transition. Having no set width/heights also gets docked in Lighthouse. Re-formatting images will improve UX & Lighthouse score.
+## Future Updates
+# Additional Features
+Add an 'i' information bubble that pops open a modal when clicked for how to use, about the project, etc.
+
+On the fly ingredient classification: User can click the ingredients that display in the Meal or Drink Ingredient tabs, and change them to "Try to include" or Red "Try to Exclude" directly from the main page. The purpose of this feature being that people may not remember that they like or dislike something until it shows up in a recipe that they've cycled to.
+
+Meal and Drink bookmarking. If you come across a meal or drink that you particularly like, you will be able to save its details for later recall, instead of trying to find it again in the randomization cycle.
+
+Meal and Drink exclusion. If you come across a meal or drink that you particularly dislike, you will be able to exclude it entirely from future searches.
+
+Meal and Drink recipe upload. We'd like to find a way for the user to upload their own recipes, either with the API we're currently using (which is permitted) or having a separate user only list that gets pulled from in addition to the API call.
+
+A way to require specific ingredients in the recipe search, since right now the program gives a random best guess. For example, if you're chicken is about to go bad, show ONLY recipes that use that ingredient.
+
+# Improvements
+Tapping an ingredient button twice assigns it a 'dislike' value in localStorage to prevent recipes from showing up. However quick double tapping the zooms in the screen on mobile. This should be fixed to improve UX
+
+Carousel images are different sizes. Because of this, the slider increases and decreases in height every transition, though only on mobile. Having no set width/heights also gets docked in Lighthouse. Re-formatting images will improve UX & Lighthouse score.
 
 Header might look nicer if heading information was overlapped onto the Carousel images. Also, might be worth testing to add social media icons (for sharing) somewhere on the cards, or maybe the navbar, fixed to the side, etc.
 
 When a card title's line length is longer than the one right next to it, it results in cards having different heights and looking slightly uneven. It might be worth looking into max-height or possibly the CSS clamp() property to prevent this from happening.
-
-Add an 'i' information bubble that pops open a modal when clicked for how to use, about the project, etc.
 
 Re-arrange the mobile layout. One thought that sticks out: try to stick each meal card within another tab component. This way, one would not have to be stacked over one another on the y axis. Z axis may look better, but inevitably it would be one over the other. Also, reducing and experimenting with different button sizes and layout would be a big to do, as the landing page is not as intuitive as it can be.
 
