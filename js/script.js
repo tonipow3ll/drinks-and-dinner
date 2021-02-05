@@ -1,7 +1,7 @@
 const version = "1.00";
-if(JSON.parse(localStorage.getItem("ezrpzWorkingVersion")) !== version) {
+if(localStorage.getItem("ezrpzWorkingVersion") !== version) {
     localStorage.clear;
-    localStorage.setItem(JSON.stringify("ezrpzWorkingVersion"), version);
+    localStorage.setItem("ezrpzWorkingVersion", version);
 }
 
 $(document).ready(function () {
@@ -34,7 +34,7 @@ $(document).ready(function () {
                 let classAdd = "";
 
                 // Checks to see if this ingredient has a stored data state. If it does, get the data state.
-                if (JSON.parse(localStorage.getItem(titleCase(response.meals[i].strIngredient))) !== null) { storeMeal = localStorage.getItem(titleCase(response.meals[i].strIngredient)) };
+                if (localStorage.getItem(titleCase(response.meals[i].strIngredient)) !== null) { storeMeal = localStorage.getItem(titleCase(response.meals[i].strIngredient)) };
 
                 // Changes CSS based on saved data state of this ingredient.
                 switch (parseInt(storeMeal)) {
@@ -74,7 +74,7 @@ $(document).ready(function () {
                 let classAdd = "";
 
                 // Checks to see if this ingredient has a stored data state. If it does, get the data state.
-                if (JSON.parse(localStorage.getItem(titleCase(response.drinks[i].strIngredient1))) !== null) { storeDrink = localStorage.getItem(titleCase(response.drinks[i].strIngredient1)) };
+                if (localStorage.getItem(titleCase(response.drinks[i].strIngredient1)) !== null) { storeDrink = localStorage.getItem(titleCase(response.drinks[i].strIngredient1)) };
 
                 // Changes CSS based on saved data state of this ingredient.
                 switch (parseInt(storeDrink)) {
@@ -224,8 +224,8 @@ $(document).ready(function () {
                         for (let j = 0; j < drinkIngArray.length; j++) {
                             let haveDrinkIng = "";
                             let drinkNullString = "";
-                            if (JSON.parse(localStorage.getItem(titleCase(drinkIngArray[j])) == 1)) { haveDrinkIng = ' class="haveIng"'; 
-                            } else if (JSON.parse(localStorage.getItem(titleCase(drinkIngArray[j])) == -1)) { haveDrinkIng = ' class="badIng"'; };
+                            if (localStorage.getItem(titleCase(drinkIngArray[j])) == 1) { haveDrinkIng = ' class="haveIng"'; 
+                            } else if (localStorage.getItem(titleCase(drinkIngArray[j])) == -1) { haveDrinkIng = ' class="badIng"'; };
                             if (!drinkMeasurements[j] === false) { drinkNullString = drinkMeasurements[j] + " "; };
                             $('#drinkIngredientsUL').append($(`<li` + haveDrinkIng + `></li>`).text(
                                 drinkNullString + titleCase(drinkIngArray[j])
@@ -275,8 +275,8 @@ $(document).ready(function () {
                         for (let l = 0; l < mealIngArray.length; l++) {
                             let haveMealIng = "";
                             let mealNullString = "";
-                            if (JSON.parse(localStorage.getItem(titleCase(mealIngArray[l])) == 1)) { haveMealIng = ' class="haveIng"';
-                            } else if (JSON.parse(localStorage.getItem(titleCase(mealIngArray[l])) == -1)) { haveMealIng = ' class="badIng"'; };
+                            if (localStorage.getItem(titleCase(mealIngArray[l])) == 1) { haveMealIng = ' class="haveIng"';
+                            } else if (localStorage.getItem(titleCase(mealIngArray[l])) == -1) { haveMealIng = ' class="badIng"'; };
                             if (!mealMeasurements[l] === false) { mealNullString = mealMeasurements[l] + " "; };
                             $('#mealIngredientsUL').append($(`<li` + haveMealIng + `></li>`).text(
                                 mealNullString + titleCase(mealIngArray[l])
