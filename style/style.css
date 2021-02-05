@@ -236,7 +236,6 @@ li , p {
  @media (min-width: 1024px) { 
    pre{
      max-width: 80%;
-
    }
    /* #drinkRecipe{
      text-align: center;
@@ -246,6 +245,9 @@ li , p {
 
 /* Widescreen 1216px and 1407px) */
 @media (min-width: 1216px) { 
+  pre{
+    max-width: 80%;
+  }
   /* #drinkRecipe{
     text-align: center;
   } */
@@ -253,6 +255,9 @@ li , p {
 
 /* Full HD 1408px and above) */
 @media (min-width: 1408px) { 
+  pre{
+    max-width: 80%;
+  }
   /* #drinkRecipe{
     text-align: center;
   } */
