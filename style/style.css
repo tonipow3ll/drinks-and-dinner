@@ -83,15 +83,7 @@ button:focus .mbb,
   color:white;
 }
 
-<<<<<<< HEAD
-button:focus .luckybutton {
-color:white;
-}
-
-.button:hover.luckybutton {
-=======
 button:hover.luckybutton {
->>>>>>> 0267ecde71bfa0a884decf87313551c372fb255a
   background-color: #b00b28;
 }
 
