@@ -97,6 +97,11 @@ color: white;
 
 .recipe {
   background-color: #EAEAE8;
+  margin: 0 2rem;
+}
+
+#clear-drinks{
+  align-items: right;
 }
 
 
@@ -119,6 +124,7 @@ pre {
 .modal-card-head{
   padding: 3rem;
 }
+
 
 footer.footer {
   /* green to match */
@@ -228,15 +234,26 @@ li , p {
 
  /* Desktops 1024px and 1215px) */
  @media (min-width: 1024px) { 
+   pre{
+     max-width: 80%;
+
+   }
+   /* #drinkRecipe{
+     text-align: center;
+   } */
     
 }
 
 /* Widescreen 1216px and 1407px) */
 @media (min-width: 1216px) { 
-
+  /* #drinkRecipe{
+    text-align: center;
+  } */
 }
 
 /* Full HD 1408px and above) */
 @media (min-width: 1408px) { 
-    
+  /* #drinkRecipe{
+    text-align: center;
+  } */
 }
