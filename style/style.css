@@ -226,8 +226,9 @@ li , p {
     background-color: #fff;
     color: black;
   }
-  #mealRecipe, #drinkRecipe{
+  pre{
     max-width: 100%;
+    padding: 0;
   }
 }
 
@@ -237,22 +238,14 @@ li , p {
    pre{
      max-width: 80%;
    }
-   /* #drinkRecipe{
-     text-align: center;
-   } */
-    
 }
 
 /* Widescreen 1216px and 1407px) */
 @media (min-width: 1216px) { 
   pre{
     max-width: 80%;
-   
-    text-align: center;
+    /* text-align: center; */
   }
-  /* #drinkRecipe{
-    text-align: center;
-  } */
 }
 
 /* Full HD 1408px and above) */
