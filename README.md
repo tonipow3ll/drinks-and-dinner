@@ -121,6 +121,8 @@ Meal and Drink exclusion. If you come across a meal or drink that you particular
 
 Meal and Drink recipe upload. We'd like to find a way for the user to upload their own recipes, either with the API we're currently using (which is permitted) or having a separate user only list that gets pulled from in addition to the API call.
 
+A way to require specific ingredients in the recipe search, since right now the program gives a random best guess. For example, if you're chicken is about to go bad, show ONLY recipes that use that ingredient.
+
 # Improvements
 Tapping an ingredient button twice assigns it a 'dislike' value in localStorage to prevent recipes from showing up. However quick double tapping the zooms in the screen on mobile. This should be fixed to improve UX
 
