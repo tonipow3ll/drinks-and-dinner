@@ -124,7 +124,7 @@ Meal and Drink recipe upload. We'd like to find a way for the user to upload the
 # Improvements
 Tapping an ingredient button twice assigns it a 'dislike' value in localStorage to prevent recipes from showing up. However quick double tapping the zooms in the screen on mobile. This should be fixed to improve UX
 
-Carousel images are different sizes. Because of this, the slider increases and decreases in height every transition. Having no set width/heights also gets docked in Lighthouse. Re-formatting images will improve UX & Lighthouse score.
+Carousel images are different sizes. Because of this, the slider increases and decreases in height every transition, though only on mobile. Having no set width/heights also gets docked in Lighthouse. Re-formatting images will improve UX & Lighthouse score.
 
 Header might look nicer if heading information was overlapped onto the Carousel images. Also, might be worth testing to add social media icons (for sharing) somewhere on the cards, or maybe the navbar, fixed to the side, etc.
 
