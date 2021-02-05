@@ -441,6 +441,39 @@ $(document).ready(function () {
         $('.mealSelector').show();
     })
 
+    // Discard Drink Ingredients
+    $('#clearDI').on('click', function (event) {
+        let drinkGreenButtons = $(".drinkSelector.is-success");
+        let drinkRedButtons = $(".drinkSelector.is-danger");
+        $(drinkGreenButtons).removeClass("is-success");
+        $(drinkRedButtons).removeClass("is-danger");
+        for (let i = 0; i < drinkGreenButtons.length; i++) { localStorage.setItem($(drinkGreenButtons[i]).text(), 0); };
+        for (let i = 0; i < drinkRedButtons.length; i++) { localStorage.setItem($(drinkRedButtons[i]).text(), 0); };
+    })
+
+    // Discard Meal Ingredients
+    $('#clearMI').on('click', function (event) {
+        event.preventDefault;
+        let mealGreenButtons = $(".mealSelector.is-success");
+        let mealRedButtons = $(".mealSelector.is-danger");
+        $(mealGreenButtons).removeClass("is-success");
+        $(mealRedButtons).removeClass("is-danger");
+        for (let i = 0; i < mealGreenButtons.length; i++) { localStorage.setItem($(mealGreenButtons[i]).text(), 0); };
+        for (let i = 0; i < mealRedButtons.length; i++) { localStorage.setItem($(mealRedButtons[i]).text(), 0); };
+    })
+
+    // Input functionality for the Drink search bar.
+    $('#drinkSearch').on('input', function (event) {
+        $('.drinkSelector').hide();
+        $('.drinkSelector:contains("' + titleCase($(this).val()) + '")').show()
+    })
+
+    // Input functionality for the Meal search bar.
+    $('#mealSearch').on('input', function (event) {
+        $('.mealSelector').hide();
+        $('.mealSelector:contains("' + titleCase($(this).val()) + '")').show()
+    })
+
     /* This event will allow users to change ingredient status on the fly from the Ingredients Tabs, if we have time to get to it. */
     // $('#mealIngredientsUL').on('click', function (event) {
     //     event.preventDefault;
@@ -467,17 +500,7 @@ $(document).ready(function () {
     //         }
     // })
 
-    // Input functionality for the Drink search bar.
-    $('#drinkSearch').on('input', function (event) {
-        $('.drinkSelector').hide();
-        $('.drinkSelector:contains("' + titleCase($(this).val()) + '")').show()
-    })
 
-    // Input functionality for the Meal search bar.
-    $('#mealSearch').on('input', function (event) {
-        $('.mealSelector').hide();
-        $('.mealSelector:contains("' + titleCase($(this).val()) + '")').show()
-    })
 });
 
 
