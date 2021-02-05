@@ -247,6 +247,8 @@ li , p {
 @media (min-width: 1216px) { 
   pre{
     max-width: 80%;
+   
+    text-align: center;
   }
   /* #drinkRecipe{
     text-align: center;
