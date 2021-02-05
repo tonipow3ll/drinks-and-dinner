@@ -6,15 +6,6 @@ if(JSON.parse(localStorage.getItem("ezrpzWorkingVersion")) !== version) {
 
 $(document).ready(function () {
 
-    // API Constants
-    const drinkAPIkey = "9973533";
-    const mealAPIkey = "9973533";
-    const drinkURL = "https://www.thecocktaildb.com/api/json/v2/" + drinkAPIkey + "/";
-    const mealURL = "https://www.themealdb.com/api/json/v2/" + mealAPIkey + "/";
-    const filterURL = "filter.php?i=";
-    const lookUpURL = "lookup.php?i=";
-    const randomURL = "random.php";
-
     // regex Constants
     const regexIng = /\bstrIngredient/g;
     const regexMeas = /\bstrMeasure/g;
@@ -136,6 +127,7 @@ $(document).ready(function () {
 
         // Waits for all GREEN promises (or 1 RANDOM promise), then generates a list of IDs for the drinks/meals that use the ingredients. Sorts the list by most ingredients found to least.
         Promise.all(goodArray).then((response) => {
+
             // Loop to concat the arrays of the GREEN IDs together.
             for (let i = 0; i < response.length; i++) {
                 if (type === "drink" && response[i].drinks !== null && response[i].drinks !== "None Found") { goodGen = goodGen.concat(response[i].drinks.map(function (v) { return v.idDrink })); 
@@ -143,6 +135,7 @@ $(document).ready(function () {
             }
 
             Promise.all(badArray).then((response) => {
+
                 // Loop to concat the arrays of the RED IDs together.
                 for (let i = 0; i < response.length; i++) {
                     if (type === "drink" && response[i].drinks !== null) { badGen = badGen.concat(response[i].drinks.map(function (v) { return v.idDrink })); 
@@ -153,7 +146,6 @@ $(document).ready(function () {
                 goodGen.forEach(function (x) {
                     goodCounts[x] = (goodCounts[x] || 0) + 1;
                 });
-                console.log(goodCounts)
 
                 // Counts the number of times each ID appears in the RED list.
                 badGen.forEach(function (x) {
@@ -161,8 +153,8 @@ $(document).ready(function () {
                 });
 
                 // If an id exists in the RED object, remove it from the GREEN object.
-                Object.entries(goodCounts).forEach(function (e) {
-                    if (!badCounts[e[0]] === false) {
+                Object.entries(badCounts).forEach(function (e) {
+                    if (!goodCounts[e[0]] === false) {
                         delete goodCounts[e[0]];
                     };
                 });
